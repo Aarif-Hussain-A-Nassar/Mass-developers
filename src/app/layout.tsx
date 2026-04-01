@@ -1,21 +1,24 @@
 import type { Metadata } from "next";
-import { Inter, Outfit } from "next/font/google";
+import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/context/ThemeContext";
 
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
+  display: "swap",
 });
 
-const outfit = Outfit({
-  variable: "--font-outfit",
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "MASS Developers | Building Dreams, One Project at a Time",
-  description: "Premier construction and interior design company specialized in residential and commercial projects with 25 years of excellence.",
+  title: "Mass Developers | Building Dreams, One Project at a Time",
+  description: "Premier construction and interior design company in Kerala. Specializing in residential, commercial, turnkey, and renovation projects since 2018.",
+  keywords: ["Mass Developers", "construction Kerala", "interior design Ernakulam", "residential construction", "turnkey projects"],
 };
 
 export default function RootLayout({
@@ -25,7 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${outfit.variable}`}>
+      <body className={`${inter.variable} ${playfair.variable}`}>
         <ThemeProvider>
           {children}
         </ThemeProvider>

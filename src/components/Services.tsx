@@ -2,76 +2,214 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Home, Building2, Key, HardHat, Paintbrush } from 'lucide-react';
+import { Home, Building2, Key, HardHat, Paintbrush, Layers } from 'lucide-react';
 
 const services = [
   {
     title: 'Residential Building',
-    icon: <Home size={28} />,
-    description: 'We specialize in constructing high-quality residential buildings that cater to the diverse needs and preferences of our clients. Whether it\'s a single-family home, an apartment complex, or a gated community, we deliver space that is structurally sound and aesthetically pleasing.'
+    icon: Home,
+    description: 'We specialize in constructing high-quality residential buildings — single-family homes, apartment complexes, and gated communities — that are structurally sound and aesthetically pleasing.',
+    tag: 'Popular',
   },
   {
     title: 'Commercial Building',
-    icon: <Building2 size={28} />,
-    description: 'Our expertise extends to the construction of commercial buildings, including office complexes, retail outlets, industrial facilities, and more. We work closely with our clients to deliver spaces that meet business objectives and adhere to strict safety standards.'
+    icon: Building2,
+    description: 'Our expertise covers office complexes, retail outlets and industrial facilities. We deliver spaces that meet business objectives and adhere to strict safety standards.',
+    tag: null,
   },
   {
-    title: 'Turnkey Work',
-    icon: <Key size={28} />,
-    description: 'As a full-service construction firm, we offer turnkey solutions to streamline the building process. From conceptualization and design to construction and final handover, we provide a seamless and hassle-free experience.'
+    title: 'Turnkey Solutions',
+    icon: Key,
+    description: 'Full-service construction from concept to handover. We manage every detail — design, procurement, construction — delivering a seamless, hassle-free experience.',
+    tag: null,
   },
   {
-    title: 'Renovation Work',
-    icon: <HardHat size={28} />,
-    description: 'Whether it\'s revitalizing an existing space or restoring a historic building, we have the expertise to handle renovation projects of all sizes. Our team transforms outdated structures into modern, functional, and visually appealing spaces.'
+    title: 'Renovation & Restoration',
+    icon: HardHat,
+    description: 'From revitalizing existing spaces to restoring historic structures, our team transforms outdated buildings into modern, functional, and visually appealing spaces.',
+    tag: null,
   },
   {
-    title: 'Interior Work',
-    icon: <Paintbrush size={28} />,
-    description: 'We offer comprehensive interior design and fit-out services to enhance the aesthetics and usability of your spaces. From space planning to finishing touches, we ensure every aspect aligns with our clients\' vision.'
-  }
+    title: 'Interior Design & Fit-out',
+    icon: Paintbrush,
+    description: 'Comprehensive interior design services — from space planning to finishing touches — that align with your vision and elevate how you live or work.',
+    tag: 'Featured',
+  },
+  {
+    title: 'Project Management',
+    icon: Layers,
+    description: 'End-to-end project management ensuring timelines, budgets, and quality standards are met with full transparency and regular client updates throughout.',
+    tag: null,
+  },
 ];
 
 const Services: React.FC = () => {
   return (
-    <section id="services" className="py-24 bg-white dark:bg-black transition-colors duration-500">
-      <div className="max-w-7xl mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="mb-16"
-        >
-          <h2 className="text-4xl font-black mb-4 tracking-tighter uppercase text-black dark:text-white">Our Services</h2>
-          <p className="max-w-2xl text-black/70 dark:text-white/70 font-medium">
-            At MASS Developers, we are committed to delivering spaces that are not just structurally sound but also aesthetically pleasing and functional.
-          </p>
-        </motion.div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((service, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1, type: "spring", stiffness: 100 }}
-              viewport={{ once: true }}
-              whileHover={{ y: -10, scale: 1.02 }}
-              className="relative p-8 border border-black dark:border-white bg-white dark:bg-black transition-all duration-500 rounded-3xl group overflow-hidden shadow-none hover:shadow-[0_10px_40px_rgba(0,0,0,0.15)] dark:hover:shadow-[0_10px_40px_rgba(255,255,255,0.15)]"
+    <section
+      id="services"
+      style={{
+        paddingTop: '120px',
+        paddingBottom: '120px',
+        background: 'var(--background)',
+      }}
+    >
+      <div className="container-max">
+        {/* Header */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0', marginBottom: '5rem' }} className="services-header">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <span className="section-label">What We Do</span>
+            <h2
+              className="font-display"
+              style={{
+                fontSize: 'clamp(2rem, 5vw, 3.5rem)',
+                fontWeight: 800,
+                marginBottom: '1.25rem',
+                maxWidth: '600px',
+              }}
             >
-              <div className="absolute inset-0 bg-black/5 dark:bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="w-16 h-16 bg-black text-white dark:bg-white dark:text-black flex items-center justify-center rounded-2xl mb-6 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500 shadow-sm border border-transparent">
-                {service.icon}
-              </div>
-              <h3 className="text-xl font-bold mb-4 relative z-10 text-black dark:text-white uppercase tracking-wider">{service.title}</h3>
-              <p className="text-black/70 dark:text-white/70 font-medium leading-relaxed text-sm relative z-10">
-                {service.description}
-              </p>
-            </motion.div>
-          ))}
+              Services Built for{' '}
+              <span style={{ color: 'var(--accent)', fontStyle: 'italic' }}>Excellence</span>
+            </h2>
+          </motion.div>
+          <motion.p
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            viewport={{ once: true }}
+            style={{ color: 'var(--muted)', maxWidth: '520px', lineHeight: '1.75', fontSize: '1.05rem' }}
+          >
+            At Mass Developers, we deliver spaces that are not just structurally sound, but beautiful and functional.
+          </motion.p>
+        </div>
+
+        {/* Services Grid */}
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: '1fr',
+            gap: '1.25rem',
+          }}
+          className="services-grid"
+        >
+          {services.map((service, index) => {
+            const IconComp = service.icon;
+            return (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.55, delay: (index % 3) * 0.1 }}
+                viewport={{ once: true }}
+                className="service-card"
+                style={{
+                  position: 'relative',
+                  padding: '2.25rem',
+                  background: 'var(--card-bg)',
+                  border: '1px solid var(--border)',
+                  borderRadius: '20px',
+                  transition: 'all 0.35s cubic-bezier(0.4, 0, 0.2, 1)',
+                  cursor: 'default',
+                  overflow: 'hidden',
+                }}
+                whileHover={{ y: -6, boxShadow: '0 20px 60px rgba(0,0,0,0.12)' }}
+              >
+                {/* Tag */}
+                {service.tag && (
+                  <div style={{
+                    position: 'absolute',
+                    top: '1.25rem',
+                    right: '1.25rem',
+                    background: '#f4f4f4',
+                    color: '#050505',
+                    fontSize: '0.65rem',
+                    fontWeight: 800,
+                    letterSpacing: '0.12em',
+                    textTransform: 'uppercase',
+                    padding: '0.3rem 0.7rem',
+                    borderRadius: '100px',
+                  }}>
+                    {service.tag}
+                  </div>
+                )}
+
+                {/* Icon */}
+                <div style={{
+                  width: '52px',
+                  height: '52px',
+                  background: 'var(--foreground)',
+                  color: 'var(--background)',
+                  borderRadius: '14px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  marginBottom: '1.5rem',
+                  transition: 'transform 0.3s ease',
+                }}>
+                  <IconComp size={24} />
+                </div>
+
+                <h3 style={{
+                  fontSize: '1.05rem',
+                  fontWeight: 800,
+                  letterSpacing: '0.02em',
+                  marginBottom: '0.875rem',
+                  color: 'var(--foreground)',
+                }}>
+                  {service.title}
+                </h3>
+
+                <p style={{
+                  fontSize: '0.9rem',
+                  lineHeight: '1.7',
+                  color: 'var(--muted)',
+                }}>
+                  {service.description}
+                </p>
+
+                {/* Hover accent bottom line */}
+                <div style={{
+                  position: 'absolute',
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  height: '3px',
+                  background: 'var(--accent)',
+                  transform: 'scaleX(0)',
+                  transition: 'transform 0.3s ease',
+                  transformOrigin: 'left',
+                  borderRadius: '0 0 20px 20px',
+                }} className="card-accent-line" />
+              </motion.div>
+            );
+          })}
         </div>
       </div>
+
+      <style jsx>{`
+        @media (min-width: 640px) {
+          .services-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+        }
+        @media (min-width: 1024px) {
+          .services-grid {
+            grid-template-columns: repeat(3, 1fr) !important;
+          }
+          .services-header {
+            flex-direction: row !important;
+            justify-content: space-between;
+            align-items: flex-end;
+          }
+        }
+        .service-card:hover .card-accent-line {
+          transform: scaleX(1) !important;
+        }
+      `}</style>
     </section>
   );
 };

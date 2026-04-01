@@ -1,80 +1,220 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap');
 @import "tailwindcss";
+
+/* ============================================================
+   MASS DEVELOPERS — PITCH BLACK / PURE WHITE DESIGN SYSTEM
+   ============================================================ */
 
 @theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-border: var(--border);
   --color-accent: var(--accent);
+  --color-muted: var(--muted);
+  --color-card-bg: var(--card-bg);
 }
 
-:root {
-  --background: #ffffff;
-  --foreground: #000000;
-  --accent: #666666;
-  --card-bg: rgba(0, 0, 0, 0.05);
-  --border: rgba(0, 0, 0, 0.1);
-  --nav-bg: rgba(255, 255, 255, 0.8);
+/* ─── ALWAYS DARK — BLACK & WHITE ONLY ─── */
+:root, [data-theme='dark'] {
+  --background: #050505;
+  --foreground: #f4f4f4;
+  --accent: #f4f4f4;
+  --accent-dim: rgba(244, 244, 244, 0.6);
+  --muted: rgba(244, 244, 244, 0.4);
+  --card-bg: #0f0f0f;
+  --card-hover: #161616;
+  --border: rgba(255, 255, 255, 0.07);
+  --border-strong: rgba(255, 255, 255, 0.18);
+  --nav-bg: rgba(5, 5, 5, 0.95);
+  --section-bg-alt: #080808;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.6);
+  --shadow-md: 0 4px 20px rgba(0,0,0,0.7);
+  --shadow-lg: 0 10px 40px rgba(0,0,0,0.8);
+  --shadow-xl: 0 20px 70px rgba(0,0,0,0.9);
+  --shadow-white: 0 0 40px rgba(255, 255, 255, 0.06);
   --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-[data-theme='dark'] {
-  --background: #000000;
-  --foreground: #ffffff;
-  --accent: #999999;
-  --card-bg: rgba(255, 255, 255, 0.05);
-  --border: rgba(255, 255, 255, 0.1);
-  --nav-bg: rgba(0, 0, 0, 0.8);
-}
-
-* {
+/* ─── RESET & BASE ─── */
+*, *::before, *::after {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
 }
 
-html,
-body {
-  max-width: 100vw;
+html {
+  scroll-behavior: smooth;
   overflow-x: hidden;
+  color-scheme: dark;
+}
+
+body {
   background: var(--background);
   color: var(--foreground);
-  font-family: 'Inter', sans-serif;
-  transition: background var(--transition), color var(--transition);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  max-width: 100vw;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
 
-section {
-  padding: 100px 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
+/* ─── TYPOGRAPHY ─── */
+.font-display { font-family: 'Playfair Display', Georgia, serif; }
 
-.glass {
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  background: var(--nav-bg);
-  border-bottom: 1px solid var(--border);
-}
-
-h1, h2, h3 {
+h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
+  line-height: 1.15;
   letter-spacing: -0.02em;
 }
 
-p {
-  line-height: 1.6;
-  opacity: 0.8;
+/* ─── LAYOUT ─── */
+.container-max {
+  width: 100%;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+@media (min-width: 768px) {
+  .container-max { padding-left: 2.5rem; padding-right: 2.5rem; }
+}
+@media (min-width: 1280px) {
+  .container-max { padding-left: 3rem; padding-right: 3rem; }
 }
 
-.animate-fade-in {
-  animation: fadeIn 0.8s ease forwards;
+section { width: 100%; position: relative; }
+
+/* ─── BUTTONS ─── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  background: #f4f4f4;
+  color: #050505;
+  font-weight: 800;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border-radius: 100px;
+  border: 1px solid #f4f4f4;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.btn-primary:hover {
+  background: transparent;
+  color: #f4f4f4;
+  box-shadow: var(--shadow-white);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  background: transparent;
+  color: #f4f4f4;
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border-radius: 100px;
+  border: 1px solid rgba(244, 244, 244, 0.25);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.btn-outline:hover {
+  border-color: #f4f4f4;
+  background: rgba(244, 244, 244, 0.06);
+  box-shadow: var(--shadow-white);
+}
+
+/* ─── SECTION LABEL ─── */
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(244, 244, 244, 0.5);
+  margin-bottom: 1.25rem;
+}
+
+.section-label::before {
+  content: '';
+  display: block;
+  width: 1.5rem;
+  height: 1px;
+  background: rgba(244, 244, 244, 0.4);
+  border-radius: 2px;
+}
+
+/* ─── SCROLL BAR ─── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #050505; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.3); }
+
+/* ─── SELECTION ─── */
+::selection { background: #f4f4f4; color: #050505; }
+
+/* ─── ANIMATIONS ─── */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* ─── GRADIENT TEXT — White shimmer ─── */
+.gradient-text {
+  background: linear-gradient(120deg, #ffffff 0%, rgba(255,255,255,0.5) 40%, #ffffff 60%, rgba(255,255,255,0.6) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 5s linear infinite;
+}
+
+/* ─── PATTERN BG ─── */
+.pattern-dots {
+  background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* ─── STAT NUMBER ─── */
+.stat-number {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.25rem, 4vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1;
+  color: #f4f4f4;
+}
+
+/* ─── PREMIUM CARD ─── */
+.premium-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+
+.premium-card:hover {
+  background: var(--card-hover);
+  border-color: var(--border-strong);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
 }
