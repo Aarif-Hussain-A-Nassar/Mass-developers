@@ -8,7 +8,7 @@ import Link from 'next/link';
 import * as THREE from 'three';
 
 /* ══════════════════════════════════════════
-   ARCHITECTURE 3D SCENE
+   ARCHITECTURE 3D SCENE — Skyline
 ══════════════════════════════════════════ */
 
 const Building = ({
@@ -23,7 +23,7 @@ const Building = ({
   const meshRef  = useRef<THREE.Mesh>(null);
   const edgeRef  = useRef<THREE.LineSegments>(null);
   const startY   = position[1] - 10;
-  const progress = useRef(delay > 0 ? -delay : 0); // negative = waiting
+  const progress = useRef(delay > 0 ? -delay : 0);
 
   useFrame((state, delta) => {
     const mesh = meshRef.current;
@@ -35,8 +35,8 @@ const Building = ({
 
     const eased = 1 - Math.pow(1 - Math.max(0, progress.current), 3);
     const y = startY + (position[1] - startY) * eased + Math.sin(state.clock.elapsedTime * 0.45 + delay) * 0.05;
-    mesh.position.y  = y;
-    edge.position.y  = y;
+    mesh.position.y = y;
+    edge.position.y = y;
   });
 
   const geo = useMemo(() => new THREE.BoxGeometry(...size), [size[0], size[1], size[2]]);
@@ -44,10 +44,10 @@ const Building = ({
   return (
     <group position={[position[0], startY, position[2]]}>
       <mesh ref={meshRef} geometry={geo} castShadow>
-        <meshStandardMaterial color="#080808" metalness={0.7} roughness={0.25} envMapIntensity={2} />
+        <meshStandardMaterial color="#0e0e0e" metalness={0.8} roughness={0.2} envMapIntensity={2.5} />
       </mesh>
       <lineSegments ref={edgeRef} geometry={new THREE.EdgesGeometry(geo)}>
-        <lineBasicMaterial color="#ffffff" transparent opacity={0.3} />
+        <lineBasicMaterial color="#ffffff" transparent opacity={0.25} />
       </lineSegments>
     </group>
   );
@@ -58,10 +58,10 @@ const GroundGrid = () => (
     position={[0, -1.5, 0]}
     args={[40, 40]}
     cellSize={1}
-    cellThickness={0.3}
-    cellColor="#1a1a1a"
+    cellThickness={0.25}
+    cellColor="#1f1f1f"
     sectionSize={5}
-    sectionThickness={0.5}
+    sectionThickness={0.4}
     sectionColor="#2a2a2a"
     fadeDistance={24}
     fadeStrength={1.5}
@@ -70,7 +70,7 @@ const GroundGrid = () => (
 );
 
 const DustParticles = () => {
-  const count = 100;
+  const count = 120;
   const positions = useMemo(() => {
     const arr = new Float32Array(count * 3);
     for (let i = 0; i < count; i++) {
@@ -83,7 +83,7 @@ const DustParticles = () => {
 
   const ref = useRef<THREE.Points>(null);
   useFrame((s) => {
-    if (ref.current) ref.current.rotation.y = s.clock.elapsedTime * 0.012;
+    if (ref.current) ref.current.rotation.y = s.clock.elapsedTime * 0.01;
   });
 
   return (
@@ -91,7 +91,7 @@ const DustParticles = () => {
       <bufferGeometry>
         <bufferAttribute attach="attributes-position" args={[positions, 3]} />
       </bufferGeometry>
-      <pointsMaterial color="#ffffff" size={0.015} transparent opacity={0.2} sizeAttenuation />
+      <pointsMaterial color="#ffffff" size={0.012} transparent opacity={0.18} sizeAttenuation />
     </points>
   );
 };
@@ -144,13 +144,13 @@ const Scene = () => (
     shadows
   >
     <Suspense fallback={null}>
-      <ambientLight intensity={0.4} color="#ffffff" />
-      <directionalLight position={[10, 14, 8]}  intensity={2.5} color="#ffffff" castShadow />
-      <directionalLight position={[-8, 10, -5]} intensity={1.0} color="#cccccc" />
-      <pointLight position={[0, 10, 0]} intensity={2} color="#ffffff" distance={20} />
+      <ambientLight intensity={0.35} color="#ffffff" />
+      <directionalLight position={[10, 14, 8]}  intensity={2.2} color="#ffffff" castShadow />
+      <directionalLight position={[-8, 10, -5]} intensity={0.8} color="#c6c6c6" />
+      <pointLight position={[0, 10, 0]} intensity={1.8} color="#ffffff" distance={20} />
       <Environment preset="city" />
       <GroundGrid />
-      <Float speed={0.4} rotationIntensity={0.03} floatIntensity={0.15}>
+      <Float speed={0.4} rotationIntensity={0.03} floatIntensity={0.12}>
         <Skyline />
       </Float>
       <DustParticles />
@@ -158,7 +158,7 @@ const Scene = () => (
         enableZoom={false}
         enablePan={false}
         autoRotate
-        autoRotateSpeed={0.35}
+        autoRotateSpeed={0.3}
         minPolarAngle={Math.PI / 4}
         maxPolarAngle={Math.PI / 2.4}
         target={[0, 1, 0]}
@@ -168,151 +168,167 @@ const Scene = () => (
 );
 
 /* ══════════════════════════════════════════
-   HERO — Text on top, 3D fills ALL below
+   HERO — Stitch design: Architectural Monolith
+   Text on top, 3D fills the void below
 ══════════════════════════════════════════ */
 const Hero: React.FC = () => {
   return (
     <section
       id="home"
       style={{
-        position: 'relative',
-        height: '100vh',
-        minHeight: '600px',
-        overflow: 'hidden',
-        background: '#050505',
+        position:   'relative',
+        height:     '100vh',
+        minHeight:  '640px',
+        overflow:   'hidden',
+        background: '#131313',
       }}
     >
-      {/* dot grid */}
+      {/* Subtle dot grid — structural texture */}
       <div className="pattern-dots" style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none' }} />
 
-      {/* ── 3D CANVAS — absolute, fills the ENTIRE hero section ── */}
-      <div
-        style={{
-          position: 'absolute',
-          inset: 0,
-          zIndex: 1,
-        }}
-      >
-        {/* Top fade — blend with text */}
-        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '55%', background: 'linear-gradient(to bottom, #050505 0%, rgba(5,5,5,0.7) 40%, transparent 100%)', zIndex: 3, pointerEvents: 'none' }} />
-        {/* Left fade */}
-        <div style={{ position: 'absolute', inset: '0 auto 0 0', width: '120px', background: 'linear-gradient(to right, #050505, transparent)', zIndex: 3, pointerEvents: 'none' }} />
-        {/* Right fade */}
-        <div style={{ position: 'absolute', inset: '0 0 0 auto', width: '120px', background: 'linear-gradient(to left, #050505, transparent)', zIndex: 3, pointerEvents: 'none' }} />
-        {/* Bottom fade */}
-        <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '140px', background: 'linear-gradient(to top, #050505, transparent)', zIndex: 3, pointerEvents: 'none' }} />
+      {/* ── 3D CANVAS — fills the entire hero ── */}
+      <div style={{ position: 'absolute', inset: 0, zIndex: 1 }}>
+        {/* Gradient fades — bleed the 3D into the void */}
+        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '60%', background: 'linear-gradient(to bottom, #131313 0%, rgba(19,19,19,0.75) 40%, transparent 100%)', zIndex: 3, pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', inset: '0 auto 0 0', width: '100px', background: 'linear-gradient(to right, #131313, transparent)', zIndex: 3, pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', inset: '0 0 0 auto', width: '100px', background: 'linear-gradient(to left, #131313, transparent)', zIndex: 3, pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '160px', background: 'linear-gradient(to top, #131313, transparent)', zIndex: 3, pointerEvents: 'none' }} />
         <Scene />
       </div>
 
-      {/* ── TEXT — sits at top, above 3D ─── */}
-      {/* ── TEXT — absolutely positioned over the 3D canvas ── */}
+      {/* ── TEXT — sits above the 3D canvas ── */}
       <div
         className="container-max"
         style={{
-          position: 'relative',
-          zIndex: 2,
-          paddingTop: '130px',
-          paddingBottom: '2rem',
-          textAlign: 'center',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
+          position:       'relative',
+          zIndex:         2,
+          paddingTop:     '140px',
+          textAlign:      'center',
+          display:        'flex',
+          flexDirection:  'column',
+          alignItems:     'center',
         }}
       >
-        <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-          <span className="section-label" style={{ justifyContent: 'center' }}>Since 2018 · Built on Trust</span>
+        {/* Label */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <span className="section-label" style={{ justifyContent: 'center' }}>
+            Since 2018 · Architectural Integrity
+          </span>
         </motion.div>
 
+        {/* Headline — wide tracking, authoritative */}
         <motion.h1
-          initial={{ opacity: 0, y: 28 }}
+          initial={{ opacity: 0, y: 32 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.85, delay: 0.15 }}
+          transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
           style={{
-            fontSize: 'clamp(2.8rem, 7.5vw, 6.5rem)',
-            fontWeight: 900,
-            lineHeight: '1.05',
-            letterSpacing: '-0.04em',
-            color: '#f4f4f4',
-            maxWidth: '960px',
-            marginBottom: '1.1rem',
+            fontFamily:    "'Inter', sans-serif",
+            fontSize:      'clamp(2.6rem, 7vw, 6.5rem)',
+            fontWeight:    900,
+            lineHeight:    1.0,
+            letterSpacing: '0.06em',
+            textTransform: 'uppercase',
+            color:         '#e2e2e2',
+            maxWidth:      '980px',
+            marginBottom:  '1.25rem',
           }}
         >
-          Building <span className="gradient-text">Dreams,</span>
+          Redefining{' '}
+          <span className="gradient-text">Architectural</span>
           <br />
-          <span style={{
-            fontWeight: 300,
-            fontStyle: 'italic',
-            fontFamily: "'Playfair Display', serif",
-            color: 'rgba(244,244,244,0.3)',
-            letterSpacing: '-0.02em',
-          }}>
-            One Project at a Time
+          <span style={{ fontWeight: 300, letterSpacing: '0.08em', color: 'rgba(226,226,226,0.25)' }}>
+            Integrity
           </span>
         </motion.h1>
 
+        {/* Sub-headline — Manrope body */}
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
+          transition={{ duration: 0.8, delay: 0.32 }}
           style={{
-            fontSize: '1rem',
-            color: 'rgba(244,244,244,0.38)',
-            maxWidth: '480px',
-            lineHeight: '1.8',
-            marginBottom: '2rem',
+            fontFamily:   "'Manrope', sans-serif",
+            fontSize:     '1rem',
+            color:        'rgba(198,198,198,0.45)',
+            maxWidth:     '500px',
+            lineHeight:   '1.8',
+            marginBottom: '2.25rem',
           }}
         >
-          Premier construction and interior design firm in Ernakulam, Kerala.
-          We transform visions into stunning architectural realities.
+          MASS Developers operates at the intersection of structural brutalism
+          and modern luxury — transforming visions into enduring architectural
+          realities in Ernakulam, Kerala.
         </motion.p>
 
+        {/* CTAs — square buttons */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.42 }}
-          style={{ display: 'flex', gap: '0.875rem', flexWrap: 'wrap', justifyContent: 'center', marginBottom: '2rem' }}
+          transition={{ duration: 0.7, delay: 0.46 }}
+          style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', justifyContent: 'center', marginBottom: '2.5rem' }}
         >
           <Link href="#projects" className="btn-primary">View Our Work</Link>
-          <Link href="#about" className="btn-outline">Our Story</Link>
+          <Link href="#about"    className="btn-outline">Our Story</Link>
         </motion.div>
 
-        {/* Stats */}
+        {/* Stats bar */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.7, delay: 0.56 }}
+          transition={{ duration: 0.7, delay: 0.62 }}
           style={{
-            display: 'flex',
+            display:       'flex',
             justifyContent: 'center',
-            width: '100%',
-            maxWidth: '560px',
-            borderTop: '1px solid rgba(255,255,255,0.07)',
-            paddingTop: '1.5rem',
+            width:         '100%',
+            maxWidth:      '560px',
+            borderTop:     '1px solid rgba(255,255,255,0.06)',
+            paddingTop:    '1.75rem',
           }}
         >
           {[
-            { value: '250+', label: 'Projects' },
-            { value: '8+',   label: 'Years'    },
-            { value: '98%',  label: 'Satisfaction' },
-            { value: '50Cr+',label: 'Delivered' },
+            { value: '250+',  label: 'Projects'     },
+            { value: '8+',    label: 'Years'         },
+            { value: '98%',   label: 'Satisfaction'  },
+            { value: '50 Cr+',label: 'Delivered'     },
           ].map((s, i, arr) => (
             <div
               key={i}
               style={{
-                flex: 1,
-                textAlign: 'center',
-                padding: '0 0.75rem',
-                borderRight: i < arr.length - 1 ? '1px solid rgba(255,255,255,0.07)' : 'none',
+                flex:        1,
+                textAlign:   'center',
+                padding:     '0 0.75rem',
+                borderRight: i < arr.length - 1 ? '1px solid rgba(255,255,255,0.06)' : 'none',
               }}
             >
-              <div style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(1.3rem, 2.5vw, 1.8rem)', fontWeight: 800, color: '#f4f4f4', lineHeight: 1 }}>{s.value}</div>
-              <div style={{ fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(244,244,244,0.28)', marginTop: '0.25rem' }}>{s.label}</div>
+              <div style={{
+                fontFamily:    "'Inter', sans-serif",
+                fontSize:      'clamp(1.2rem, 2.2vw, 1.7rem)',
+                fontWeight:    900,
+                letterSpacing: '-0.02em',
+                color:         '#ffffff',
+                lineHeight:    1,
+              }}>
+                {s.value}
+              </div>
+              <div style={{
+                fontFamily:    "'Manrope', sans-serif",
+                fontSize:      '0.6rem',
+                fontWeight:    600,
+                letterSpacing: '0.16em',
+                textTransform: 'uppercase',
+                color:         'rgba(198,198,198,0.3)',
+                marginTop:     '0.3rem',
+              }}>
+                {s.label}
+              </div>
             </div>
           ))}
         </motion.div>
       </div>
-
-
     </section>
   );
 };
