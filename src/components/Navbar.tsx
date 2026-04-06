@@ -68,6 +68,7 @@ const Navbar: React.FC = () => {
                 src="/logo-dark.jpg"
                 alt="Mass Developers Logo"
                 fill
+                sizes="38px"
                 style={{ objectFit: 'contain' }}
                 priority
               />

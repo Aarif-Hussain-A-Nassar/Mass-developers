@@ -1,52 +1,37 @@
-import type { Metadata } from "next";
-import { Inter, Manrope } from "next/font/google";
-import "./globals.css";
+import type { Metadata } from 'next';
+import { Inter, Manrope } from 'next/font/google';
+import './globals.css';
 
 const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  display: "swap",
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
 });
 
 const manrope = Manrope({
-  variable: "--font-manrope",
-  subsets: ["latin"],
-  display: "swap",
-  weight: ["300", "400", "500", "600", "700", "800"],
+  subsets: ['latin'],
+  variable: '--font-manrope',
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
-  title: "Mass Developers | Architectural Integrity",
-  description:
-    "MASS Developers operates at the intersection of structural brutalism and modern luxury. Premier construction and interior design company in Ernakulam, Kerala — since 2018.",
-  keywords: [
-    "Mass Developers",
-    "construction Kerala",
-    "interior design Ernakulam",
-    "residential construction",
-    "turnkey projects",
-    "architectural design Kerala",
-    "luxury construction",
-  ],
+  title: 'MASS | Precision in Silence',
+  description: 'MASS operates at the intersection of structural gravity and ethereal transparency. Architecture as a manifesto.',
+  keywords: ['architecture', 'luxury', 'design', 'construction', 'brutalist', 'mass developers'],
   openGraph: {
-    title: "Mass Developers | Architectural Integrity",
-    description:
-      "Redefining architectural integrity through innovative design and luxury construction. Built in Kerala, designed for the bold.",
-    type: "website",
+    title: 'MASS | Precision in Silence',
+    description: 'Architecture as a manifesto.',
+    type: 'website',
   },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body className={`${inter.variable} ${manrope.variable}`}>
-        {children}
-      </body>
+    <html lang="en" className={`${inter.variable} ${manrope.variable}`}>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+      </head>
+      <body>{children}</body>
     </html>
   );
 }

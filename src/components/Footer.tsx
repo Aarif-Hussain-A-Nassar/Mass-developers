@@ -49,6 +49,7 @@ const Footer: React.FC = () => {
                   src="/logo-light.jpg"
                   alt="Mass Developers"
                   fill
+                  sizes="44px"
                   style={{ objectFit: 'contain' }}
                 />
               </div>

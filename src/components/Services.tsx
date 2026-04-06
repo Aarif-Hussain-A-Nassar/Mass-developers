@@ -43,6 +43,18 @@ const services = [
   },
 ];
 
+/* Shared ease */
+const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
+
+function cardAnim(i: number) {
+  return {
+    initial:    { opacity: 0, y: 48, scale: 0.96 },
+    whileInView:{ opacity: 1, y: 0,  scale: 1    },
+    viewport:   { once: true, margin: '-50px' as const },
+    transition: { duration: 0.7, delay: i * 0.1, ease: EASE },
+  } as const;
+}
+
 const Services: React.FC = () => {
   return (
     <section
@@ -50,20 +62,40 @@ const Services: React.FC = () => {
       style={{
         paddingTop:    '128px',
         paddingBottom: '128px',
-        background:    'var(--background)',   /* #131313 — alternates from section-bg-alt */
+        background:    'var(--background)',
       }}
     >
       <div className="container-max">
 
         {/* Header */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0', marginBottom: '5rem' }} className="services-header">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            viewport={{ once: true }}
-          >
-            <span className="section-label">What We Do</span>
+          <div>
+            {/* Animated section label */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4 }}
+              style={{ display: 'flex', alignItems: 'center', gap: '0.625rem', marginBottom: '1.5rem' }}
+            >
+              <motion.span
+                initial={{ scaleX: 0 }}
+                whileInView={{ scaleX: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                style={{ display: 'block', width: '2rem', height: '1px', background: 'rgba(198,198,198,0.5)', transformOrigin: 'left' }}
+              />
+              <motion.span
+                initial={{ opacity: 0, x: -8 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+                style={{ fontFamily: "'Manrope', sans-serif", fontSize: '0.68rem', fontWeight: 700, letterSpacing: '0.28em', textTransform: 'uppercase', color: 'var(--on-surface-variant)' }}
+              >
+                What We Do
+              </motion.span>
+            </motion.div>
+
             <h2 style={{
               fontFamily:    "'Inter', sans-serif",
               fontSize:      'clamp(2rem, 5vw, 3.5rem)',
@@ -74,15 +106,44 @@ const Services: React.FC = () => {
               maxWidth:      '640px',
               color:         '#e2e2e2',
             }}>
-              Services Built for{' '}
-              <span className="gradient-text">Excellence</span>
+              {['Services', 'Built for'].map((chunk, ci) => (
+                <span key={ci}>
+                  {chunk.split(' ').map((word, wi) => (
+                    <span key={wi} style={{ display: 'inline-block', overflow: 'hidden', verticalAlign: 'bottom', marginRight: '0.28em' }}>
+                      <motion.span
+                        style={{ display: 'inline-block' }}
+                        initial={{ y: '110%', opacity: 0 }}
+                        whileInView={{ y: '0%', opacity: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8, delay: ci * 0.15 + wi * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                      >
+                        {word}
+                      </motion.span>
+                    </span>
+                  ))}
+                  {' '}
+                </span>
+              ))}
+              <span style={{ display: 'inline-block', overflow: 'hidden', verticalAlign: 'bottom' }}>
+                <motion.span
+                  className="gradient-text"
+                  style={{ display: 'inline-block' }}
+                  initial={{ y: '110%', opacity: 0 }}
+                  whileInView={{ y: '0%', opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  Excellence
+                </motion.span>
+              </span>
             </h2>
-          </motion.div>
+          </div>
+
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
             style={{
               fontFamily: "'Manrope', sans-serif",
               color:      'var(--muted)',
@@ -91,12 +152,12 @@ const Services: React.FC = () => {
               fontSize:   '1rem',
             }}
           >
-            At Mass Developers, we deliver spaces that are not just structurally
-            sound, but beautiful and functional.
+            At Mass Developers, we deliver spaces that are not just structurally sound,
+            but beautiful and functional.
           </motion.p>
         </div>
 
-        {/* Services Grid — tonal cards, no borders, SQUARE */}
+        {/* Services Grid — staggered entrance */}
         <div
           style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '1px' }}
           className="services-grid"
@@ -106,56 +167,61 @@ const Services: React.FC = () => {
             return (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.55, delay: (index % 3) * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                viewport={{ once: true }}
+                {...cardAnim(index)}
                 className="service-card"
                 style={{
                   position:     'relative',
                   padding:      '2.5rem',
-                  background:   'var(--card-bg)',       /* tonal — no border */
-                  borderRadius: 0,                      /* SQUARE */
-                  transition:   'background 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+                  background:   'var(--card-bg)',
+                  borderRadius: 0,
                   cursor:       'default',
                   overflow:     'hidden',
                 }}
               >
-                {/* Tag — square badge */}
+                {/* Tag */}
                 {service.tag && (
-                  <div style={{
-                    position:      'absolute',
-                    top:           '1.25rem',
-                    right:         '1.25rem',
-                    background:    '#ffffff',
-                    color:         '#131313',
-                    fontFamily:    "'Inter', sans-serif",
-                    fontSize:      '0.62rem',
-                    fontWeight:    800,
-                    letterSpacing: '0.16em',
-                    textTransform: 'uppercase',
-                    padding:       '0.3rem 0.75rem',
-                    borderRadius:  0,   /* SQUARE */
-                  }}>
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: 0.3 + index * 0.08 }}
+                    style={{
+                      position:      'absolute',
+                      top:           '1.25rem',
+                      right:         '1.25rem',
+                      background:    '#ffffff',
+                      color:         '#131313',
+                      fontFamily:    "'Inter', sans-serif",
+                      fontSize:      '0.62rem',
+                      fontWeight:    800,
+                      letterSpacing: '0.16em',
+                      textTransform: 'uppercase',
+                      padding:       '0.3rem 0.75rem',
+                      borderRadius:  0,
+                    }}
+                  >
                     {service.tag}
-                  </div>
+                  </motion.div>
                 )}
 
-                {/* Icon — square, white bg */}
-                <div style={{
-                  width:         '50px',
-                  height:        '50px',
-                  background:    '#ffffff',
-                  color:         '#131313',
-                  borderRadius:  0,   /* SQUARE */
-                  display:       'flex',
-                  alignItems:    'center',
-                  justifyContent: 'center',
-                  marginBottom:   '1.75rem',
-                  transition:    'transform 0.3s ease',
-                }}>
+                {/* Icon — pops on hover */}
+                <motion.div
+                  whileHover={{ scale: 1.15, rotate: 3 }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 15 }}
+                  style={{
+                    width:          '50px',
+                    height:         '50px',
+                    background:     '#ffffff',
+                    color:          '#131313',
+                    borderRadius:   0,
+                    display:        'flex',
+                    alignItems:     'center',
+                    justifyContent: 'center',
+                    marginBottom:   '1.75rem',
+                  }}
+                >
                   <IconComp size={22} strokeWidth={2.5} />
-                </div>
+                </motion.div>
 
                 <h3 style={{
                   fontFamily:    "'Inter', sans-serif",
@@ -178,13 +244,11 @@ const Services: React.FC = () => {
                   {service.description}
                 </p>
 
-                {/* Hover accent line — bottom */}
+                {/* Hover accent line */}
                 <div
                   style={{
                     position:        'absolute',
-                    bottom:          0,
-                    left:            0,
-                    right:           0,
+                    bottom:          0, left: 0, right: 0,
                     height:          '2px',
                     background:      '#ffffff',
                     transform:       'scaleX(0)',
@@ -211,15 +275,7 @@ const Services: React.FC = () => {
             align-items:     flex-end;
           }
         }
-        .service-card:hover {
-          background: var(--card-hover) !important;
-        }
-        .service-card:hover .card-accent-line {
-          transform: scaleX(1) !important;
-        }
-        .service-card:hover > div:nth-child(3) {
-          transform: scale(1.05) !important;
-        }
+        .service-card:hover .card-accent-line { transform: scaleX(1) !important; }
       `}</style>
     </section>
   );
