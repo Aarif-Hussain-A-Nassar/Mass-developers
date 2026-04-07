@@ -6,17 +6,17 @@ import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const navLinks = [
-  { name: 'Home',     href: '#home'     },
-  { name: 'About',    href: '#about'    },
+  { name: 'Home', href: '#home' },
+  { name: 'About', href: '#about' },
   { name: 'Services', href: '#services' },
   { name: 'Projects', href: '#projects' },
-  { name: 'Contact',  href: '#contact'  },
+  { name: 'Contact', href: '#contact' },
 ];
 
 const Navbar: React.FC = () => {
-  const [isScrolled,       setIsScrolled]       = useState(false);
-  const [activeTab,        setActiveTab]         = useState('Home');
-  const [isMobileMenuOpen, setIsMobileMenuOpen]  = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [activeTab, setActiveTab] = useState('Home');
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 40);
@@ -33,14 +33,14 @@ const Navbar: React.FC = () => {
     <>
       <motion.header
         initial={{ y: -80, opacity: 0 }}
-        animate={{ y: 0,  opacity: 1 }}
+        animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         style={{
-          position:   'fixed',
+          position: 'fixed',
           top: 0, left: 0, right: 0,
-          zIndex:     50,
+          zIndex: 50,
           transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
-          padding:    isScrolled ? '0.75rem 0' : '1.5rem 0',
+          padding: isScrolled ? '0.75rem 0' : '1.5rem 0',
           /*
            * Glassmorphism — surface_variant @40% opacity + blur(20px)
            * Transitions from transparent to frosted glass on scroll
@@ -106,17 +106,17 @@ const Navbar: React.FC = () => {
                 href={link.href}
                 onClick={() => setActiveTab(link.name)}
                 style={{
-                  position:      'relative',
-                  padding:       '0.5rem 0.875rem',
-                  fontFamily:    "'Inter', sans-serif",
-                  fontSize:      '0.7rem',
-                  fontWeight:    600,
+                  position: 'relative',
+                  padding: '0.5rem 0.875rem',
+                  fontFamily: "'Inter', sans-serif",
+                  fontSize: '0.7rem',
+                  fontWeight: 600,
                   letterSpacing: '0.16em',
                   textTransform: 'uppercase',
                   color: activeTab === link.name
                     ? '#e2e2e2'
                     : 'rgba(198,198,198,0.45)',
-                  transition:  'color 0.2s ease',
+                  transition: 'color 0.2s ease',
                   textDecoration: 'none',
                 }}
               >
@@ -124,11 +124,11 @@ const Navbar: React.FC = () => {
                   <motion.div
                     layoutId="navPill"
                     style={{
-                      position:   'absolute',
-                      inset:      0,
+                      position: 'absolute',
+                      inset: 0,
                       background: 'rgba(255,255,255,0.06)',
                       borderRadius: 0,
-                      zIndex:     -1,
+                      zIndex: -1,
                     }}
                     transition={{ type: 'spring', bounce: 0.15, duration: 0.5 }}
                   />
@@ -145,33 +145,33 @@ const Navbar: React.FC = () => {
               href="#contact"
               className="desktop-cta"
               style={{
-                display:     'none',
-                alignItems:  'center',
+                display: 'none',
+                alignItems: 'center',
                 justifyContent: 'center',
-                padding:     '0.6rem 1.5rem',
-                background:  '#ffffff',
-                color:       '#131313',
-                fontFamily:  "'Inter', sans-serif",
-                fontWeight:  800,
-                fontSize:    '0.68rem',
+                padding: '0.6rem 1.5rem',
+                background: '#ffffff',
+                color: '#131313',
+                fontFamily: "'Inter', sans-serif",
+                fontWeight: 800,
+                fontSize: '0.68rem',
                 letterSpacing: '0.18em',
                 textTransform: 'uppercase',
-                borderRadius:  0,    /* SQUARE */
+                borderRadius: 0,    /* SQUARE */
                 textDecoration: 'none',
-                transition:  'all 0.25s cubic-bezier(0.16, 1, 0.3, 1)',
-                whiteSpace:  'nowrap',
+                transition: 'all 0.25s cubic-bezier(0.16, 1, 0.3, 1)',
+                whiteSpace: 'nowrap',
               }}
               onMouseEnter={(e) => {
                 const el = e.currentTarget as HTMLElement;
                 el.style.background = 'transparent';
-                el.style.color      = '#e2e2e2';
-                el.style.border     = '1px solid rgba(255,255,255,0.3)';
+                el.style.color = '#e2e2e2';
+                el.style.border = '1px solid rgba(255,255,255,0.3)';
               }}
               onMouseLeave={(e) => {
                 const el = e.currentTarget as HTMLElement;
                 el.style.background = '#ffffff';
-                el.style.color      = '#131313';
-                el.style.border     = 'none';
+                el.style.color = '#131313';
+                el.style.border = 'none';
               }}
             >
               Get a Quote
@@ -183,31 +183,31 @@ const Navbar: React.FC = () => {
               aria-label="Toggle menu"
               className="hamburger"
               style={{
-                display:        'flex',
-                flexDirection:  'column',
+                display: 'flex',
+                flexDirection: 'column',
                 justifyContent: 'center',
-                alignItems:     'center',
-                width:          '40px',
-                height:         '40px',
-                background:     isMobileMenuOpen ? 'rgba(255,255,255,0.06)' : 'transparent',
-                border:         '1px solid rgba(255,255,255,0.10)',
-                borderRadius:   0,   /* SQUARE */
-                cursor:         'pointer',
-                gap:            '5px',
+                alignItems: 'center',
+                width: '40px',
+                height: '40px',
+                background: isMobileMenuOpen ? 'rgba(255,255,255,0.06)' : 'transparent',
+                border: '1px solid rgba(255,255,255,0.10)',
+                borderRadius: 0,   /* SQUARE */
+                cursor: 'pointer',
+                gap: '5px',
               }}
             >
               {[0, 1, 2].map((i) => (
                 <span key={i} style={{
-                  display:      'block',
-                  width:        '18px',
-                  height:       '1.5px',
-                  background:   '#e2e2e2',
+                  display: 'block',
+                  width: '18px',
+                  height: '1.5px',
+                  background: '#e2e2e2',
                   borderRadius: '0',
-                  transition:   'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+                  transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
                   transform: isMobileMenuOpen
                     ? i === 0 ? 'rotate(45deg) translate(0, 6.5px)'
-                    : i === 2 ? 'rotate(-45deg) translate(0, -6.5px)'
-                    : 'none'
+                      : i === 2 ? 'rotate(-45deg) translate(0, -6.5px)'
+                        : 'none'
                     : 'none',
                   opacity: isMobileMenuOpen && i === 1 ? 0 : 1,
                 }} />
@@ -223,16 +223,16 @@ const Navbar: React.FC = () => {
           <motion.div
             initial={{ opacity: 0, x: '100%' }}
             animate={{ opacity: 1, x: 0 }}
-            exit={{   opacity: 0, x: '100%' }}
+            exit={{ opacity: 0, x: '100%' }}
             transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
             style={{
-              position:       'fixed',
-              inset:          0,
-              zIndex:         40,
-              background:     '#131313',
-              paddingTop:     '80px',
-              display:        'flex',
-              flexDirection:  'column',
+              position: 'fixed',
+              inset: 0,
+              zIndex: 40,
+              background: '#131313',
+              paddingTop: '80px',
+              display: 'flex',
+              flexDirection: 'column',
             }}
           >
             <div style={{ display: 'flex', flexDirection: 'column', padding: '2rem 1.5rem', gap: '0', flex: 1 }}>
@@ -247,19 +247,19 @@ const Navbar: React.FC = () => {
                     href={link.href}
                     onClick={() => { setActiveTab(link.name); setIsMobileMenuOpen(false); }}
                     style={{
-                      display:         'flex',
-                      alignItems:      'center',
-                      justifyContent:  'space-between',
-                      width:           '100%',
-                      padding:         '1.375rem 0',
-                      borderBottom:    '1px solid rgba(255,255,255,0.06)',
-                      fontFamily:      "'Inter', sans-serif",
-                      fontSize:        '1.5rem',
-                      fontWeight:      800,
-                      letterSpacing:   '0.04em',
-                      textTransform:   'uppercase',
-                      color:           '#e2e2e2',
-                      textDecoration:  'none',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      width: '100%',
+                      padding: '1.375rem 0',
+                      borderBottom: '1px solid rgba(255,255,255,0.06)',
+                      fontFamily: "'Inter', sans-serif",
+                      fontSize: '1.5rem',
+                      fontWeight: 800,
+                      letterSpacing: '0.04em',
+                      textTransform: 'uppercase',
+                      color: '#e2e2e2',
+                      textDecoration: 'none',
                     }}
                   >
                     {link.name}
@@ -275,20 +275,20 @@ const Navbar: React.FC = () => {
                 href="#contact"
                 onClick={() => setIsMobileMenuOpen(false)}
                 style={{
-                  display:         'flex',
-                  alignItems:      'center',
-                  justifyContent:  'center',
-                  width:           '100%',
-                  padding:         '1.125rem',
-                  background:      '#ffffff',
-                  color:           '#131313',
-                  fontFamily:      "'Inter', sans-serif",
-                  fontWeight:      800,
-                  fontSize:        '0.72rem',
-                  letterSpacing:   '0.2em',
-                  textTransform:   'uppercase',
-                  textDecoration:  'none',
-                  borderRadius:    0,  /* SQUARE */
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: '100%',
+                  padding: '1.125rem',
+                  background: '#ffffff',
+                  color: '#131313',
+                  fontFamily: "'Inter', sans-serif",
+                  fontWeight: 800,
+                  fontSize: '0.72rem',
+                  letterSpacing: '0.2em',
+                  textTransform: 'uppercase',
+                  textDecoration: 'none',
+                  borderRadius: 0,  /* SQUARE */
                 }}
               >
                 Get a Quote

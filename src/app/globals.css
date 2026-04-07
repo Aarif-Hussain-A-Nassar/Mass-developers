@@ -10,17 +10,17 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg:           #0a0a0a;
-  --surface:      #111111;
-  --surface-hi:   #181818;
-  --surface-hihi: #222222;
-  --white:        #ffffff;
-  --white-60:     rgba(255,255,255,0.60);
-  --white-30:     rgba(255,255,255,0.30);
-  --white-10:     rgba(255,255,255,0.10);
-  --white-06:     rgba(255,255,255,0.06);
-  --white-03:     rgba(255,255,255,0.03);
-  --accent:       #c8a96e;       /* single warm gold accent used sparingly */
+  --bg:           #ffffff;
+  --surface:      #f4f4f5;
+  --surface-hi:   #e4e4e7;
+  --surface-hihi: #d4d4d8;
+  --white:        #000000;
+  --white-60:     rgba(0,0,0,0.60);
+  --white-30:     rgba(0,0,0,0.30);
+  --white-10:     rgba(0,0,0,0.10);
+  --white-06:     rgba(0,0,0,0.06);
+  --white-03:     rgba(0,0,0,0.03);
+  --accent:       #808080;       /* Grey hover color */
   --ease-expo:    cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-expo: cubic-bezier(0.7, 0, 0.84, 0);
   --font-inter:   'Inter', sans-serif;
@@ -29,7 +29,6 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-snap-type: y mandatory;
 }
 
 body {
@@ -39,6 +38,19 @@ body {
   line-height:  1.6;
   overflow-x:   hidden;
   -webkit-font-smoothing: antialiased;
+}
+
+/* ─── Hero Curtain Scroll Animation ─── */
+#hero {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+section:not(#hero) {
+  position: relative;
+  z-index: 10;
+  background: var(--bg);
 }
 
 /* ─── Scrollbar ─── */
@@ -124,16 +136,16 @@ body {
 }
 
 .nav.scrolled {
-  background:      rgba(10, 10, 10, 0.85);
+  background:      rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(20px);
-  border-bottom:   1px solid var(--white-06);
+  border-bottom:   1px solid rgba(0,0,0,0.06);
 }
 
 .nav-logo {
   font-family:    var(--font-inter);
   font-size:      1rem;
   font-weight:    900;
-  letter-spacing: 0.5em;
+  letter-spacing: 0.25em;
   text-transform: uppercase;
   color:          var(--white);
   text-decoration: none;
@@ -376,7 +388,7 @@ body {
   font-weight:    700;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color:          var(--white-30);
+  color:          var(--white);
   white-space:    nowrap;
 }
 
@@ -444,6 +456,17 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
 }
+
+/* ─── Random Masonry Staggering ─── */
+@media (min-width: 769px) {
+  .expertise-card:nth-child(1) { margin-top: 0; }
+  .expertise-card:nth-child(2) { margin-top: 12rem; }
+  .expertise-card:nth-child(3) { margin-top: -8rem; }
+  .expertise-card:nth-child(4) { margin-top: 6rem; }
+}
+
+
+
 
 /* ─── Mobile ─── */
 @media (max-width: 768px) {

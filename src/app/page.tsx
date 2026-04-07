@@ -8,11 +8,13 @@ const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
 /* ═══════════════════ DATA ═══════════════════ */
 const NAV_LINKS = [
-  { label: 'Projects', href: '#projects' },
-  { label: 'Studio', href: '#studio' },
+  { label: 'Home',         href: '#hero'         },
+  { label: 'About',        href: '#philosophy'   },
+  { label: 'Expertise',    href: '#expertise'    },
+  { label: 'Projects',     href: '#projects'     },
   { label: 'Testimonials', href: '#testimonials' },
-  { label: 'Journal', href: '#journal' },
-  { label: 'Archive', href: '#archive' },
+  { label: 'Journal',      href: '#journal'      },
+  { label: 'Contact',      href: '#contact'      },
 ];
 
 const TICKER_ITEMS = [
@@ -24,28 +26,24 @@ const TICKER_ITEMS = [
 
 const EXPERTISE = [
   {
-    title: 'Residential',
-    body: 'Curating bespoke living spaces that blend minimalist aesthetics with domestic warmth.',
-    tag: '01',
-    bg: 'img-arch-1',
+    title: 'RESIDENTIAL',
+    body: 'SCULPTING SANCTUARY THROUGH MATERIAL HONESTY AND SPATIAL SILENCE.',
+    bg: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=1600&auto=format&fit=crop',
   },
   {
-    title: 'Commercial',
-    body: 'Designing monoliths for business that prioritize flow, productivity, and brand presence.',
-    tag: '02',
-    bg: 'img-arch-2',
+    title: 'COMMERCIAL',
+    body: 'PRECISION-ENGINEERED ENVIRONMENTS FOR GLOBAL INDUSTRIAL LEADERS.',
+    bg: 'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1600&auto=format&fit=crop',
   },
   {
-    title: 'Cultural',
-    body: 'Monuments to human expression built with geological permanence.',
-    tag: '03',
-    bg: 'img-arch-3',
+    title: 'CULTURAL',
+    body: 'MONUMENTS TO HUMAN EXPRESSION BUILT WITH GEOLOGICAL PERMANENCE.',
+    bg: 'https://images.unsplash.com/photo-1566195992011-5f6b21e539aa?q=80&w=1600&auto=format&fit=crop',
   },
   {
-    title: 'Interiors',
-    body: 'Sculpting the void within. Every piece of furniture and light fixture serves the structure.',
-    tag: '04',
-    bg: 'img-arch-4',
+    title: 'INTERIORS',
+    body: 'CURATING THE INTIMATE INTERFACE BETWEEN SKIN AND STRUCTURE.',
+    bg: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=1600&auto=format&fit=crop',
   },
 ];
 
@@ -102,25 +100,58 @@ const JOURNAL = [
 /* ═══════════════════ NAVBAR ═══════════════════ */
 function Navbar({ activeSection }: { activeSection: number }) {
   const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [activeIdx, setActiveIdx] = useState(0);
 
+  /* Switch navbar to white once past hero */
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 60);
     window.addEventListener('scroll', handler);
     return () => window.removeEventListener('scroll', handler);
   }, []);
 
+  /* Highlight the nav link corresponding to which section is on screen */
+  useEffect(() => {
+    const sectionIds = NAV_LINKS.map(l => l.href.replace('#', ''));
+    const observers: IntersectionObserver[] = [];
+
+    sectionIds.forEach((id, i) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const obs = new IntersectionObserver(
+        ([entry]) => { if (entry.isIntersecting) setActiveIdx(i); },
+        { threshold: 0.35 }
+      );
+      obs.observe(el);
+      observers.push(obs);
+    });
+
+    return () => observers.forEach(o => o.disconnect());
+  }, []);
+
+  /* Smooth-scroll without hard hash jump — hero uses window.scrollTo since it's sticky */
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    if (href === '#hero') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      const target = document.querySelector(href);
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <nav className={`nav ${scrolled ? 'scrolled' : ''}`}>
-      <a href="#hero" className="nav-logo">M A S S</a>
+      <a href="#hero" className="nav-logo" onClick={(e) => handleClick(e, '#hero')}>
+        MASS DEVELOPERS
+      </a>
 
       <ul className="nav-links">
         {NAV_LINKS.map((l, i) => (
           <li key={i}>
             <a
               href={l.href}
-              className={activeSection === i + 1 ? 'active' : ''}
-              onClick={() => setMobileOpen(false)}
+              className={activeIdx === i ? 'active' : ''}
+              onClick={(e) => handleClick(e, l.href)}
             >
               {l.label}
             </a>
@@ -128,7 +159,9 @@ function Navbar({ activeSection }: { activeSection: number }) {
         ))}
       </ul>
 
-      <a href="#contact" className="nav-cta">Inquire</a>
+      <a href="#contact" className="nav-cta" onClick={(e) => handleClick(e, '#contact')}>
+        Inquire
+      </a>
     </nav>
   );
 }
@@ -198,10 +231,12 @@ function Hero() {
   return (
     <section
       id="hero"
-      className="section-snap"
       ref={ref}
       style={{
-        position: 'relative',
+        position: 'sticky',
+        top: 0,
+        height: '100vh',
+        zIndex: 1,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -215,11 +250,11 @@ function Hero() {
         alt=""
         aria-hidden="true"
         style={{
-          position:   'absolute',
-          inset:      0,
-          width:      '100%',
-          height:     '100%',
-          objectFit:  'cover',            /* fill the container without black bars */
+          position: 'absolute',
+          inset: 0,
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',            /* fill the container without black bars */
           objectPosition: 'center center',
         }}
       />
@@ -351,16 +386,16 @@ function Philosophy() {
                 letterSpacing: '-0.01em',
               }}
             >
-              <span style={{ display: 'block', color: 'var(--white)' }}>We do not build</span>
-              <span style={{ display: 'block', color: 'var(--white)' }}>structures;</span>
-              <span style={{ display: 'block', color: 'var(--white-30)', fontWeight: 300 }}>we sculpt light.</span>
+              <motion.span whileHover={{ x: 10, color: 'var(--accent)' }} transition={{ duration: 0.3, ease: 'easeOut' }} style={{ display: 'block', color: 'var(--white)', cursor: 'default', originX: 0 }}>We do not build</motion.span>
+              <motion.span whileHover={{ x: 10, color: 'var(--accent)' }} transition={{ duration: 0.3, ease: 'easeOut' }} style={{ display: 'block', color: 'var(--white)', cursor: 'default', originX: 0 }}>structures;</motion.span>
+              <motion.span whileHover={{ x: 10, color: 'var(--white)' }} transition={{ duration: 0.3, ease: 'easeOut' }} style={{ display: 'block', color: 'var(--white-30)', fontWeight: 300, cursor: 'default', originX: 0 }}>we sculpt light.</motion.span>
             </h2>
           </FadeIn>
 
           <FadeIn delay={0.25}>
             <div>
               <p className="t-body" style={{ marginBottom: '2rem' }}>
-                MASS operates at the intersection of structural gravity and ethereal transparency.
+                MASS DEVELOPERS operates at the intersection of structural gravity and ethereal transparency.
                 Our methodology rejects the ornamental in favor of the essential. By reducing form
                 to its most primitive geometry, we allow the landscape and the atmospheric
                 conditions to become the primary architects of the occupant's experience.
@@ -370,12 +405,23 @@ function Philosophy() {
               </p>
 
               {/* Stats */}
-              <div className="grid-2-col" style={{ gap: '2rem', marginTop: '3rem', borderTop: '1px solid var(--white-06)', paddingTop: '2rem' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', marginTop: '3rem', borderTop: '1px solid var(--white-06)', paddingTop: '2rem' }}>
                 {[['250+', 'Projects'], ['8+', 'Years'], ['98%', 'Satisfaction'], ['50 Cr+', 'Delivered']].map(([num, label]) => (
-                  <div key={label}>
-                    <div style={{ fontFamily: 'var(--font-inter)', fontSize: '1.8rem', fontWeight: 900, color: 'var(--white)', letterSpacing: '-0.02em' }}>{num}</div>
-                    <div className="t-label">{label}</div>
-                  </div>
+                  <motion.div
+                    key={label}
+                    whileHover={{ y: -6 }}
+                    transition={{ duration: 0.3, ease: 'easeOut' }}
+                    style={{ cursor: 'default' }}
+                  >
+                    <motion.div
+                      whileHover={{ color: 'var(--accent)', scale: 1.05 }}
+                      transition={{ duration: 0.2 }}
+                      style={{ fontFamily: 'var(--font-inter)', fontSize: '1.8rem', fontWeight: 900, color: 'var(--white)', letterSpacing: '-0.02em', originX: 0 }}
+                    >
+                      {num}
+                    </motion.div>
+                    <div className="t-label" style={{ marginTop: '0.25rem' }}>{label}</div>
+                  </motion.div>
                 ))}
               </div>
             </div>
@@ -389,20 +435,21 @@ function Philosophy() {
 /* ═══════════════════ EXPERTISE ═══════════════════ */
 function Expertise() {
   return (
-    <section id="expertise" className="section-snap" style={{ background: 'var(--surface)', paddingTop: '6rem', paddingBottom: '4rem' }}>
+    <section id="expertise" className="section-snap" style={{ background: 'var(--surface)', paddingTop: '6rem', paddingBottom: '10rem' }}>
       <div className="container">
         <FadeIn>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '4rem' }}>
-            <div>
-              <div className="section-eyebrow"><span>Expertise</span></div>
-              <h2 className="t-headline" style={{ fontSize: 'clamp(2rem, 5vw, 4rem)' }}>What we build</h2>
-            </div>
-            <a href="#contact" className="btn-ghost" style={{ flexShrink: 0 }}>All Services</a>
+          <div style={{ marginBottom: '6rem' }}>
+            <h2
+              className="t-headline"
+              style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 100, letterSpacing: '0.15em' }}
+            >
+              EXPERTISE
+            </h2>
           </div>
         </FadeIn>
 
-        {/* Expertise grid — 2 col */}
-        <div className="grid-2-col" style={{ gap: '1px', background: 'var(--white-06)' }}>
+        {/* Expertise random editorial masonry */}
+        <div className="grid-2-col" style={{ gap: '6rem 4rem', alignItems: 'flex-start' }}>
           {EXPERTISE.map((exp, i) => (
             <motion.div
               key={i}
@@ -410,24 +457,30 @@ function Expertise() {
               initial={{ opacity: 0, y: 60 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-40px' }}
-              transition={{ duration: 0.8, delay: i * 0.1, ease: EASE }}
+              transition={{ duration: 0.8, delay: (i % 2) * 0.15, ease: EASE }}
             >
-              {/* Image placeholder */}
-              <div
-                className={exp.bg}
-                style={{ width: '100%', aspectRatio: '16/9', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}
-              >
-                <span style={{ fontFamily: 'var(--font-inter)', fontSize: '4rem', fontWeight: 900, opacity: 0.04, letterSpacing: '0.1em' }}>
-                  {exp.tag}
-                </span>
+              {/* Image */}
+              <div style={{ width: '100%', aspectRatio: '16/9', overflow: 'hidden' }}>
+                <motion.img
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.6, ease: EASE }}
+                  src={exp.bg}
+                  alt={exp.title}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                />
               </div>
 
-              <div style={{ padding: '1.75rem' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.75rem' }}>
-                  <h3 className="t-title" style={{ fontSize: '0.85rem' }}>{exp.title}</h3>
-                  <span style={{ fontFamily: 'var(--font-inter)', fontSize: '0.6rem', color: 'var(--white-30)', letterSpacing: '0.15em' }}>↗</span>
+              {/* Grey Text Container matching screenshot */}
+              <div style={{ background: 'var(--surface-hihi)', padding: '2.5rem 2rem' }}>
+                <h3 style={{ fontFamily: 'var(--font-inter)', fontSize: 'clamp(1.5rem, 2vw, 2rem)', fontWeight: 900, textTransform: 'uppercase', color: 'var(--white)', marginBottom: '1.25rem', letterSpacing: '-0.02em' }}>
+                  {exp.title}
+                </h3>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                  <p className="t-label" style={{ fontSize: '0.65rem', maxWidth: '85%', lineHeight: 1.6, letterSpacing: '0.08em', color: 'var(--white)' }}>
+                    {exp.body}
+                  </p>
+                  <span style={{ fontFamily: 'var(--font-inter)', fontSize: '0.85rem', color: 'var(--white-60)' }}>↗</span>
                 </div>
-                <p className="t-body" style={{ fontSize: '0.85rem' }}>{exp.body}</p>
               </div>
             </motion.div>
           ))}
@@ -746,8 +799,8 @@ function Contact() {
           <div className="grid-3-col" style={{ gap: '2rem', padding: '3rem 0 2rem' }}>
             {/* Brand */}
             <div>
-              <div style={{ fontFamily: 'var(--font-inter)', fontSize: '1.2rem', fontWeight: 900, letterSpacing: '0.4em', textTransform: 'uppercase', color: 'var(--white)', marginBottom: '1rem' }}>
-                M A S S
+              <div style={{ fontFamily: 'var(--font-inter)', fontSize: '1.2rem', fontWeight: 900, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--white)', marginBottom: '1rem' }}>
+                MASS DEVELOPERS
               </div>
               <p className="t-body" style={{ fontSize: '0.78rem', maxWidth: '220px' }}>
                 Creating enduring architectural statements that transcend time. Designed for the bold.
