@@ -155,8 +155,14 @@ function Navbar({ activeSection }: { activeSection: number }) {
 
   return (
     <nav className={`nav ${scrolled ? 'scrolled' : ''}`}>
-      <a href="#hero" className="nav-logo" onClick={(e) => handleClick(e, '#hero', 0)}>
-        <img src="/logo.png" alt="MASS Logo" className="nav-logo-img" />
+      <a href="#hero" className="nav-logo" style={{ marginLeft: '1.5rem' }} onClick={(e) => handleClick(e, '#hero', 0)}>
+        <motion.img 
+          src="/logo.png" 
+          alt="MASS Logo" 
+          className="nav-logo-img" 
+          whileHover={{ scale: 1.05 }}
+          transition={{ duration: 0.3, ease: EASE }}
+        />
       </a>
 
       <ul className="nav-links">
@@ -239,8 +245,18 @@ function Ticker({ reversed = false }: { reversed?: boolean }) {
 function Hero() {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
-  const y = useTransform(scrollYProgress, [0, 1], [0, -80]);
-  const opac = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+
+  // Smoother parallax using spring
+  const springConfig = { stiffness: 100, damping: 30, restDelta: 0.001 };
+  const smoothProgress = useSpring(scrollYProgress, springConfig);
+
+  const y = useTransform(smoothProgress, [0, 1], [0, -150]);
+  const bgY = useTransform(smoothProgress, [0, 1], [0, 50]);
+  const scale = useTransform(smoothProgress, [0, 1], [1, 1.1]);
+  const opac = useTransform(smoothProgress, [0, 0.6], [1, 0]);
+  const blur = useTransform(smoothProgress, [0, 0.8], [0, 15]);
+
+  const titleText = "MASS";
 
   return (
     <section
@@ -258,64 +274,91 @@ function Hero() {
         background: '#0a0a0a',
       }}
     >
-      {/* ── Full-screen background photo — object-fit: cover fills gaps, new ultra-wide image prevents extreme zoom  ── */}
-      <img
-        src="/hero-bg.jpg"
-        alt=""
-        aria-hidden="true"
+      {/* ── Background Photo Recall Animation ── */}
+      <motion.div
+        initial={{ scale: 1.15, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 2, ease: EASE }}
         style={{
           position: 'absolute',
           inset: 0,
           width: '100%',
-          height: '100%',
-          objectFit: 'cover',            /* fill the container without black bars */
-          objectPosition: 'center center',
+          height: '110%',
+          y: bgY,
+          scale,
+          filter: `blur(${blur}px)`,
         }}
-      />
-
-      {/* ── Dark overlay — same as Stitch design ── */}
-      <div
-        style={{
-          position: 'absolute',
-          inset: 0,
-          background: 'rgba(0, 0, 0, 0.52)',
-        }}
-      />
+      >
+        <img
+          src="/hero-bg.jpg"
+          alt=""
+          aria-hidden="true"
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            objectPosition: 'center center',
+          }}
+        />
+        {/* ── Dark overlay with gradient ── */}
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            background: 'linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.7) 100%)',
+          }}
+        />
+      </motion.div>
 
       {/* ── Centered content ── */}
       <motion.div
         style={{ y, opacity: opac, position: 'relative', zIndex: 2, textAlign: 'center', width: '100%', padding: '0 1rem' }}
       >
-        {/* M A S S — ultra-thin, wide tracked, exactly like the mockup */}
-        <motion.h1
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, delay: 0.3, ease: EASE }}
+        {/* M A S S — Character-level animation */}
+        <div
           style={{
-            fontFamily: 'var(--font-inter)',
-            fontSize: 'clamp(2.5rem, 12vw, 13rem)', /* more responsive bounds */
-            fontWeight: 100,            /* hairline weight — matching the thin outline look */
-            letterSpacing: '0.55em',
-            textTransform: 'uppercase',
-            lineHeight: 1,
-            color: '#ffffff',
+            display: 'flex',
+            justifyContent: 'center',
+            gap: '0.1em',
             marginBottom: '1.25rem',
-            paddingLeft: '0.55em',       /* compensate for letter-spacing so it looks centred */
+            paddingLeft: '0.55em',
           }}
         >
-          MASS
-        </motion.h1>
+          {titleText.split('').map((char, i) => (
+            <motion.h1
+              key={i}
+              initial={{ opacity: 0, y: 80, filter: 'blur(10px)' }}
+              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              transition={{
+                duration: 1.4,
+                delay: 0.2 + i * 0.1,
+                ease: EASE
+              }}
+              style={{
+                fontFamily: 'var(--font-inter)',
+                fontSize: 'clamp(2.5rem, 12vw, 13rem)',
+                fontWeight: 100,
+                letterSpacing: '0.55em',
+                textTransform: 'uppercase',
+                lineHeight: 1,
+                color: '#ffffff',
+                display: 'inline-block',
+              }}
+            >
+              {char}
+            </motion.h1>
+          ))}
+        </div>
 
         {/* Subtitle */}
         <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.7, ease: EASE }}
+          initial={{ opacity: 0, letterSpacing: '0.2em' }}
+          animate={{ opacity: 1, letterSpacing: '0.45em' }}
+          transition={{ duration: 1.5, delay: 0.8, ease: EASE }}
           style={{
             fontFamily: 'var(--font-manrope)',
-            fontSize: 'clamp(0.45rem, 1.2vw, 0.72rem)', /* more responsive bounds */
+            fontSize: 'clamp(0.45rem, 1.2vw, 0.72rem)',
             fontWeight: 500,
-            letterSpacing: '0.45em',
             textTransform: 'uppercase',
             color: 'rgba(255,255,255,0.70)',
             marginBottom: '3.5rem',
@@ -324,16 +367,17 @@ function Hero() {
           Precision in silence. Architecture as a manifesto.
         </motion.p>
 
-        {/* CTA row: WORKS  |  STUDIO — matching the mockup's two text buttons with divider */}
+        {/* CTA row */}
         <motion.div
-
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 1.0, ease: EASE }}
-          style={{ display: 'inline-flex', alignItems: 'center', gap: '1.25rem' }}
+          transition={{ duration: 1, delay: 1.2, ease: EASE }}
+          style={{ display: 'inline-flex', alignItems: 'center', gap: '1.5rem' }}
         >
-          <a
+          <motion.a
             href="#projects"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.98 }}
             onClick={(e) => { e.preventDefault(); document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' }); }}
             style={{
               fontFamily: 'var(--font-manrope)',
@@ -343,31 +387,34 @@ function Hero() {
               textTransform: 'uppercase',
               color: '#ffffff',
               textDecoration: 'none',
-              padding: '0.85rem 2.5rem',
-              border: '1px solid rgba(255,255,255,0.55)',
-              transition: 'background 0.25s ease, color 0.25s ease, border-color 0.25s ease',
+              padding: '1rem 3rem',
+              border: '1px solid rgba(255,255,255,0.3)',
+              backgroundColor: 'rgba(255,255,255,0.05)',
+              backdropFilter: 'blur(10px)',
+              transition: 'background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease',
               display: 'inline-flex',
               alignItems: 'center',
-              gap: '0.6rem',
             }}
             onMouseEnter={e => {
               const el = e.currentTarget as HTMLElement;
-              el.style.background = '#ffffff';
+              el.style.backgroundColor = '#ffffff';
               el.style.color = '#000000';
               el.style.borderColor = '#ffffff';
             }}
             onMouseLeave={e => {
               const el = e.currentTarget as HTMLElement;
-              el.style.background = 'transparent';
+              el.style.backgroundColor = 'rgba(255,255,255,0.05)';
               el.style.color = '#ffffff';
-              el.style.borderColor = 'rgba(255,255,255,0.55)';
+              el.style.borderColor = 'rgba(255,255,255,0.3)';
             }}
           >
             View Works
-          </a>
+          </motion.a>
 
-          <a
+          <motion.a
             href="#philosophy"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.98 }}
             onClick={(e) => { e.preventDefault(); document.querySelector('#philosophy')?.scrollIntoView({ behavior: 'smooth' }); }}
             style={{
               fontFamily: 'var(--font-manrope)',
@@ -377,34 +424,78 @@ function Hero() {
               textTransform: 'uppercase',
               color: '#ffffff',
               textDecoration: 'none',
-              padding: '0.85rem 2.5rem',
-              border: '1px solid rgba(255,255,255,0.55)',
-              transition: 'background 0.25s ease, color 0.25s ease, border-color 0.25s ease',
+              padding: '1rem 3rem',
+              border: '1px solid rgba(255,255,255,0.3)',
+              backgroundColor: 'rgba(255,255,255,0.05)',
+              backdropFilter: 'blur(10px)',
+              transition: 'background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease',
               display: 'inline-flex',
               alignItems: 'center',
-              gap: '0.6rem',
             }}
             onMouseEnter={e => {
               const el = e.currentTarget as HTMLElement;
-              el.style.background = '#ffffff';
+              el.style.backgroundColor = '#ffffff';
               el.style.color = '#000000';
               el.style.borderColor = '#ffffff';
             }}
             onMouseLeave={e => {
               const el = e.currentTarget as HTMLElement;
-              el.style.background = 'transparent';
+              el.style.backgroundColor = 'rgba(255,255,255,0.05)';
               el.style.color = '#ffffff';
-              el.style.borderColor = 'rgba(255,255,255,0.55)';
+              el.style.borderColor = 'rgba(255,255,255,0.3)';
             }}
           >
             Our Studio
-          </a>
+          </motion.a>
         </motion.div>
       </motion.div>
+
+      {/* ── Scroll Indicator ── */}
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 2, duration: 1 }}
+        style={{
+          position: 'absolute',
+          bottom: '2rem',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          zIndex: 2,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: '1rem',
+        }}
+      >
+        <div style={{
+          width: '1px',
+          height: '60px',
+          background: 'linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 50%, rgba(255,255,255,0) 100%)',
+          backgroundSize: '100% 200%',
+          animation: 'scroll-line 2s cubic-bezier(0.76, 0, 0.24, 1) infinite',
+        }} />
+        <span style={{
+          fontFamily: 'var(--font-manrope)',
+          fontSize: '0.5rem',
+          fontWeight: 700,
+          letterSpacing: '0.4em',
+          textTransform: 'uppercase',
+          color: 'rgba(255,255,255,0.5)',
+        }}>
+          Scroll
+        </span>
+      </motion.div>
+
+      <style jsx>{`
+        @keyframes scroll-line {
+          0% { background-position: 0% 100%; opacity: 0; }
+          50% { opacity: 1; }
+          100% { background-position: 0% -100%; opacity: 0; }
+        }
+      `}</style>
     </section>
   );
 }
-
 
 /* ═══════════════════ PHILOSOPHY ═══════════════════ */
 function Philosophy() {
