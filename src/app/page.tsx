@@ -186,7 +186,7 @@ function Navbar() {
         </a>
       </nav>
 
-      <div className="lg:hidden">
+      <div className="floating-nav-dock">
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div
@@ -271,6 +271,17 @@ function Navbar() {
           )}
         </motion.button>
       </div>
+
+      <style jsx>{`
+        .floating-nav-dock {
+          display: none;
+        }
+        @media (max-width: 768px) {
+          .floating-nav-dock {
+            display: block;
+          }
+        }
+      `}</style>
     </>
   );
 }
@@ -349,14 +360,7 @@ function Hero() {
   const opac = useTransform(smoothProgress, [0, 0.6], [1, 0]);
   const blur = useTransform(smoothProgress, [0, 0.8], [0, 15]);
 
-  const handleMouseMove = (e: React.MouseEvent) => {
-    const { clientX, clientY, currentTarget } = e;
-    const { width, height, left, top } = currentTarget.getBoundingClientRect();
-    const x = (clientX - left) / width - 0.5;
-    const y = (clientY - top) / height - 0.5;
-    mouseX.set(x);
-    mouseY.set(y);
-  };
+  const handleMouseMove = () => {};
 
   const titleText = "MASS";
 
@@ -387,8 +391,6 @@ function Hero() {
           width: '100%',
           height: '100%',
           y: bgY,
-          x: moveX as any,
-          top: moveY as any,
           filter: `blur(${blur}px)`,
         }}
       >
@@ -401,7 +403,6 @@ function Hero() {
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.7) 100%)' }} />
       </motion.div>
 
-      <div style={{ position: 'absolute', inset: 0, zIndex: 3, pointerEvents: 'none', opacity: 0.04, background: 'url("https://grainy-gradients.vercel.app/noise.svg")', mixBlendMode: 'overlay' }} />
 
       <motion.div style={{ y, opacity: opac, position: 'relative', zIndex: 2, textAlign: 'center', width: '100%', padding: '0 1rem', willChange: 'transform, opacity' }}>
         <div style={{ display: 'flex', justifyContent: 'center', gap: '0.1em', marginBottom: '1.25rem', paddingLeft: '0.55em' }}>
@@ -411,7 +412,15 @@ function Hero() {
               initial={{ opacity: 0, y: 80, filter: 'blur(10px)' }}
               animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
               transition={{ duration: 1.4, delay: 0.2 + i * 0.1, ease: EASE }}
-              style={{ fontFamily: 'var(--font-inter)', fontSize: 'clamp(2.5rem, 12vw, 13rem)', fontWeight: 100, letterSpacing: '0.55em', textTransform: 'uppercase', lineHeight: 1, color: '#ffffff' }}
+              style={{ 
+                fontFamily: 'var(--font-inter)', 
+                fontSize: 'clamp(2.5rem, 10vw, 13rem)', 
+                fontWeight: 100, 
+                letterSpacing: 'clamp(0.2em, 5vw, 0.55em)', 
+                textTransform: 'uppercase', 
+                lineHeight: 1, 
+                color: '#ffffff' 
+              }}
             >
               {char}
             </motion.h1>
@@ -635,6 +644,11 @@ export default function Page() {
         <Journal />
         <Contact />
       </main>
+      <style jsx global>{`
+        @media (min-width: 1024px) {
+          .xl\\:hidden { display: none !important; }
+        }
+      `}</style>
     </>
   );
 }
