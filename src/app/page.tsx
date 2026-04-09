@@ -38,7 +38,7 @@ const EXPERTISE = [
   {
     title: 'Turnkey Work',
     body: 'As a full-service construction firm, we offer turnkey solutions to streamline the building process for our clients. From conceptualization and design to construction and final handover, we take care of every aspect of the project, ensuring a seamless and hassle-free experience for our clients.',
-    bg: 'https://images.unsplash.com/photo-1503387762-592dea58ef23?q=80&w=1600&auto=format&fit=crop',
+    bg: '/turnkey.png',
   },
   {
     title: 'Renovation Work',
