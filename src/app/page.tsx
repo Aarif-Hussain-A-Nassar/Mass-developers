@@ -103,9 +103,11 @@ const JOURNAL = [
 ];
 
 /* ═══════════════════ NAVBAR ═══════════════════ */
+
 function Navbar({ activeSection }: { activeSection: number }) {
   const [scrolled, setScrolled] = useState(false);
   const [activeIdx, setActiveIdx] = useState(0);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   /* Switch navbar to white once past hero */
   useEffect(() => {
@@ -114,17 +116,11 @@ function Navbar({ activeSection }: { activeSection: number }) {
     return () => window.removeEventListener('scroll', handler);
   }, []);
 
-  /* Track active section by scroll position — reliable, no observer conflicts */
+  /* Track active section by scroll position */
   useEffect(() => {
     const sectionIds = NAV_LINKS.map(l => l.href.replace('#', ''));
-
     const updateActive = () => {
-      // If at the very top, always Home
-      if (window.scrollY < 80) {
-        setActiveIdx(0);
-        return;
-      }
-
+      if (window.scrollY < 80) { setActiveIdx(0); return; }
       const midpoint = window.scrollY + window.innerHeight / 2;
       let best = 0;
       sectionIds.forEach((id, i) => {
@@ -134,16 +130,15 @@ function Navbar({ activeSection }: { activeSection: number }) {
       });
       setActiveIdx(best);
     };
-
-    updateActive(); // run once on mount
+    updateActive();
     window.addEventListener('scroll', updateActive, { passive: true });
     return () => window.removeEventListener('scroll', updateActive);
   }, []);
 
-  /* Smooth-scroll — for Home, also immediately mark it active */
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string, idx: number) => {
     e.preventDefault();
-    setActiveIdx(idx);            // ← immediately update underline
+    setActiveIdx(idx);
+    setIsMenuOpen(false);
     if (href === '#hero') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
@@ -152,37 +147,150 @@ function Navbar({ activeSection }: { activeSection: number }) {
     }
   };
 
-
   return (
-    <nav className={`nav ${scrolled ? 'scrolled' : ''}`}>
-      <a href="#hero" className="nav-logo" style={{ marginLeft: '1.5rem' }} onClick={(e) => handleClick(e, '#hero', 0)}>
-        <motion.img 
-          src="/logo.png" 
-          alt="MASS Logo" 
-          className="nav-logo-img" 
-          whileHover={{ scale: 1.05 }}
-          transition={{ duration: 0.3, ease: EASE }}
-        />
-      </a>
+    <>
+      {/* ── Desktop/Top Navbar ── */}
+      <nav className={`nav ${scrolled ? 'scrolled' : ''}`}>
+        <a href="#hero" className="nav-logo" style={{ marginLeft: '1.5rem' }} onClick={(e) => handleClick(e, '#hero', 0)}>
+          <motion.img 
+            src="/logo.png" 
+            alt="MASS Logo" 
+            className="nav-logo-img" 
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.3, ease: EASE }}
+          />
+        </a>
 
-      <ul className="nav-links">
-        {NAV_LINKS.map((l, i) => (
-          <li key={i}>
-            <a
-              href={l.href}
-              className={activeIdx === i ? 'active' : ''}
-              onClick={(e) => handleClick(e, l.href, i)}
+        {/* Links — hidden on mobile via CSS */}
+        <ul className="nav-links">
+          {NAV_LINKS.map((l, i) => (
+            <li key={i}>
+              <a
+                href={l.href}
+                className={activeIdx === i ? 'active' : ''}
+                onClick={(e) => handleClick(e, l.href, i)}
+                style={{ color: scrolled ? '#000000' : '#ffffff' }}
+              >
+                {l.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+
+        <a 
+          href="#contact" 
+          className="nav-cta" 
+          onClick={(e) => handleClick(e, '#contact', NAV_LINKS.length - 1)}
+          style={{ 
+            color: scrolled ? '#000000' : '#ffffff', 
+            borderColor: scrolled ? 'rgba(0,0,0,0.3)' : 'rgba(255,255,255,0.3)' 
+          }}
+        >
+          Inquire
+        </a>
+      </nav>
+
+      {/* ── Innovative Mobile Floating Dock ── */}
+      <div className="mobile-only">
+        <AnimatePresence>
+          {isMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: 100 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 100 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+              style={{
+                position: 'fixed',
+                bottom: '100px',
+                left: '20px',
+                right: '20px',
+                zIndex: 1000,
+                background: 'rgba(10, 10, 10, 0.95)',
+                backdropFilter: 'blur(20px)',
+                padding: '2.5rem 2rem',
+                border: '1px solid rgba(255,255,255,0.1)'
+              }}
             >
-              {l.label}
-            </a>
-          </li>
-        ))}
-      </ul>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
+                {NAV_LINKS.map((l, i) => (
+                  <motion.a
+                    key={i}
+                    href={l.href}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: i * 0.05 }}
+                    onClick={(e) => handleClick(e, l.href, i)}
+                    style={{
+                      fontFamily: 'var(--font-inter)',
+                      fontSize: '1.25rem',
+                      fontWeight: 800,
+                      letterSpacing: '0.1em',
+                      textTransform: 'uppercase',
+                      color: activeIdx === i ? '#ffffff' : 'rgba(255,255,255,0.3)',
+                      textDecoration: 'none',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '1rem'
+                    }}
+                  >
+                    <span style={{ fontSize: '0.7rem', opacity: 0.3 }}>0{i+1}</span>
+                    {l.label}
+                    {activeIdx === i && <motion.span layoutId="activeDotMobile" style={{ width: '6px', height: '6px', background: '#ffffff', borderRadius: '50%' }} />}
+                  </motion.a>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
-      <a href="#contact" className="nav-cta" onClick={(e) => handleClick(e, '#contact', NAV_LINKS.length - 1)}>
-        Inquire
-      </a>
-    </nav>
+        <motion.button
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          whileTap={{ scale: 0.95 }}
+          style={{
+            position: 'fixed',
+            bottom: '30px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            zIndex: 1001,
+            background: isMenuOpen ? '#ffffff' : '#000000',
+            color: isMenuOpen ? '#000000' : '#ffffff',
+            border: 'none',
+            padding: '1rem 2.5rem',
+            borderRadius: '2rem',
+            fontFamily: 'var(--font-manrope)',
+            fontSize: '0.7rem',
+            fontWeight: 800,
+            letterSpacing: '0.3em',
+            textTransform: 'uppercase',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '1.25rem',
+            boxShadow: '0 20px 40px rgba(0,0,0,0.4)',
+            transition: 'background 0.3s ease, color 0.3s ease'
+          }}
+        >
+          {isMenuOpen ? (
+            <span style={{ color: '#000000' }}>Close</span>
+          ) : (
+            <>
+              <span style={{ color: 'rgba(255,255,255,0.6)' }}>{NAV_LINKS[activeIdx].label}</span>
+              <span style={{ fontSize: '1.2rem', lineHeight: 1, color: '#ffffff' }}>+</span>
+            </>
+          )}
+        </motion.button>
+      </div>
+
+      <style jsx>{`
+        .mobile-only {
+          display: none;
+        }
+        @media (max-width: 768px) {
+          .mobile-only {
+            display: block;
+          }
+        }
+      `}</style>
+    </>
   );
 }
 
