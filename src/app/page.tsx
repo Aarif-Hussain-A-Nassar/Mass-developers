@@ -26,24 +26,29 @@ const TICKER_ITEMS = [
 
 const EXPERTISE = [
   {
-    title: 'RESIDENTIAL',
-    body: 'SCULPTING SANCTUARY THROUGH MATERIAL HONESTY AND SPATIAL SILENCE.',
-    bg: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=1600&auto=format&fit=crop',
+    title: 'Residential Building',
+    body: "At MASS Developers, we specialize in constructing high-quality residential buildings that cater to the diverse needs and preferences of our clients. Whether it's a single-family home, an apartment complex, or a gated community, we are committed to delivering spaces that are not just structurally sound but also aesthetically pleasing and functional.",
+    bg: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1600&auto=format&fit=crop',
   },
   {
-    title: 'COMMERCIAL',
-    body: 'PRECISION-ENGINEERED ENVIRONMENTS FOR GLOBAL INDUSTRIAL LEADERS.',
-    bg: 'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1600&auto=format&fit=crop',
+    title: 'Commercial Building',
+    body: 'Our expertise extends to the construction of commercial buildings, including office complexes, retail outlets, industrial facilities, and more. We understand the unique requirements of commercial projects and work closely with our clients to deliver spaces that meet their business objectives while adhering to strict quality and safety standards.',
+    bg: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1600&auto=format&fit=crop',
   },
   {
-    title: 'CULTURAL',
-    body: 'MONUMENTS TO HUMAN EXPRESSION BUILT WITH GEOLOGICAL PERMANENCE.',
-    bg: 'https://images.unsplash.com/photo-1566195992011-5f6b21e539aa?q=80&w=1600&auto=format&fit=crop',
+    title: 'Turnkey Work',
+    body: 'As a full-service construction firm, we offer turnkey solutions to streamline the building process for our clients. From conceptualization and design to construction and final handover, we take care of every aspect of the project, ensuring a seamless and hassle-free experience for our clients.',
+    bg: 'https://images.unsplash.com/photo-1503387762-592dea58ef23?q=80&w=1600&auto=format&fit=crop',
   },
   {
-    title: 'INTERIORS',
-    body: 'CURATING THE INTIMATE INTERFACE BETWEEN SKIN AND STRUCTURE.',
-    bg: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=1600&auto=format&fit=crop',
+    title: 'Renovation Work',
+    body: 'Whether it\'s revitalizing an existing space or restoring a historic building, we have the expertise and experience to handle renovation projects of all sizes and complexities. Our team of skilled professionals works diligently to transform outdated or dilapidated structures into modern, functional, and visually appealing spaces.',
+    bg: 'https://images.unsplash.com/photo-1517581177682-a085bb7ffb15?q=80&w=1600&auto=format&fit=crop',
+  },
+  {
+    title: 'Interior Work',
+    body: "At MASS Developers, we understand that the interior of a building plays a crucial role in defining its overall ambiance and functionality. That's why we offer comprehensive interior design and fit-out services to enhance the aesthetics and usability of our clients' spaces. From space planning and material selection to furniture installation and finishing touches, we ensure that every aspect of the interior design aligns with our clients' vision and requirements.",
+    bg: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=1600&auto=format&fit=crop',
   },
 ];
 
@@ -52,15 +57,15 @@ const PROJECTS = [
     title: 'The Obsidian Loft',
     label: 'Project 039 / 2022',
     location: 'Residential / Los Angeles',
-    bg: 'linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.85) 100%), url("/arch-1.jpg") center/cover no-repeat',
-    placeholder: 'linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 40%, #0d0d15 100%)',
+    bg: 'linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.65) 100%), url("/arch-1.jpg") center/cover no-repeat',
+    placeholder: 'linear-gradient(135deg, var(--surface) 0%, var(--surface-hi) 60%, var(--surface) 100%)',
   },
   {
     title: 'Summit Corporate Center',
     label: 'Project 012 / 2023',
     location: 'Commercial / Singapore',
-    bg: 'linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.85) 100%), url("/arch-2.jpg") center/cover no-repeat',
-    placeholder: 'linear-gradient(135deg, #0a0a0a 0%, #1e1e1e 60%, #0a0a0a 100%)',
+    bg: 'linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.65) 100%), url("/arch-2.jpg") center/cover no-repeat',
+    placeholder: 'linear-gradient(135deg, var(--surface-hi) 0%, var(--surface) 60%, var(--surface-hi) 100%)',
   },
 ];
 
@@ -109,28 +114,36 @@ function Navbar({ activeSection }: { activeSection: number }) {
     return () => window.removeEventListener('scroll', handler);
   }, []);
 
-  /* Highlight the nav link corresponding to which section is on screen */
+  /* Track active section by scroll position — reliable, no observer conflicts */
   useEffect(() => {
     const sectionIds = NAV_LINKS.map(l => l.href.replace('#', ''));
-    const observers: IntersectionObserver[] = [];
 
-    sectionIds.forEach((id, i) => {
-      const el = document.getElementById(id);
-      if (!el) return;
-      const obs = new IntersectionObserver(
-        ([entry]) => { if (entry.isIntersecting) setActiveIdx(i); },
-        { threshold: 0.35 }
-      );
-      obs.observe(el);
-      observers.push(obs);
-    });
+    const updateActive = () => {
+      // If at the very top, always Home
+      if (window.scrollY < 80) {
+        setActiveIdx(0);
+        return;
+      }
 
-    return () => observers.forEach(o => o.disconnect());
+      const midpoint = window.scrollY + window.innerHeight / 2;
+      let best = 0;
+      sectionIds.forEach((id, i) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        if (el.offsetTop <= midpoint) best = i;
+      });
+      setActiveIdx(best);
+    };
+
+    updateActive(); // run once on mount
+    window.addEventListener('scroll', updateActive, { passive: true });
+    return () => window.removeEventListener('scroll', updateActive);
   }, []);
 
-  /* Smooth-scroll without hard hash jump — hero uses window.scrollTo since it's sticky */
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  /* Smooth-scroll — for Home, also immediately mark it active */
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string, idx: number) => {
     e.preventDefault();
+    setActiveIdx(idx);            // ← immediately update underline
     if (href === '#hero') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
@@ -139,10 +152,11 @@ function Navbar({ activeSection }: { activeSection: number }) {
     }
   };
 
+
   return (
     <nav className={`nav ${scrolled ? 'scrolled' : ''}`}>
-      <a href="#hero" className="nav-logo" onClick={(e) => handleClick(e, '#hero')}>
-        MASS DEVELOPERS
+      <a href="#hero" className="nav-logo" onClick={(e) => handleClick(e, '#hero', 0)}>
+        <img src="/logo.png" alt="MASS Logo" className="nav-logo-img" />
       </a>
 
       <ul className="nav-links">
@@ -151,7 +165,7 @@ function Navbar({ activeSection }: { activeSection: number }) {
             <a
               href={l.href}
               className={activeIdx === i ? 'active' : ''}
-              onClick={(e) => handleClick(e, l.href)}
+              onClick={(e) => handleClick(e, l.href, i)}
             >
               {l.label}
             </a>
@@ -159,7 +173,7 @@ function Navbar({ activeSection }: { activeSection: number }) {
         ))}
       </ul>
 
-      <a href="#contact" className="nav-cta" onClick={(e) => handleClick(e, '#contact')}>
+      <a href="#contact" className="nav-cta" onClick={(e) => handleClick(e, '#contact', NAV_LINKS.length - 1)}>
         Inquire
       </a>
     </nav>
@@ -316,47 +330,74 @@ function Hero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 1.0, ease: EASE }}
-          style={{ display: 'inline-flex', alignItems: 'center' }}
+          style={{ display: 'inline-flex', alignItems: 'center', gap: '1.25rem' }}
         >
           <a
             href="#projects"
+            onClick={(e) => { e.preventDefault(); document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' }); }}
             style={{
               fontFamily: 'var(--font-manrope)',
               fontSize: '0.65rem',
-              fontWeight: 500,
+              fontWeight: 700,
               letterSpacing: '0.3em',
               textTransform: 'uppercase',
-              color: 'rgba(255,255,255,0.85)',
+              color: '#ffffff',
               textDecoration: 'none',
-              padding: '0.6rem 2.5rem',
-              transition: 'color 0.2s ease',
+              padding: '0.85rem 2.5rem',
+              border: '1px solid rgba(255,255,255,0.55)',
+              transition: 'background 0.25s ease, color 0.25s ease, border-color 0.25s ease',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.6rem',
             }}
-            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = '#fff'; }}
-            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.85)'; }}
+            onMouseEnter={e => {
+              const el = e.currentTarget as HTMLElement;
+              el.style.background = '#ffffff';
+              el.style.color = '#000000';
+              el.style.borderColor = '#ffffff';
+            }}
+            onMouseLeave={e => {
+              const el = e.currentTarget as HTMLElement;
+              el.style.background = 'transparent';
+              el.style.color = '#ffffff';
+              el.style.borderColor = 'rgba(255,255,255,0.55)';
+            }}
           >
-            Works
+            View Works
           </a>
-
-          {/* Thin vertical divider */}
-          <div style={{ width: '1px', height: '18px', background: 'rgba(255,255,255,0.35)' }} />
 
           <a
             href="#philosophy"
+            onClick={(e) => { e.preventDefault(); document.querySelector('#philosophy')?.scrollIntoView({ behavior: 'smooth' }); }}
             style={{
               fontFamily: 'var(--font-manrope)',
               fontSize: '0.65rem',
-              fontWeight: 500,
+              fontWeight: 700,
               letterSpacing: '0.3em',
               textTransform: 'uppercase',
-              color: 'rgba(255,255,255,0.85)',
+              color: 'rgba(255,255,255,0.75)',
               textDecoration: 'none',
-              padding: '0.6rem 2.5rem',
-              transition: 'color 0.2s ease',
+              padding: '0.85rem 2.5rem',
+              border: '1px solid rgba(255,255,255,0.25)',
+              transition: 'background 0.25s ease, color 0.25s ease, border-color 0.25s ease',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.6rem',
             }}
-            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = '#fff'; }}
-            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.85)'; }}
+            onMouseEnter={e => {
+              const el = e.currentTarget as HTMLElement;
+              el.style.background = 'rgba(255,255,255,0.12)';
+              el.style.color = '#ffffff';
+              el.style.borderColor = 'rgba(255,255,255,0.55)';
+            }}
+            onMouseLeave={e => {
+              const el = e.currentTarget as HTMLElement;
+              el.style.background = 'transparent';
+              el.style.color = 'rgba(255,255,255,0.75)';
+              el.style.borderColor = 'rgba(255,255,255,0.25)';
+            }}
           >
-            Studio
+            Our Studio
           </a>
         </motion.div>
       </motion.div>
@@ -472,14 +513,14 @@ function Expertise() {
 
               {/* Grey Text Container matching screenshot */}
               <div style={{ background: 'var(--surface-hihi)', padding: '2.5rem 2rem' }}>
-                <h3 style={{ fontFamily: 'var(--font-inter)', fontSize: 'clamp(1.5rem, 2vw, 2rem)', fontWeight: 900, textTransform: 'uppercase', color: 'var(--white)', marginBottom: '1.25rem', letterSpacing: '-0.02em' }}>
+                <h3 style={{ fontFamily: 'var(--font-inter)', fontSize: 'clamp(1.25rem, 1.8vw, 1.65rem)', fontWeight: 100, textTransform: 'uppercase', color: 'var(--white)', marginBottom: '1.25rem', letterSpacing: '0.1em' }}>
                   {exp.title}
                 </h3>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                  <p className="t-label" style={{ fontSize: '0.65rem', maxWidth: '85%', lineHeight: 1.6, letterSpacing: '0.08em', color: 'var(--white)' }}>
+                  <p className="t-body" style={{ fontSize: '0.85rem', maxWidth: '90%', lineHeight: 1.6, color: 'var(--white-60)' }}>
                     {exp.body}
                   </p>
-                  <span style={{ fontFamily: 'var(--font-inter)', fontSize: '0.85rem', color: 'var(--white-60)' }}>↗</span>
+                  <span style={{ fontFamily: 'var(--font-inter)', fontSize: '0.85rem', color: 'var(--white-60)', marginTop: '4px' }}>↗</span>
                 </div>
               </div>
             </motion.div>
@@ -518,15 +559,19 @@ function Projects() {
           />
         </AnimatePresence>
 
-        {/* Dark overlay */}
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.1) 100%)' }} />
+        {/* Light overlay — instead of dark */}
+        <div style={{
+          position: 'absolute',
+          inset: 0,
+          background: 'linear-gradient(to top, var(--surface) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0.1) 100%)'
+        }} />
 
         {/* Content at bottom */}
         <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '4rem 5rem' }}>
           {/* Grid lines top */}
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
-            <span className="t-label">{PROJECTS[active].label}</span>
-            <span className="t-label">{PROJECTS[active].location}</span>
+            <span className="t-label" style={{ color: 'var(--white-60)' }}>{PROJECTS[active].label}</span>
+            <span className="t-label" style={{ color: 'var(--white-60)' }}>{PROJECTS[active].location}</span>
           </div>
 
           <AnimatePresence mode="wait">
@@ -573,7 +618,7 @@ function Projects() {
                 {String(i + 1).padStart(2, '0')}
               </button>
             ))}
-            <a href="#contact" className="btn-ghost" style={{ marginLeft: 'auto' }}>View Archive</a>
+            <a href="#contact" className="btn-ghost" style={{ marginLeft: 'auto', borderColor: 'var(--white-30)' }}>View Archive</a>
           </div>
         </div>
 
@@ -799,8 +844,8 @@ function Contact() {
           <div className="grid-3-col" style={{ gap: '2rem', padding: '3rem 0 2rem' }}>
             {/* Brand */}
             <div>
-              <div style={{ fontFamily: 'var(--font-inter)', fontSize: '1.2rem', fontWeight: 900, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--white)', marginBottom: '1rem' }}>
-                MASS DEVELOPERS
+              <div style={{ marginBottom: '1rem' }}>
+                <img src="/logo.png" alt="MASS Logo" style={{ height: '40px', width: 'auto' }} />
               </div>
               <p className="t-body" style={{ fontSize: '0.78rem', maxWidth: '220px' }}>
                 Creating enduring architectural statements that transcend time. Designed for the bold.
