@@ -453,16 +453,17 @@ function Hero() {
                 color: '#ffffff',
                 textDecoration: 'none',
                 padding: 'clamp(0.5rem, 1.2vw, 0.85rem) clamp(1rem, 3.5vw, 2.5rem)',
-                border: '0.8px solid rgba(255,255,255,0.2)',
-                backgroundColor: 'transparent',
-                backdropFilter: 'blur(5px)',
+                border: '0.8px solid rgba(255,255,255,0.3)',
+                backgroundColor: 'rgba(255,255,255,0.15)',
+                backdropFilter: 'blur(12px)',
+                opacity: 0.9,
                 transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
                 display: 'inline-flex',
                 alignItems: 'center',
                 whiteSpace: 'nowrap'
               }}
-              onMouseEnter={e => { Object.assign(e.currentTarget.style, { backgroundColor: '#ffffff', color: '#000000', borderColor: '#ffffff' }); }}
-              onMouseLeave={e => { Object.assign(e.currentTarget.style, { backgroundColor: 'transparent', color: '#ffffff', borderColor: 'rgba(255,255,255,0.2)' }); }}
+              onMouseEnter={e => { Object.assign(e.currentTarget.style, { backgroundColor: '#ffffff', color: '#000000', borderColor: '#ffffff', opacity: '1' }); }}
+              onMouseLeave={e => { Object.assign(e.currentTarget.style, { backgroundColor: 'rgba(255,255,255,0.15)', color: '#ffffff', borderColor: 'rgba(255,255,255,0.3)', opacity: '0.9' }); }}
             >
               {idx === 0 ? 'View Works' : 'Our Studio'}
             </motion.a>
