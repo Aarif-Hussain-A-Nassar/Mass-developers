@@ -201,17 +201,17 @@ function Navbar({ activeSection }: { activeSection: number }) {
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
               style={{
                 position: 'fixed',
-                bottom: '100px',
-                left: '20px',
-                right: '20px',
+                bottom: 'clamp(80px, 12vh, 100px)',
+                left: 'clamp(10px, 4vw, 20px)',
+                right: 'clamp(10px, 4vw, 20px)',
                 zIndex: 1000,
                 background: 'rgba(10, 10, 10, 0.95)',
                 backdropFilter: 'blur(20px)',
-                padding: '2.5rem 2rem',
+                padding: 'clamp(1.5rem, 5vw, 2.5rem) clamp(1rem, 4vw, 2rem)',
                 border: '1px solid rgba(255,255,255,0.1)'
               }}
             >
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(1rem, 3vh, 1.75rem)' }}>
                 {NAV_LINKS.map((l, i) => (
                   <motion.a
                     key={i}
@@ -222,7 +222,7 @@ function Navbar({ activeSection }: { activeSection: number }) {
                     onClick={(e) => handleClick(e, l.href, i)}
                     style={{
                       fontFamily: 'var(--font-inter)',
-                      fontSize: '1.25rem',
+                      fontSize: 'clamp(1rem, 5vw, 1.25rem)',
                       fontWeight: 800,
                       letterSpacing: '0.1em',
                       textTransform: 'uppercase',
@@ -230,12 +230,12 @@ function Navbar({ activeSection }: { activeSection: number }) {
                       textDecoration: 'none',
                       display: 'flex',
                       alignItems: 'center',
-                      gap: '1rem'
+                      gap: '0.75rem'
                     }}
                   >
-                    <span style={{ fontSize: '0.7rem', opacity: 0.3 }}>0{i+1}</span>
+                    <span style={{ fontSize: '0.6rem', opacity: 0.3 }}>0{i+1}</span>
                     {l.label}
-                    {activeIdx === i && <motion.span layoutId="activeDotMobile" style={{ width: '6px', height: '6px', background: '#ffffff', borderRadius: '50%' }} />}
+                    {activeIdx === i && <motion.span layoutId="activeDotMobile" style={{ width: '4px', height: '4px', background: '#ffffff', borderRadius: '50%' }} />}
                   </motion.a>
                 ))}
               </div>
@@ -248,25 +248,26 @@ function Navbar({ activeSection }: { activeSection: number }) {
           whileTap={{ scale: 0.95 }}
           style={{
             position: 'fixed',
-            bottom: '30px',
+            bottom: 'clamp(20px, 4vh, 30px)',
             left: '50%',
             transform: 'translateX(-50%)',
             zIndex: 1001,
             background: isMenuOpen ? '#ffffff' : '#000000',
             color: isMenuOpen ? '#000000' : '#ffffff',
             border: 'none',
-            padding: '1rem 2.5rem',
-            borderRadius: '2rem',
+            padding: 'clamp(0.6rem, 1.5vh, 1rem) clamp(1.5rem, 6vw, 2.5rem)',
+            borderRadius: '3rem',
             fontFamily: 'var(--font-manrope)',
-            fontSize: '0.7rem',
+            fontSize: 'clamp(0.55rem, 2vw, 0.7rem)',
             fontWeight: 800,
             letterSpacing: '0.3em',
             textTransform: 'uppercase',
             display: 'flex',
             alignItems: 'center',
-            gap: '1.25rem',
+            gap: '0.75rem',
             boxShadow: '0 20px 40px rgba(0,0,0,0.4)',
-            transition: 'background 0.3s ease, color 0.3s ease'
+            transition: 'background 0.3s ease, color 0.3s ease',
+            whiteSpace: 'nowrap'
           }}
         >
           {isMenuOpen ? (
@@ -420,7 +421,16 @@ function Hero() {
 
       {/* ── Centered content ── */}
       <motion.div
-        style={{ y, opacity: opac, position: 'relative', zIndex: 2, textAlign: 'center', width: '100%', padding: '0 1rem' }}
+        style={{ 
+          y, 
+          opacity: opac, 
+          position: 'relative', 
+          zIndex: 2, 
+          textAlign: 'center', 
+          width: '100%', 
+          padding: '0 1rem',
+          willChange: 'transform, opacity' /* Force hardware acceleration to prevent flicker */
+        }}
       >
         {/* M A S S — Character-level animation */}
         <div
@@ -480,7 +490,13 @@ function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 1.2, ease: EASE }}
-          style={{ display: 'inline-flex', alignItems: 'center', gap: '1.5rem' }}
+          style={{ 
+            display: 'inline-flex', 
+            alignItems: 'center', 
+            gap: 'clamp(0.75rem, 2vw, 1.5rem)',
+            flexWrap: 'wrap',
+            justifyContent: 'center'
+          }}
         >
           <motion.a
             href="#projects"
@@ -489,19 +505,20 @@ function Hero() {
             onClick={(e) => { e.preventDefault(); document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' }); }}
             style={{
               fontFamily: 'var(--font-manrope)',
-              fontSize: '0.65rem',
+              fontSize: 'clamp(0.55rem, 1vw, 0.65rem)',
               fontWeight: 700,
               letterSpacing: '0.3em',
               textTransform: 'uppercase',
               color: '#ffffff',
               textDecoration: 'none',
-              padding: '1rem 3rem',
+              padding: 'clamp(0.75rem, 1.5vw, 1rem) clamp(1.5rem, 4vw, 3rem)',
               border: '1px solid rgba(255,255,255,0.3)',
               backgroundColor: 'rgba(255,255,255,0.05)',
               backdropFilter: 'blur(10px)',
               transition: 'background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease',
               display: 'inline-flex',
               alignItems: 'center',
+              whiteSpace: 'nowrap'
             }}
             onMouseEnter={e => {
               const el = e.currentTarget as HTMLElement;
@@ -526,19 +543,20 @@ function Hero() {
             onClick={(e) => { e.preventDefault(); document.querySelector('#philosophy')?.scrollIntoView({ behavior: 'smooth' }); }}
             style={{
               fontFamily: 'var(--font-manrope)',
-              fontSize: '0.65rem',
+              fontSize: 'clamp(0.55rem, 1vw, 0.65rem)',
               fontWeight: 700,
               letterSpacing: '0.3em',
               textTransform: 'uppercase',
               color: '#ffffff',
               textDecoration: 'none',
-              padding: '1rem 3rem',
+              padding: 'clamp(0.75rem, 1.5vw, 1rem) clamp(1.5rem, 4vw, 3rem)',
               border: '1px solid rgba(255,255,255,0.3)',
               backgroundColor: 'rgba(255,255,255,0.05)',
               backdropFilter: 'blur(10px)',
               transition: 'background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease',
               display: 'inline-flex',
               alignItems: 'center',
+              whiteSpace: 'nowrap'
             }}
             onMouseEnter={e => {
               const el = e.currentTarget as HTMLElement;
