@@ -196,17 +196,20 @@ function Navbar() {
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
               style={{
                 position: 'fixed',
-                bottom: 'clamp(80px, 12vh, 100px)',
-                left: '20px',
-                right: '20px',
+                bottom: 'clamp(70px, 10vh, 90px)',
+                left: '12px',
+                right: '12px',
                 zIndex: 1000,
                 background: 'rgba(10, 10, 10, 0.95)',
                 backdropFilter: 'blur(20px)',
-                padding: '1.5rem 2rem',
-                border: '1px solid rgba(255,255,255,0.1)'
+                padding: 'clamp(1rem, 3vw, 1.5rem) clamp(1rem, 4vw, 2rem)',
+                border: '1px solid rgba(255,255,255,0.1)',
+                maxHeight: '70vh',
+                overflowY: 'auto',
+                borderRadius: '4px'
               }}
             >
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(0.75rem, 2.5vw, 1.25rem)' }}>
                 {NAV_LINKS.map((l, i) => (
                   <motion.a
                     key={i}
@@ -217,7 +220,7 @@ function Navbar() {
                     onClick={(e) => handleClick(e, l.href, i)}
                     style={{
                       fontFamily: 'var(--font-inter)',
-                      fontSize: '1.25rem',
+                      fontSize: 'clamp(0.85rem, 3.5vw, 1.1rem)',
                       fontWeight: 800,
                       letterSpacing: '0.1em',
                       textTransform: 'uppercase',
@@ -225,10 +228,10 @@ function Navbar() {
                       textDecoration: 'none',
                       display: 'flex',
                       alignItems: 'center',
-                      gap: '1rem'
+                      gap: '0.6rem'
                     }}
                   >
-                    <span style={{ fontSize: '0.7rem', opacity: 0.3 }}>0{i+1}</span>
+                    <span style={{ fontSize: '0.55rem', opacity: 0.3 }}>0{i+1}</span>
                     {l.label}
                   </motion.a>
                 ))}
@@ -242,25 +245,26 @@ function Navbar() {
           whileTap={{ scale: 0.95 }}
           style={{
             position: 'fixed',
-            bottom: 'clamp(20px, 4vh, 30px)',
-            right: 'clamp(15px, 4vw, 25px)',
+            bottom: 'clamp(14px, 3vh, 24px)',
+            right: 'clamp(12px, 3vw, 20px)',
             zIndex: 1001,
             background: isMenuOpen ? '#ffffff' : '#000000',
             color: isMenuOpen ? '#000000' : '#ffffff',
             border: 'none',
-            padding: 'clamp(0.6rem, 1.5vh, 1rem) clamp(1.5rem, 6vw, 2.5rem)',
+            padding: 'clamp(0.45rem, 1.2vh, 0.75rem) clamp(1rem, 4vw, 1.8rem)',
             borderRadius: '3rem',
             fontFamily: 'var(--font-manrope)',
-            fontSize: 'clamp(0.55rem, 2vw, 0.7rem)',
+            fontSize: 'clamp(0.45rem, 1.8vw, 0.6rem)',
             fontWeight: 800,
-            letterSpacing: '0.3em',
+            letterSpacing: '0.25em',
             textTransform: 'uppercase',
             display: 'flex',
             alignItems: 'center',
-            gap: '1rem',
-            boxShadow: '0 20px 40px rgba(0,0,0,0.4)',
+            gap: '0.5rem',
+            boxShadow: '0 10px 30px rgba(0,0,0,0.4)',
             transition: 'background 0.3s ease, color 0.3s ease',
-            whiteSpace: 'nowrap'
+            whiteSpace: 'nowrap',
+            maxWidth: 'calc(100vw - 24px)'
           }}
         >
           {isMenuOpen ? 'Close' : (
@@ -483,7 +487,7 @@ function Philosophy() {
     <section id="philosophy" className="section-snap" style={{ background: 'var(--bg)', display: 'flex', alignItems: 'center' }}>
       <div className="container" style={{ padding: '6rem 1rem' }}>
         <FadeIn><div className="section-eyebrow"><span>Philosophy / 001</span></div></FadeIn>
-        <div className="grid-2-col" style={{ gap: '6rem', alignItems: 'center' }}>
+        <div className="grid-2-col" style={{ gap: 'clamp(3rem, 6vw, 6rem)', alignItems: 'center' }}>
           <FadeIn delay={0.1}>
             <h2 style={{ fontFamily: 'var(--font-inter)', fontSize: 'clamp(2rem, 4.5vw, 4.5rem)', fontWeight: 900, lineHeight: 0.95, textTransform: 'uppercase' }}>
               <motion.span whileHover={{ x: 10, color: 'var(--accent)' }} transition={{ duration: 0.3 }} style={{ display: 'block', color: 'var(--white)', cursor: 'default' }}>We do not build</motion.span>
@@ -497,7 +501,7 @@ function Philosophy() {
                 MASS DEVELOPERS operates at the intersection of structural gravity and ethereal transparency.
                 Our methodology rejects the ornamental in favor of the essential.
               </p>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', marginTop: '3rem', borderTop: '1px solid var(--white-06)', paddingTop: '2rem' }}>
+              <div className="philosophy-stats" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', marginTop: '3rem', borderTop: '1px solid var(--white-06)', paddingTop: '2rem' }}>
                 {[['250+', 'Projects'], [`${new Date().getFullYear() - 2018}+`, 'Years']].map(([num, label]) => (
                   <div key={label}>
                     <div style={{ fontFamily: 'var(--font-inter)', fontSize: '1.8rem', fontWeight: 900, color: 'var(--white)' }}>{num}</div>
@@ -519,7 +523,7 @@ function Expertise() {
     <section id="expertise" style={{ background: 'var(--surface)', padding: '6rem 0' }}>
       <div className="container">
         <FadeIn><h2 className="t-headline" style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 100, letterSpacing: '0.15em', marginBottom: '6rem' }}>EXPERTISE</h2></FadeIn>
-        <div className="grid-2-col" style={{ gap: '6rem 4rem' }}>
+        <div className="grid-2-col" style={{ gap: 'clamp(2rem, 5vw, 6rem) clamp(1.5rem, 3vw, 4rem)' }}>
           {EXPERTISE.map((exp, i) => (
             <motion.div key={i} initial={{ opacity: 0, y: 60 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, delay: (i % 2) * 0.15 }}>
               <div className="expertise-card">
@@ -546,9 +550,9 @@ function Projects() {
         <motion.div key={active} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} style={{ position: 'absolute', inset: 0, background: PROJECTS[active].placeholder }} />
       </AnimatePresence>
       <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, var(--surface) 0%, rgba(255,255,255,0.1) 100%)' }} />
-      <div style={{ position: 'absolute', bottom: '4rem', left: '5rem', right: '5rem' }}>
+      <div className="projects-overlay" style={{ position: 'absolute', bottom: '4rem', left: '5rem', right: '5rem' }}>
         <AnimatePresence mode="wait">
-          <motion.h2 key={active} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} style={{ fontFamily: 'var(--font-inter)', fontSize: 'clamp(2.5rem, 8vw, 7rem)', fontWeight: 300, color: 'var(--white)' }}>
+          <motion.h2 key={active} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="projects-title" style={{ fontFamily: 'var(--font-inter)', fontSize: 'clamp(2rem, 8vw, 7rem)', fontWeight: 300, color: 'var(--white)' }}>
             {PROJECTS[active].title}
           </motion.h2>
         </AnimatePresence>
@@ -570,7 +574,7 @@ function Testimonials() {
       <div className="container">
         <AnimatePresence mode="wait">
           <motion.div key={active} initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
-            <p className="testimonial-quote" style={{ fontSize: '2rem', marginBottom: '2rem' }}>{TESTIMONIALS[active].quote}</p>
+            <p className="testimonial-quote" style={{ marginBottom: '2rem' }}>{TESTIMONIALS[active].quote}</p>
             <div className="t-label">{TESTIMONIALS[active].name}</div>
           </motion.div>
         </AnimatePresence>
@@ -587,7 +591,7 @@ function Journal() {
         <h2 className="t-headline">Journal</h2>
         {JOURNAL.map((post, i) => (
           <div key={i} style={{ padding: '3rem 0', borderBottom: '1px solid var(--white-06)' }}>
-            <h3 style={{ fontSize: '1.8rem', color: 'var(--white)' }}>{post.title}</h3>
+            <h3 className="journal-post-title" style={{ fontSize: 'clamp(1.2rem, 3vw, 1.8rem)', color: 'var(--white)', marginBottom: '0.75rem' }}>{post.title}</h3>
             <p className="t-body">{post.excerpt}</p>
           </div>
         ))}
@@ -601,7 +605,7 @@ function Contact() {
   return (
     <section id="contact" style={{ background: 'var(--bg)', padding: '8rem 0' }}>
       <div className="container">
-        <h2 style={{ fontSize: '7rem', color: 'var(--white)', lineHeight: 0.9 }}>Let's discuss vision.</h2>
+        <h2 className="contact-heading" style={{ fontSize: 'clamp(2rem, 7vw, 7rem)', color: 'var(--white)', lineHeight: 0.9 }}>Let&#39;s discuss vision.</h2>
         <div style={{ marginTop: '4rem' }}>
           <a href="mailto:office@mass-developers.com" className="btn-solid">Start Project</a>
         </div>

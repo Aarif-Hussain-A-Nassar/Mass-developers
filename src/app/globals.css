@@ -139,6 +139,13 @@ section:not(#hero) {
   padding: 0 3rem;
 }
 
+/* ─── Tablet ─── */
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 2rem;
+  }
+}
+
 /* ─── Navbar ─── */
 .nav {
   position: fixed;
@@ -547,6 +554,41 @@ section:not(#hero) {
   }
 }
 
+/* ─── Tablet: mid-point layout fixes ─── */
+@media (max-width: 900px) {
+  .grid-2-col {
+    grid-template-columns: 1fr;
+    gap: 3rem !important;
+  }
+
+  .grid-3-col {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem !important;
+  }
+
+  /* Philosophy section gap fix */
+  #philosophy .container > div {
+    gap: 3rem !important;
+  }
+
+  /* Expertise section gap fix */
+  #expertise .container .grid-2-col {
+    gap: 3rem !important;
+  }
+
+  /* Projects overlay repositioning */
+  .projects-overlay {
+    left: 2rem !important;
+    right: 2rem !important;
+    bottom: 2.5rem !important;
+  }
+
+  /* Contact heading */
+  .contact-heading {
+    font-size: clamp(2.5rem, 10vw, 5rem) !important;
+  }
+}
+
 
 
 
@@ -563,21 +605,23 @@ section:not(#hero) {
   }
 
   .nav {
-    padding: 0.6rem 1rem;
+    padding: 0.6rem 0.75rem;
   }
 
   .nav-logo-img {
-    height: 36px;
+    height: 50px;
   }
 
-  /* Hide desktop nav items on mobile */
+  /* Hide desktop nav links on mobile — dock handles navigation */
   .nav-links {
     display: none;
   }
 
-  /* Hide Inquire button on mobile — dock handles navigation */
+  /* Make Inquire button smaller on mobile, but keep it visible */
   .nav-cta {
-    display: none;
+    font-size: 0.5rem;
+    padding: 0.4rem 0.8rem;
+    letter-spacing: 0.15em;
   }
 
   .container {
@@ -605,6 +649,98 @@ section:not(#hero) {
   .grid-2-col,
   .grid-3-col {
     grid-template-columns: 1fr;
-    gap: 2.5rem !important;
+    gap: 2rem !important;
+  }
+
+  /* ── Philosophy section ── */
+  #philosophy {
+    height: auto !important;
+    min-height: auto !important;
+  }
+
+  #philosophy .container {
+    padding-top: 5rem !important;
+    padding-bottom: 5rem !important;
+  }
+
+  /* Philosophy stats sub-grid */
+  .philosophy-stats {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 1.5rem !important;
+  }
+
+  /* ── Expertise section ── */
+  #expertise {
+    padding: 4rem 0 !important;
+  }
+
+  #expertise .expertise-card > div {
+    padding: 1.5rem 1.25rem !important;
+  }
+
+  /* Reset masonry staggering on mobile */
+  .expertise-card:nth-child(1),
+  .expertise-card:nth-child(2),
+  .expertise-card:nth-child(3),
+  .expertise-card:nth-child(4),
+  .expertise-card:nth-child(5) {
+    margin-top: 0 !important;
+  }
+
+  /* ── Projects section ── */
+  #projects {
+    height: auto !important;
+    min-height: 80vw !important;
+    aspect-ratio: 3/4;
+  }
+
+  .projects-overlay {
+    left: 1.25rem !important;
+    right: 1.25rem !important;
+    bottom: 2rem !important;
+  }
+
+  .projects-title {
+    font-size: clamp(2rem, 12vw, 4rem) !important;
+  }
+
+  /* ── Testimonials ── */
+  #testimonials {
+    padding: 4rem 0 !important;
+  }
+
+  .testimonial-quote {
+    font-size: clamp(1rem, 5vw, 1.5rem) !important;
+  }
+
+  /* ── Journal ── */
+  #journal {
+    padding: 4rem 0 !important;
+  }
+
+  .journal-post-title {
+    font-size: clamp(1.2rem, 6vw, 1.6rem) !important;
+  }
+
+  /* ── Contact ── */
+  #contact {
+    padding: 5rem 0 !important;
+  }
+
+  .contact-heading {
+    font-size: clamp(2rem, 12vw, 4rem) !important;
+    line-height: 1.0 !important;
+  }
+}
+
+/* ─── Extra small screens ─── */
+@media (max-width: 400px) {
+  .nav-logo-img {
+    height: 40px;
+  }
+
+  .nav-cta {
+    font-size: 0.45rem;
+    padding: 0.35rem 0.6rem;
   }
 }
