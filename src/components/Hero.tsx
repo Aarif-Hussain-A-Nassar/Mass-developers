@@ -239,8 +239,9 @@ const Hero: React.FC = () => {
   const canvasY    = useSpring(rawCanvasY, { stiffness: 60, damping: 18 });
 
   /* Stats */
+  const yearsOfExp = new Date().getFullYear() - 2018;
   const s250 = useCountUp(250);
-  const s8   = useCountUp(8);
+  const sYears = useCountUp(yearsOfExp);
   const s98  = useCountUp(98);
   const s50  = useCountUp(50);
 
@@ -441,7 +442,7 @@ const Hero: React.FC = () => {
         >
           {[
             { data: s250, suffix: '+',    label: 'Projects'    },
-            { data: s8,   suffix: '+',    label: 'Years'       },
+            { data: sYears, suffix: '+',    label: 'Years'       },
             { data: s98,  suffix: '%',    label: 'Satisfaction' },
             { data: s50,  suffix: ' Cr+', label: 'Delivered'   },
           ].map(({ data, suffix, label }, i, arr) => (

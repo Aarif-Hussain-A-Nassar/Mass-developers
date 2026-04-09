@@ -49,6 +49,8 @@ const About: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const imageRef   = useRef<HTMLDivElement>(null);
 
+  const yearsOfExp = new Date().getFullYear() - 2018;
+
   /* Parallax: image moves slower than text as you scroll */
   const { scrollYProgress } = useScroll({
     target:  sectionRef,
@@ -264,7 +266,9 @@ const About: React.FC = () => {
                 fontWeight:    900,
                 lineHeight:    1,
                 letterSpacing: '-0.02em',
-              }}>8+</div>
+              }}>
+                {new Date().getFullYear() - 2018}+
+              </div>
               <div style={{
                 fontFamily:    "'Manrope', sans-serif",
                 fontSize:      '0.6rem',

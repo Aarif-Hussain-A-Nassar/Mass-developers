@@ -447,7 +447,7 @@ function Philosophy() {
 
               {/* Stats */}
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', marginTop: '3rem', borderTop: '1px solid var(--white-06)', paddingTop: '2rem' }}>
-                {[['250+', 'Projects'], ['8+', 'Years'], ['98%', 'Satisfaction'], ['50 Cr+', 'Delivered']].map(([num, label]) => (
+                {[['250+', 'Projects'], [`${new Date().getFullYear() - 2018}+`, 'Years'], ['98%', 'Satisfaction'], ['50 Cr+', 'Delivered']].map(([num, label]) => (
                   <motion.div
                     key={label}
                     whileHover={{ y: -6 }}
