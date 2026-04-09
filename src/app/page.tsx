@@ -186,7 +186,7 @@ function Navbar() {
         </a>
       </nav>
 
-      <div className="mobile-only">
+      <div className="lg:hidden">
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div
@@ -346,7 +346,6 @@ function Hero() {
 
   const y = useTransform(smoothProgress, [0, 1], [0, -150]);
   const bgY = useTransform(smoothProgress, [0, 1], [0, 50]);
-  const scale = useTransform(smoothProgress, [0, 1], [1, 1.1]);
   const opac = useTransform(smoothProgress, [0, 0.6], [1, 0]);
   const blur = useTransform(smoothProgress, [0, 0.8], [0, 15]);
 
@@ -379,18 +378,17 @@ function Hero() {
       }}
     >
       <motion.div
-        initial={{ scale: 1.15, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 2, ease: EASE }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1.5, ease: EASE }}
         style={{
           position: 'absolute',
-          inset: '-5%',
-          width: '110%',
-          height: '110%',
+          inset: 0,
+          width: '100%',
+          height: '100%',
           y: bgY,
           x: moveX as any,
           top: moveY as any,
-          scale,
           filter: `blur(${blur}px)`,
         }}
       >
