@@ -354,6 +354,18 @@ function Hero() {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
 
+  // Mouse parallax motion values
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  // Smooth springs for mouse movement
+  const springMouseX = useSpring(mouseX, { stiffness: 50, damping: 20 });
+  const springMouseY = useSpring(mouseY, { stiffness: 50, damping: 20 });
+
+  // Map mouse movement to subtle offset
+  const moveX = useTransform(springMouseX, [-0.5, 0.5], ['-1.5%', '1.5%']);
+  const moveY = useTransform(springMouseY, [-0.5, 0.5], ['-1.5%', '1.5%']);
+
   // Smoother parallax using spring
   const springConfig = { stiffness: 100, damping: 30, restDelta: 0.001 };
   const smoothProgress = useSpring(scrollYProgress, springConfig);
@@ -364,12 +376,22 @@ function Hero() {
   const opac = useTransform(smoothProgress, [0, 0.6], [1, 0]);
   const blur = useTransform(smoothProgress, [0, 0.8], [0, 15]);
 
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const { clientX, clientY, currentTarget } = e;
+    const { width, height } = currentTarget.getBoundingClientRect();
+    const x = (clientX / width) - 0.5;
+    const y = (clientY / height) - 0.5;
+    mouseX.set(x);
+    mouseY.set(y);
+  };
+
   const titleText = "MASS";
 
   return (
     <section
       id="hero"
       ref={ref}
+      onMouseMove={handleMouseMove}
       style={{
         position: 'sticky',
         top: 0,
@@ -382,17 +404,19 @@ function Hero() {
         background: '#0a0a0a',
       }}
     >
-      {/* ── Background Photo Recall Animation ── */}
+      {/* ── Background Photo + Mouse Parallax ── */}
       <motion.div
         initial={{ scale: 1.15, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 2, ease: EASE }}
         style={{
           position: 'absolute',
-          inset: 0,
-          width: '100%',
+          inset: '-5%', // Overflow slightly to allow for mouse movement
+          width: '110%',
           height: '110%',
           y: bgY,
+          x: moveX,
+          top: moveY,
           scale,
           filter: `blur(${blur}px)`,
         }}
@@ -417,6 +441,19 @@ function Hero() {
           }}
         />
       </motion.div>
+
+      {/* ── Film Grain Overlay ── */}
+      <div 
+        style={{
+          position: 'absolute',
+          inset: 0,
+          zIndex: 3,
+          pointerEvents: 'none',
+          opacity: 0.04,
+          background: 'url("https://grainy-gradients.vercel.app/noise.svg")',
+          mixBlendMode: 'overlay',
+        }}
+      />
 
       {/* ── Centered content ── */}
       <motion.div
