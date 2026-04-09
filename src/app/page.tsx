@@ -375,10 +375,10 @@ function Hero() {
               fontWeight: 700,
               letterSpacing: '0.3em',
               textTransform: 'uppercase',
-              color: 'rgba(255,255,255,0.75)',
+              color: '#ffffff',
               textDecoration: 'none',
               padding: '0.85rem 2.5rem',
-              border: '1px solid rgba(255,255,255,0.25)',
+              border: '1px solid rgba(255,255,255,0.55)',
               transition: 'background 0.25s ease, color 0.25s ease, border-color 0.25s ease',
               display: 'inline-flex',
               alignItems: 'center',
@@ -386,15 +386,15 @@ function Hero() {
             }}
             onMouseEnter={e => {
               const el = e.currentTarget as HTMLElement;
-              el.style.background = 'rgba(255,255,255,0.12)';
-              el.style.color = '#ffffff';
-              el.style.borderColor = 'rgba(255,255,255,0.55)';
+              el.style.background = '#ffffff';
+              el.style.color = '#000000';
+              el.style.borderColor = '#ffffff';
             }}
             onMouseLeave={e => {
               const el = e.currentTarget as HTMLElement;
               el.style.background = 'transparent';
-              el.style.color = 'rgba(255,255,255,0.75)';
-              el.style.borderColor = 'rgba(255,255,255,0.25)';
+              el.style.color = '#ffffff';
+              el.style.borderColor = 'rgba(255,255,255,0.55)';
             }}
           >
             Our Studio
