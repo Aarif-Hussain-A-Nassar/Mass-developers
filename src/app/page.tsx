@@ -8,13 +8,13 @@ const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
 /* ═══════════════════ DATA ═══════════════════ */
 const NAV_LINKS = [
-  { label: 'Home',         href: '#hero'         },
-  { label: 'About',        href: '#philosophy'   },
-  { label: 'Expertise',    href: '#expertise'    },
-  { label: 'Projects',     href: '#projects'     },
+  { label: 'Home', href: '#hero' },
+  { label: 'About', href: '#philosophy' },
+  { label: 'Expertise', href: '#expertise' },
+  { label: 'Projects', href: '#projects' },
   { label: 'Testimonials', href: '#testimonials' },
-  { label: 'Journal',      href: '#journal'      },
-  { label: 'Contact',      href: '#contact'      },
+  { label: 'Journal', href: '#journal' },
+  { label: 'Contact', href: '#contact' },
 ];
 
 const TICKER_ITEMS = [
