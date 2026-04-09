@@ -550,22 +550,38 @@ section:not(#hero) {
 
 
 
+/* ─── Floating Mobile Dock: hidden by default on ALL screens ─── */
+.floating-nav-dock {
+  display: none;
+}
+
 /* ─── Mobile ─── */
 @media (max-width: 768px) {
+  /* Show floating dock only on mobile */
+  .floating-nav-dock {
+    display: block;
+  }
+
   .nav {
-    padding: 0.75rem 1rem;
+    padding: 0.6rem 1rem;
   }
 
   .nav-logo-img {
-    height: 40px;
+    height: 36px;
   }
 
+  /* Hide desktop nav items on mobile */
   .nav-links {
     display: none;
   }
 
+  /* Hide Inquire button on mobile — dock handles navigation */
+  .nav-cta {
+    display: none;
+  }
+
   .container {
-    padding: 0 1.5rem;
+    padding: 0 1.25rem;
   }
 
   .dot-nav {
@@ -582,13 +598,13 @@ section:not(#hero) {
   }
 
   #hero {
-    min-height: 100vh;
-    height: 100vh;
+    min-height: 100dvh;
+    height: 100dvh;
   }
 
   .grid-2-col,
   .grid-3-col {
     grid-template-columns: 1fr;
-    gap: 3rem !important;
+    gap: 2.5rem !important;
   }
 }

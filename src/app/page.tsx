@@ -272,16 +272,6 @@ function Navbar() {
         </motion.button>
       </div>
 
-      <style jsx>{`
-        .floating-nav-dock {
-          display: none;
-        }
-        @media (max-width: 768px) {
-          .floating-nav-dock {
-            display: block;
-          }
-        }
-      `}</style>
     </>
   );
 }
@@ -645,11 +635,6 @@ export default function Page() {
         <Journal />
         <Contact />
       </main>
-      <style jsx global>{`
-        @media (min-width: 1024px) {
-          .xl\\:hidden { display: none !important; }
-        }
-      `}</style>
     </>
   );
 }
