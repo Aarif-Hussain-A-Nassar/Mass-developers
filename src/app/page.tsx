@@ -446,23 +446,23 @@ function Hero() {
               onClick={(e) => { e.preventDefault(); document.querySelector(`#${target}`)?.scrollIntoView({ behavior: 'smooth' }); }}
               style={{
                 fontFamily: 'var(--font-manrope)',
-                fontSize: 'clamp(0.55rem, 1vw, 0.65rem)',
-                fontWeight: 700,
-                letterSpacing: '0.3em',
+                fontSize: 'clamp(0.5rem, 0.8vw, 0.65rem)',
+                fontWeight: 800,
+                letterSpacing: '0.4em',
                 textTransform: 'uppercase',
                 color: '#ffffff',
                 textDecoration: 'none',
-                padding: 'clamp(0.75rem, 1.5vw, 1rem) clamp(1.5rem, 4vw, 3rem)',
-                border: '1px solid rgba(255,255,255,0.3)',
-                backgroundColor: 'rgba(255,255,255,0.05)',
-                backdropFilter: 'blur(10px)',
-                transition: 'all 0.3s ease',
+                padding: 'clamp(0.5rem, 1.2vw, 0.85rem) clamp(1rem, 3.5vw, 2.5rem)',
+                border: '0.8px solid rgba(255,255,255,0.2)',
+                backgroundColor: 'transparent',
+                backdropFilter: 'blur(5px)',
+                transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
                 display: 'inline-flex',
                 alignItems: 'center',
                 whiteSpace: 'nowrap'
               }}
               onMouseEnter={e => { Object.assign(e.currentTarget.style, { backgroundColor: '#ffffff', color: '#000000', borderColor: '#ffffff' }); }}
-              onMouseLeave={e => { Object.assign(e.currentTarget.style, { backgroundColor: 'rgba(255,255,255,0.05)', color: '#ffffff', borderColor: 'rgba(255,255,255,0.3)' }); }}
+              onMouseLeave={e => { Object.assign(e.currentTarget.style, { backgroundColor: 'transparent', color: '#ffffff', borderColor: 'rgba(255,255,255,0.2)' }); }}
             >
               {idx === 0 ? 'View Works' : 'Our Studio'}
             </motion.a>
