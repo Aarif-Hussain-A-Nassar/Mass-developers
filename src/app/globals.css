@@ -13,6 +13,12 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  outline: none;
+}
+
+*:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.4);
+  outline-offset: 2px;
 }
 
 :root {
@@ -644,6 +650,11 @@ section:not(#hero) {
   #hero {
     min-height: 100dvh;
     height: 100dvh;
+  }
+
+  /* Lift scroll indicator above the floating nav dock */
+  .hero-scroll-indicator {
+    bottom: clamp(5rem, 11vh, 7rem) !important;
   }
 
   .grid-2-col,
