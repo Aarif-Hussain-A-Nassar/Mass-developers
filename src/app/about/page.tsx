@@ -118,6 +118,7 @@ function ValueCard({
       layout
       onClick={() => setExpanded((p) => !p)}
       whileHover={{ y: -4 }}
+      whileTap={{ scale: 0.98 }}
       transition={{ layout: { duration: 0.4, ease: EASE } }}
       style={{
         padding: '2.5rem 2rem',
@@ -388,9 +389,11 @@ export default function About() {
         <a href="/" className="nav-logo" style={{ marginLeft: '1.5rem' }}>
           <img src="/logo.png" alt="MASS Logo" style={{ height: '75px', mixBlendMode: 'multiply' }} />
         </a>
-        <a
+        <motion.a
           href="/"
           className="nav-cta"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
           style={{
             color: '#000',
             borderColor: 'rgba(0,0,0,0.3)',
@@ -400,7 +403,7 @@ export default function About() {
           }}
         >
           ← Back to Home
-        </a>
+        </motion.a>
       </nav>
 
       <main style={{ background: 'var(--bg)', color: 'var(--white)', minHeight: '100vh' }}>
@@ -682,9 +685,11 @@ export default function About() {
                 }}
               >
                 {(['vision', 'mission'] as const).map((tab) => (
-                  <button
+                  <motion.button
                     key={tab}
                     onClick={() => setActiveTab(tab)}
+                    whileHover={{ opacity: 1 }}
+                    whileTap={{ scale: 0.95 }}
                     style={{
                       background: 'none',
                       border: 'none',
@@ -715,7 +720,7 @@ export default function About() {
                         transition={{ duration: 0.3, ease: EASE }}
                       />
                     )}
-                  </button>
+                  </motion.button>
                 ))}
               </div>
             </FadeIn>
@@ -968,10 +973,16 @@ export default function About() {
                 <br />
                 extraordinary.
               </h2>
-              <a href="/#contact" className="btn-ghost" style={{ display: 'inline-flex' }}>
+              <motion.a 
+                href="/#contact" 
+                className="btn-ghost" 
+                style={{ display: 'inline-flex' }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
                 Get in Touch
                 <span style={{ fontSize: '1rem', marginLeft: '0.25rem' }}>→</span>
-              </a>
+              </motion.a>
             </FadeIn>
           </div>
         </div>

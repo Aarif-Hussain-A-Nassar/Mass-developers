@@ -198,13 +198,15 @@ function Navbar() {
           ))}
         </ul>
 
-        <a
+        <motion.a
           href="#contact"
           className="nav-cta"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
           onClick={(e) => handleClick(e, '#contact', NAV_LINKS.length - 1)}
         >
           Inquire
-        </a>
+        </motion.a>
       </nav>
 
       <div className="floating-nav-dock">
@@ -237,6 +239,7 @@ function Navbar() {
                     href={l.href}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
+                    whileTap={{ scale: 0.98, x: 5 }}
                     transition={{ delay: i * 0.05 }}
                     onClick={(e) => handleClick(e, l.href, i)}
                     style={{
@@ -572,7 +575,15 @@ function Philosophy() {
                 <StatCounter value={new Date().getFullYear() - 2018} suffix="+" label="Years" />
               </div>
               <div style={{ marginTop: '2.5rem' }}>
-                <a href="/about" className="btn-ghost" style={{ padding: '0.65rem 1.75rem', fontSize: '0.6rem' }}>Read Full Story</a>
+                <motion.a 
+                  href="/about" 
+                  className="btn-ghost" 
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  style={{ padding: '0.65rem 1.75rem', fontSize: '0.6rem' }}
+                >
+                  Read Full Story
+                </motion.a>
               </div>
             </div>
           </FadeIn>
@@ -732,7 +743,14 @@ function Contact() {
         <FadeIn><div className="section-eyebrow"><span>Contact / 006</span></div></FadeIn>
         <h2 className="contact-heading" style={{ fontSize: 'clamp(2rem, 7vw, 7rem)', color: 'var(--white)', lineHeight: 0.9 }}>Let&#39;s discuss vision.</h2>
         <div style={{ marginTop: '4rem' }}>
-          <a href="mailto:office@mass-developers.com" className="btn-solid">Start Project</a>
+          <motion.a 
+            href="mailto:office@mass-developers.com" 
+            className="btn-solid"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Start Project
+          </motion.a>
         </div>
       </div>
     </section>
