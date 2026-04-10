@@ -18,8 +18,10 @@ export default function Navbar() {
 
   useEffect(() => {
     const sectionIds = NAV_LINKS.map(l => l.href.replace('#', ''));
+    let ticking = false;
+
     const updateActive = () => {
-      if (window.scrollY < 80) { setActiveIdx(0); return; }
+      if (window.scrollY < 80) { setActiveIdx(0); ticking = false; return; }
       const midpoint = window.scrollY + window.innerHeight / 2;
       let best = 0;
       sectionIds.forEach((id, i) => {
@@ -28,10 +30,19 @@ export default function Navbar() {
         if (el.offsetTop <= midpoint) best = i;
       });
       setActiveIdx(best);
+      ticking = false;
     };
+
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateActive);
+        ticking = true;
+      }
+    };
+
     updateActive();
-    window.addEventListener('scroll', updateActive, { passive: true });
-    return () => window.removeEventListener('scroll', updateActive);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string, idx: number) => {
@@ -140,7 +151,6 @@ export default function Navbar() {
         </AnimatePresence>
 
         <motion.button
-          layout
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           whileTap={{ scale: 0.92, y: 2 }}
           animate={{ 
@@ -174,10 +184,11 @@ export default function Navbar() {
             boxShadow: '0 10px 30px rgba(0,0,0,0.4)',
             whiteSpace: 'nowrap',
             maxWidth: 'calc(100vw - 24px)',
-            cursor: 'pointer'
+            cursor: 'pointer',
+            touchAction: 'manipulation'
           }}
         >
-          <motion.span layout="position">
+          <motion.span>
             {isMenuOpen ? 'Close' : (
               <>
                 <span style={{ opacity: 0.6 }}>{NAV_LINKS[activeIdx].label}</span>
