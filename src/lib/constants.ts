@@ -8,6 +8,7 @@ export const NAV_LINKS = [
   { label: 'Testimonials', href: '#testimonials' },
   { label: 'Journal', href: '#journal' },
   { label: 'Contact', href: '#contact' },
+  { label: 'Interio', href: '#mass-interio' },
 ];
 
 export const TICKER_ITEMS = [
@@ -98,4 +99,4 @@ export const JOURNAL = [
   },
 ];
 
-export const SECTIONS_IDS = ['hero', 'about-us', 'expertise', 'projects', 'testimonials', 'journal', 'contact'];
+export const SECTIONS_IDS = ['hero', 'about-us', 'expertise', 'projects', 'testimonials', 'journal', 'contact', 'mass-interio'];

@@ -67,6 +67,21 @@ export default function Footer() {
                 </motion.a>
               ))}
             </div>
+
+            <div style={{ marginTop: '3.5rem' }}>
+              <span style={{ fontSize: '0.6rem', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.4em', color: 'rgba(255,255,255,0.25)', display: 'block', marginBottom: '1.5rem' }}>GROUP DIVISIONS</span>
+              <motion.a 
+                href="https://www.instagram.com/mass.interio/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '1rem' }}
+                whileHover={{ x: 5 }}
+              >
+                <div style={{ width: '40px', height: '1px', background: 'rgba(255,255,255,0.2)' }} />
+                <span style={{ fontFamily: 'var(--font-inter)', fontSize: '0.75rem', fontWeight: 900, color: '#fff', letterSpacing: '0.1em' }}>MASS INTERIO</span>
+                <span style={{ fontSize: '0.6rem', color: 'rgba(255,255,255,0.4)', fontWeight: 700 }}>→ INSTA</span>
+              </motion.a>
+            </div>
           </div>
 
           {/* Right: Contact Grid */}

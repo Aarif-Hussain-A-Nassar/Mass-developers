@@ -7,6 +7,7 @@ import Hero from '@/components/Hero';
 import Philosophy from '@/components/Philosophy';
 import Expertise from '@/components/Expertise';
 import Projects from '@/components/Projects';
+import MassInterio from '@/components/MassInterio';
 import Testimonials from '@/components/Testimonials';
 import Journal from '@/components/Journal';
 import Contact from '@/components/Contact';
@@ -36,6 +37,7 @@ export default function Page() {
         <Testimonials />
         <Journal />
         <Contact />
+        <MassInterio />
       </main>
       <Footer />
     </>
