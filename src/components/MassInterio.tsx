@@ -236,16 +236,15 @@ export default function MassInterio() {
           .image-grid-container {
             height: auto !important;
             display: block !important;
-            margin-bottom: 4rem;
+            margin-bottom: 8rem;
           }
           .image-grid-container > :global(div) {
             position: relative !important;
-            transform: none !important;
-            y: 0 !important;
+            /* Allow some motion but controlled */
           }
           /* Main Image */
           .image-grid-container > :global(div:nth-child(1)) {
-             width: 90% !important;
+             width: 85% !important;
              aspect-ratio: 4/5;
              margin: 0 auto;
              z-index: 2;
@@ -254,23 +253,23 @@ export default function MassInterio() {
           .image-grid-container > :global(div:nth-child(2)) {
              display: block !important;
              position: absolute !important;
-             bottom: -15% !important;
+             bottom: -10dvh !important;
              left: 0 !important;
-             width: 45% !important;
+             width: 50% !important;
              height: 25vh !important;
-             z-index: 3;
-             box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+             z-index: 5; /* On top */
+             box-shadow: 0 20px 40px rgba(0,0,0,0.6);
           }
           /* Detail 2 - Staggered Top Right */
           .image-grid-container > :global(div:nth-child(3)) {
              display: block !important;
              position: absolute !important;
-             top: -10% !important;
+             top: -5dvh !important;
              right: 5% !important;
-             width: 35% !important;
+             width: 40% !important;
              height: 20vh !important;
              opacity: 0.8 !important;
-             z-index: 1;
+             z-index: 1; /* Behind */
           }
           .studio-content {
             padding-left: 0 !important;
@@ -278,6 +277,9 @@ export default function MassInterio() {
             display: flex;
             flex-direction: column;
             align-items: center;
+            position: relative;
+            z-index: 50 !important; /* Above everything */
+            margin-top: 4rem;
           }
           h2 {
             font-size: clamp(2.5rem, 8vw, 3.5rem) !important;
