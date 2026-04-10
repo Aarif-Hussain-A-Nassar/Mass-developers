@@ -566,8 +566,10 @@ function Philosophy() {
           <FadeIn delay={0.25}>
             <div>
               <p className="t-body" style={{ marginBottom: '2rem' }}>
-                MASS DEVELOPERS operates at the intersection of structural gravity and ethereal transparency.
-                Our methodology rejects the ornamental in favor of the essential.
+                Founded in 2018 by four friends with a shared vision, MASS Developers was born to bridge the gap in honesty and quality within the construction industry.
+              </p>
+              <p className="t-body" style={{ marginBottom: '2rem' }}>
+                From our modest beginnings to becoming a trusted name in residential and commercial spaces, we remain committed to building dreams with unwavering integrity and precision.
               </p>
               <div className="philosophy-stats" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2rem', marginTop: '3rem', borderTop: '1px solid var(--white-06)', paddingTop: '2rem' }}>
                 <StatCounter value={250} suffix="+" label="Projects" />

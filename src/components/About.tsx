@@ -4,10 +4,10 @@ import React, { useRef } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 
 const milestones = [
-  { year: '2018', event: 'Founded by four friends with a vision for honest construction' },
-  { year: '2020', event: 'Expanded into commercial and turnkey projects across Kerala'   },
-  { year: '2022', event: 'Launched premium interior design vertical'                     },
-  { year: '2024', event: 'Crossed 200+ successful project deliveries'                    },
+  { year: '2018', event: 'Founded by four neighborhood friends with a vision for honest construction.' },
+  { year: '2020', event: 'Gained recognition for quality and honesty, expanding into residential and commercial projects.' },
+  { year: '2022', event: 'Became known as one of the most trusted builders in the region.' },
+  { year: '2024', event: 'Continuing our mission: building dreams, one project at a time.' },
 ];
 
 /* Word-by-word reveal — reused pattern */
@@ -334,7 +334,7 @@ const About: React.FC = () => {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', marginBottom: '3.5rem' }}>
               {[
                 'In our neighborhood, four buddies shared a passion for construction. Each worked in different companies in the industry — but we saw a common problem: most construction firms lacked honesty and quality.',
-                'So we thought: why not start our own? That\'s how Mass Developers was born in 2018. We started small, with big dreams — provide top-notch work at fair prices. Slowly, people noticed our dedication.',
+                'So we thought: why not start our own? That\'s how MASS Developers was born in 2018. We started small, with big dreams — to provide top-notch work at fair prices. Slowly, people noticed our dedication.',
               ].map((text, i) => (
                 <motion.p
                   key={i}

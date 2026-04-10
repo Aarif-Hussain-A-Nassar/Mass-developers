@@ -539,10 +539,10 @@ export default function About() {
                     <br />a developer.
                   </h2>
                   <p className="t-body">
-                    Mass Developers has grown from a modest construction firm into a leading real estate developer, trusted by thousands to deliver not just structures, but spaces that inspire.
+                    In 2018, four friends from the same neighborhood—all established in different facets of the construction industry—recognized a recurring flaw: a concerning lack of transparency and quality in most firms. Driven by a passion to deliver better, we founded MASS Developers.
                   </p>
                   <p className="t-body">
-                    We believe every project is a narrative told in steel, glass, and concrete — flawlessly executed, blending modern aesthetics with functional durability.
+                    What started as a shared dream has evolved into a leading development firm. We began with simple goals: providing top-tier craftsmanship at fair prices. Today, from landmark residential projects to complex corporate offices, our narrative is defined by the trust we earn with every structure.
                   </p>
                 </div>
               </FadeIn>
