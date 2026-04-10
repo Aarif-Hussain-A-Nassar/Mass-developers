@@ -240,7 +240,7 @@ const About: React.FC = () => {
               </motion.div>
             </div>
 
-            {/* Badge — pops in after image */}
+            {/* Badge: Years — pops in after image */}
             <motion.div
               initial={{ opacity: 0, scale: 0.7, rotate: -6 }}
               whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
@@ -258,6 +258,7 @@ const About: React.FC = () => {
                 boxShadow:   '0 8px 40px rgba(0,0,0,0.5)',
                 textAlign:   'center',
                 cursor:      'default',
+                zIndex:      2,
               }}
             >
               <div style={{
@@ -278,6 +279,48 @@ const About: React.FC = () => {
                 marginTop:     '0.3rem',
                 opacity:       0.7,
               }}>Years</div>
+            </motion.div>
+
+            {/* Badge: Families — second stat */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.7, rotate: 6 }}
+              whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              whileHover={{ scale: 1.06 }}
+              style={{
+                position:    'absolute',
+                top:         '8rem',
+                right:       '-1.25rem',
+                background:  '#131313',
+                color:       '#ffffff',
+                padding:     '1.1rem 1.35rem',
+                borderRadius: 0,
+                boxShadow:   '0 8px 40px rgba(0,0,0,0.6)',
+                textAlign:   'center',
+                cursor:      'default',
+                zIndex:      2,
+                border:      '1px solid rgba(255,255,255,0.1)',
+              }}
+            >
+              <div style={{
+                fontFamily:    "'Inter', sans-serif",
+                fontSize:      '1.8rem',
+                fontWeight:    900,
+                lineHeight:    1,
+                letterSpacing: '-0.02em',
+              }}>
+                12k+
+              </div>
+              <div style={{
+                fontFamily:    "'Manrope', sans-serif",
+                fontSize:      '0.6rem',
+                fontWeight:    700,
+                letterSpacing: '0.18em',
+                textTransform: 'uppercase',
+                marginTop:     '0.3rem',
+                opacity:       0.6,
+              }}>Families</div>
             </motion.div>
           </motion.div>
 
@@ -323,6 +366,59 @@ const About: React.FC = () => {
                 mission remains the same: keep building dreams, one project at a time.&rdquo;
               </motion.p>
             </div>
+
+            {/* Stats strip */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              style={{
+                display:       'grid',
+                gridTemplateColumns: '1fr 1fr 1fr',
+                gap:           '0',
+                marginBottom:  '3.5rem',
+                borderTop:     '1px solid rgba(255,255,255,0.08)',
+                borderBottom:  '1px solid rgba(255,255,255,0.08)',
+                padding:       '1.75rem 0',
+              }}
+            >
+              {[
+                { value: `${new Date().getFullYear() - 2018}+`, label: 'Years' },
+                { value: '12,000+',                             label: 'Families' },
+                { value: '200+',                                label: 'Projects' },
+              ].map((stat, i) => (
+                <div
+                  key={stat.label}
+                  style={{
+                    textAlign:   'center',
+                    borderRight: i < 2 ? '1px solid rgba(255,255,255,0.08)' : 'none',
+                  }}
+                >
+                  <div style={{
+                    fontFamily:    "'Inter', sans-serif",
+                    fontSize:      'clamp(1.4rem, 3vw, 2rem)',
+                    fontWeight:    900,
+                    lineHeight:    1,
+                    letterSpacing: '-0.02em',
+                    color:         '#e2e2e2',
+                    marginBottom:  '0.35rem',
+                  }}>
+                    {stat.value}
+                  </div>
+                  <div style={{
+                    fontFamily:    "'Manrope', sans-serif",
+                    fontSize:      '0.58rem',
+                    fontWeight:    700,
+                    letterSpacing: '0.22em',
+                    textTransform: 'uppercase',
+                    color:         'var(--muted)',
+                  }}>
+                    {stat.label}
+                  </div>
+                </div>
+              ))}
+            </motion.div>
 
             {/* Milestones */}
             <motion.h3

@@ -499,7 +499,7 @@ export default function About() {
                 gap: '2rem',
               }}
             >
-              <AnimatedStat value={new Date().getFullYear() - 2007} suffix="+" label="Years of Excellence" />
+              <AnimatedStat value={new Date().getFullYear() - 2018} suffix="+" label="Years of Excellence" />
               <AnimatedStat value={450} suffix="+" label="Projects Delivered" />
               <AnimatedStat value={12000} suffix="+" label="Happy Families" />
               <AnimatedStat value={18} suffix="" label="Cities Active" />
@@ -599,7 +599,7 @@ export default function About() {
                           color: 'var(--white)',
                         }}
                       >
-                        {new Date().getFullYear() - 2007}
+                        {new Date().getFullYear() - 2018}
                       </span>
                       <span
                         style={{
@@ -648,7 +648,7 @@ export default function About() {
                     >
                       Est.
                       <br />
-                      2007
+                      2018
                     </span>
                   </motion.div>
                 </div>

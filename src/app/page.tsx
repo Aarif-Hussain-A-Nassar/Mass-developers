@@ -505,6 +505,47 @@ function Hero() {
   );
 }
 
+function StatCounter({ value, suffix, label }: { value: number; suffix: string; label: string }) {
+  const [count, setCount] = useState(0);
+  const ref = useRef<HTMLDivElement>(null);
+  const [started, setStarted] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !started) {
+          setStarted(true);
+          let start = 0;
+          const duration = 1600;
+          const step = 16;
+          const increment = value / (duration / step);
+          const timer = setInterval(() => {
+            start += increment;
+            if (start >= value) {
+              setCount(value);
+              clearInterval(timer);
+            } else {
+              setCount(Math.floor(start));
+            }
+          }, step);
+        }
+      },
+      { threshold: 0.2 }
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [value, started]);
+
+  return (
+    <div ref={ref}>
+      <div style={{ fontFamily: 'var(--font-inter)', fontSize: '1.8rem', fontWeight: 900, color: 'var(--white)' }}>
+        {count.toLocaleString()}{suffix}
+      </div>
+      <div className="t-label">{label}</div>
+    </div>
+  );
+}
+
 /* ═══════════════════ ABOUT US ═══════════════════ */
 function Philosophy() {
   return (
@@ -525,13 +566,10 @@ function Philosophy() {
                 MASS DEVELOPERS operates at the intersection of structural gravity and ethereal transparency.
                 Our methodology rejects the ornamental in favor of the essential.
               </p>
-              <div className="philosophy-stats" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', marginTop: '3rem', borderTop: '1px solid var(--white-06)', paddingTop: '2rem' }}>
-                {[['250+', 'Projects'], [`${new Date().getFullYear() - 2018}+`, 'Years']].map(([num, label]) => (
-                  <div key={label}>
-                    <div style={{ fontFamily: 'var(--font-inter)', fontSize: '1.8rem', fontWeight: 900, color: 'var(--white)' }}>{num}</div>
-                    <div className="t-label">{label}</div>
-                  </div>
-                ))}
+              <div className="philosophy-stats" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2rem', marginTop: '3rem', borderTop: '1px solid var(--white-06)', paddingTop: '2rem' }}>
+                <StatCounter value={250} suffix="+" label="Projects" />
+                <StatCounter value={12000} suffix="+" label="Families" />
+                <StatCounter value={new Date().getFullYear() - 2018} suffix="+" label="Years" />
               </div>
               <div style={{ marginTop: '2.5rem' }}>
                 <a href="/about" className="btn-ghost" style={{ padding: '0.65rem 1.75rem', fontSize: '0.6rem' }}>Read Full Story</a>
