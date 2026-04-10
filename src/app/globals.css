@@ -235,18 +235,32 @@ html {
   font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--white);
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
   text-decoration: none;
-  border: 1px solid var(--white-30);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   padding: 0.6rem 1.5rem;
   transition: all 0.25s ease;
 }
 
+.nav.scrolled .nav-cta {
+  color: #000000;
+  background-color: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.3);
+}
+
 @media (hover: hover) {
   .nav-cta:hover {
-    background: var(--white);
-    color: var(--bg);
-    border-color: var(--white);
+    background-color: #ffffff;
+    color: #000000;
+    border-color: #ffffff;
+  }
+
+  .nav.scrolled .nav-cta:hover {
+    background-color: #000000;
+    color: #ffffff;
+    border-color: #000000;
   }
 }
 
