@@ -132,9 +132,14 @@ function ExpertiseItemEnhanced({ exp, index }: { exp: any, index: number }) {
       />
 
       <div className="expertise-grid" style={{ position: 'relative', zIndex: 2 }}>
-        {/* Left Column: Text */}
+        {/* Left Column: Focused motion on Title only */}
         <div className="expertise-text-col">
-          <FadeIn delay={0.2}>
+          <motion.div
+            style={{ 
+              opacity: useTransform(smoothProgress, [0, 0.5], [0, 1]),
+              y: useTransform(smoothProgress, [0, 1], [30, 0])
+            }}
+          >
             <div style={{ height: '1px', width: '40px', background: 'var(--white)', marginBottom: 'clamp(1rem, 2vw, 2rem)' }} />
             <h3 style={{
               fontFamily: 'var(--font-inter)',
@@ -147,6 +152,9 @@ function ExpertiseItemEnhanced({ exp, index }: { exp: any, index: number }) {
             }}>
               {exp.title}
             </h3>
+          </motion.div>
+          
+          <FadeIn delay={0.4}>
             <p className="t-body" style={{ color: 'var(--white-60)', maxWidth: '420px', fontSize: 'clamp(0.85rem, 1vw, 0.95rem)', lineHeight: 1.8 }}>
               {exp.body}
             </p>
@@ -161,7 +169,7 @@ function ExpertiseItemEnhanced({ exp, index }: { exp: any, index: number }) {
               alt={exp.title}
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 1.2, ease: EASE }}
-              style={{ width: '100%', aspectRatio: '16/9', objectFit: 'cover' }}
+              style={{ width: '100%', aspectRatio: '16/9', objectFit: 'cover', display: 'block' }}
             />
           </div>
 
