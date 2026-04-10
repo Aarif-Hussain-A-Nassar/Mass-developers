@@ -578,9 +578,9 @@ function Philosophy() {
                 <StatCounter value={new Date().getFullYear() - 2018} suffix="+" label="Years" />
               </div>
               <div style={{ marginTop: '2.5rem' }}>
-                <motion.a 
-                  href="/about" 
-                  className="btn-ghost" 
+                <motion.a
+                  href="/about"
+                  className="btn-ghost"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   style={{ padding: '0.65rem 1.75rem', fontSize: '0.6rem' }}
@@ -596,30 +596,162 @@ function Philosophy() {
   );
 }
 
-/* ═══════════════════ EXPERTISE ═══════════════════ */
 function Expertise() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end end"]
+  });
+
+  const scrollLineHeight = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
   return (
-    <section id="expertise" style={{ background: 'var(--surface)', padding: '6rem 0' }}>
-      <div className="container">
-        <FadeIn><div className="section-eyebrow"><span>Expertise / 002</span></div></FadeIn>
-        <FadeIn><h2 className="t-headline" style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 100, letterSpacing: '0.15em', marginBottom: '6rem' }}>EXPERTISE</h2></FadeIn>
-        <div className="grid-2-col" style={{ gap: 'clamp(2rem, 5vw, 6rem) clamp(1.5rem, 3vw, 4rem)' }}>
+    <section
+      id="expertise"
+      ref={containerRef}
+      style={{
+        background: 'var(--bg)',
+        padding: '12rem 0',
+        position: 'relative',
+        overflow: 'hidden'
+      }}
+    >
+      <div className="container" style={{ position: 'relative', zIndex: 1 }}>
+        <FadeIn>
+          <div className="section-eyebrow" style={{ marginBottom: '8rem' }}>
+            <span>Expertise / 002</span>
+          </div>
+        </FadeIn>
+
+        <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', gap: '22rem' }}>
+
+          {/* THE THREAD — Enhanced with Spring Drawing */}
+          <div style={{
+            position: 'absolute',
+            left: '2rem',
+            top: 0,
+            bottom: 0,
+            width: '1px',
+            background: 'var(--white-06)'
+          }}>
+            <motion.div
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                background: 'var(--white)',
+                scaleY: scrollLineHeight,
+                originY: 0
+              }}
+            />
+          </div>
+
           {EXPERTISE.map((exp, i) => (
-            <motion.div key={i} initial={{ opacity: 0, y: 60 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, delay: (i % 2) * 0.15 }}>
-              <div className="expertise-card">
-                <img src={exp.bg} alt={exp.title} style={{ width: '100%', aspectRatio: '16/9', objectFit: 'cover' }} />
-                <div style={{ background: 'var(--surface-hihi)', padding: '2.5rem 2rem' }}>
-                  <h3 style={{ fontFamily: 'var(--font-inter)', fontSize: '1.4rem', fontWeight: 100, textTransform: 'uppercase', color: 'var(--white)', marginBottom: '1rem' }}>{exp.title}</h3>
-                  <p className="t-body" style={{ fontSize: '0.85rem', color: 'var(--white-60)' }}>{exp.body}</p>
-                </div>
-              </div>
-            </motion.div>
+            <ExpertiseItemEnhanced key={i} exp={exp} index={i} />
           ))}
         </div>
       </div>
     </section>
   );
 }
+
+function ExpertiseItemEnhanced({ exp, index }: { exp: any, index: number }) {
+  return (
+    <div style={{ paddingLeft: '6rem', position: 'relative' }}>
+      {/* SUB-INDEX — Magnetic/Scale effect */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.5, x: -10 }}
+        whileInView={{ opacity: 1, scale: 1, x: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8, delay: 0.2, ease: EASE }}
+        style={{
+          position: 'absolute',
+          left: '2.4rem',
+          top: '0.4rem',
+          fontFamily: 'var(--font-inter)',
+          fontSize: '0.85rem',
+          fontWeight: 900,
+          color: 'var(--white)'
+        }}
+      >
+        02.{index + 1}
+      </motion.div>
+
+      <div className="grid-2-col" style={{ gap: 'clamp(2rem, 6vw, 8rem)', alignItems: 'center' }}>
+        <div>
+          <motion.h3
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, delay: 0.1, ease: EASE }}
+            style={{
+              fontFamily: 'var(--font-inter)',
+              fontSize: 'clamp(1.8rem, 4.5vw, 4rem)',
+              fontWeight: 900,
+              textTransform: 'uppercase',
+              lineHeight: 0.9,
+              marginBottom: '2rem'
+            }}
+          >
+            {exp.title.split(' ').map((word: string, wi: number) => (
+              <span key={wi} style={{ display: 'inline-block', marginRight: '0.3em' }}>{word}</span>
+            ))}
+          </motion.h3>
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, delay: 0.3 }}
+            className="t-body"
+            style={{ color: 'var(--white-60)', maxWidth: '440px' }}
+          >
+            {exp.body}
+          </motion.p>
+        </div>
+
+        <div style={{ position: 'relative', overflow: 'hidden', padding: '10px' }}>
+          <motion.div
+            initial={{ clipPath: 'inset(100% 0 0 0)' }}
+            whileInView={{ clipPath: 'inset(0% 0 0 0)' }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.4, ease: EASE }}
+            style={{ position: 'relative', borderRadius: '4px', overflow: 'hidden' }}
+          >
+            <motion.img
+              src={exp.bg}
+              alt={exp.title}
+              whileHover={{ scale: 1.08 }}
+              transition={{ duration: 1.2, ease: EASE }}
+              style={{ width: '100%', aspectRatio: '16/10', objectFit: 'cover' }}
+            />
+          </motion.div>
+
+          {/* Blueprint Detail Brackets — Animating in */}
+          <motion.div
+            initial={{ scale: 0, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 0.5 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.8 }}
+            style={{ position: 'absolute', top: 0, right: 0, width: '30px', height: '30px', borderTop: '1px solid var(--white)', borderRight: '1px solid var(--white)' }}
+          />
+          <motion.div
+            initial={{ scale: 0, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 0.5 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.8 }}
+            style={{ position: 'absolute', bottom: 0, left: 0, width: '30px', height: '30px', borderBottom: '1px solid var(--white)', borderLeft: '1px solid var(--white)' }}
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 
 /* ═══════════════════ PROJECTS ═══════════════════ */
 function Projects() {
@@ -658,7 +790,7 @@ function Testimonials() {
     <section id="testimonials" style={{ background: 'var(--bg)', padding: '6rem 0' }}>
       <div className="container">
         <FadeIn><div className="section-eyebrow"><span>Testimonials / 004</span></div></FadeIn>
-        
+
         <div className="grid-2-col" style={{ gap: 'clamp(3rem, 6vw, 6rem)', alignItems: 'center' }}>
           {/* Text Column */}
           <div style={{ position: 'relative' }}>
@@ -673,7 +805,7 @@ function Testimonials() {
             </AnimatePresence>
 
             <div style={{ display: 'flex', gap: '1rem', marginTop: '4rem' }}>
-              <button 
+              <button
                 onClick={prevTestimonial}
                 style={{ width: '40px', height: '40px', borderRadius: '50%', border: '1px solid rgba(0,0,0,0.2)', background: 'transparent', color: '#000', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', transition: 'all 0.3s ease' }}
                 onMouseEnter={e => { e.currentTarget.style.background = '#000'; e.currentTarget.style.color = '#fff'; }}
@@ -681,7 +813,7 @@ function Testimonials() {
               >
                 ←
               </button>
-              <button 
+              <button
                 onClick={nextTestimonial}
                 style={{ width: '40px', height: '40px', borderRadius: '50%', border: '1px solid rgba(0,0,0,0.2)', background: 'transparent', color: '#000', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', transition: 'all 0.3s ease' }}
                 onMouseEnter={e => { e.currentTarget.style.background = '#000'; e.currentTarget.style.color = '#fff'; }}
@@ -698,9 +830,9 @@ function Testimonials() {
               <motion.div key={active} initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 1.05 }} transition={{ duration: 0.8, ease: EASE }} style={{ width: '100%', height: '100%', position: 'absolute', inset: 0 }}>
                 <img src={TESTIMONIALS[active].poster} alt="Testimonial Video" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'grayscale(30%)' }} />
                 <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.2)' }} />
-                
+
                 {/* Custom Play Button */}
-                <motion.div 
+                <motion.div
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                   style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '80px', height: '80px', borderRadius: '50%', background: 'rgba(255,255,255,0.1)', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', color: '#fff' }}
@@ -757,8 +889,8 @@ function Contact() {
               Whether it&#39;s a residential masterpiece or a commercial landmark, your vision deserves the highest standards of integrity.
             </p>
             <div style={{ display: 'flex', gap: '1.25rem' }}>
-              <motion.a 
-                href="/contact" 
+              <motion.a
+                href="/contact"
                 className="btn-solid"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -766,8 +898,8 @@ function Contact() {
               >
                 Get in Touch
               </motion.a>
-              <motion.a 
-                href="mailto:project@massdevelopers.in" 
+              <motion.a
+                href="mailto:project@massdevelopers.in"
                 className="btn-ghost"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
