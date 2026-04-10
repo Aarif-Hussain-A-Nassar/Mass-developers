@@ -68,15 +68,12 @@ section:not(#hero) {
 
 /* ─── Scrollbar ─── */
 ::-webkit-scrollbar {
-  width: 2px;
+  display: none;
 }
 
-::-webkit-scrollbar-track {
-  background: var(--bg);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--white-30);
+html {
+  scrollbar-width: none;        /* Firefox */
+  -ms-overflow-style: none;     /* IE / Edge */
 }
 
 /* ─── Selection ─── */
