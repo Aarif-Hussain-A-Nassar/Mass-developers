@@ -30,13 +30,15 @@ export default function Footer() {
 
             <div style={{ display: 'flex', gap: '0.75rem', marginTop: '1rem', flexWrap: 'wrap' }}>
               {[
-                { name: 'Instagram', url: 'https://instagram.com/mass_developers' },
-                { name: 'LinkedIn', url: '#' },
-                { name: 'Facebook', url: '#' }
+                { name: 'Instagram', url: 'https://www.instagram.com/mass_developers/' },
+                { name: 'LinkedIn', url: 'https://www.linkedin.com/company/mass-developers/?originalSubdomain=in' },
+                { name: 'Facebook', url: 'https://www.facebook.com/p/MASS-Developers-100054430543081/' }
               ].map(social => (
                 <motion.a
                   key={social.name}
                   href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   whileHover={{ y: -5 }}
                   whileTap={{ scale: 0.95 }}
                   style={{ textDecoration: 'none' }}
@@ -105,16 +107,32 @@ export default function Footer() {
             <div>
               <h4 style={{ fontFamily: 'var(--font-inter)', fontSize: '0.65rem', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.3em', marginBottom: '2rem', color: '#fff', opacity: 0.3 }}>Inquiries</h4>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-                <p style={{ fontFamily: 'var(--font-manrope)', fontSize: 'clamp(0.85rem, 1vw, 0.9rem)', lineHeight: 1.6, color: 'rgba(255,255,255,0.8)', fontWeight: 600 }}>
-                  <span style={{ fontSize: '0.6rem', opacity: 0.4, display: 'block', marginBottom: '0.4rem' }}>CALL BASE</span>
-                  +91 70255 76777<br />
-                  +91 80892 48246
-                </p>
-                <p style={{ fontFamily: 'var(--font-manrope)', fontSize: 'clamp(0.85rem, 1vw, 0.9rem)', lineHeight: 1.6, color: 'rgba(255,255,255,0.8)', fontWeight: 600 }}>
-                  <span style={{ fontSize: '0.6rem', opacity: 0.4, display: 'block', marginBottom: '0.4rem' }}>CORRESPONDENCE</span>
-                  project@massdevelopers.in<br />
-                  massdevelopers@outlook.com
-                </p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                  <a href="tel:+917025576777" className="location-link" style={{ textDecoration: 'none' }}>
+                    <p style={{ fontFamily: 'var(--font-manrope)', fontSize: 'clamp(0.85rem, 1vw, 0.9rem)', color: 'rgba(255,255,255,0.8)', fontWeight: 600 }}>
+                      <span style={{ fontSize: '0.6rem', opacity: 0.4, display: 'block', marginBottom: '0.4rem' }}>CALL BASE</span>
+                      +91 70255 76777
+                    </p>
+                  </a>
+                  <a href="tel:+918089248246" className="location-link" style={{ textDecoration: 'none' }}>
+                    <p style={{ fontFamily: 'var(--font-manrope)', fontSize: 'clamp(0.85rem, 1vw, 0.9rem)', color: 'rgba(255,255,255,0.8)', fontWeight: 600 }}>
+                      +91 80892 48246
+                    </p>
+                  </a>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                  <a href="mailto:project@massdevelopers.in" className="location-link" style={{ textDecoration: 'none' }}>
+                    <p style={{ fontFamily: 'var(--font-manrope)', fontSize: 'clamp(0.85rem, 1vw, 0.9rem)', color: 'rgba(255,255,255,0.8)', fontWeight: 600 }}>
+                      <span style={{ fontSize: '0.6rem', opacity: 0.4, display: 'block', marginBottom: '0.4rem' }}>CORRESPONDENCE</span>
+                      project@massdevelopers.in
+                    </p>
+                  </a>
+                  <a href="mailto:massdevelopers@outlook.com" className="location-link" style={{ textDecoration: 'none' }}>
+                    <p style={{ fontFamily: 'var(--font-manrope)', fontSize: 'clamp(0.85rem, 1vw, 0.9rem)', color: 'rgba(255,255,255,0.8)', fontWeight: 600 }}>
+                      massdevelopers@outlook.com
+                    </p>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -125,10 +143,18 @@ export default function Footer() {
           <p style={{ fontSize: '0.6rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.2em', color: 'rgba(255,255,255,0.3)' }}>
             © {new Date().getFullYear()} Mass Developers Group.
           </p>
-          <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-            <p className="footer-slogan" style={{ fontSize: '0.6rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.2em', color: 'rgba(255,255,255,0.3)' }}>
-              Precision in Silence.
-            </p>
+            <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
+              <p className="footer-slogan" style={{ fontSize: '0.6rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.2em', color: 'rgba(255,255,255,0.3)' }}>
+                Precision in Silence.
+              </p>
+              <a 
+                href="https://twodots.dev" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                style={{ fontSize: '0.6rem', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.2em', color: 'rgba(255,255,255,0.2)', textDecoration: 'none' }}
+              >
+                DESIGNED BY TWO DOTS
+              </a>
             <motion.a
               href="#hero"
               whileHover={{ color: '#ffffff' }}
