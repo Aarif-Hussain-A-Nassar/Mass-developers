@@ -223,53 +223,51 @@ export default function MassInterio() {
 
         @media (max-width: 900px) {
           .container {
-            grid-template-columns: 1fr;
-            gap: 4rem;
-            width: 90%;
-            margin: 0 auto;
+            grid-template-columns: 1fr !important;
+            gap: 2rem !important;
+            width: 100% !important;
+            padding: 0 1.5rem !important;
+            margin: 0 !important;
           }
           section {
             min-height: auto !important;
-            padding: 6rem 0 !important;
+            padding: 4rem 0 8rem 0 !important;
             overflow-x: hidden;
           }
           .image-grid-container {
-            height: auto !important;
-            display: block !important;
-            margin-bottom: 8rem;
+            width: 100%;
+            height: 65vh !important;
+            margin-bottom: 5rem;
+            position: relative;
           }
-          .image-grid-container > :global(div) {
-            position: relative !important;
-            /* Allow some motion but controlled */
-          }
-          /* Main Image */
+          /* Resetting children specifically for mobile to avoid relative/absolute conflicts */
           .image-grid-container > :global(div:nth-child(1)) {
-             width: 85% !important;
-             aspect-ratio: 4/5;
-             margin: 0 auto;
-             z-index: 2;
+            width: 80% !important;
+            height: 55vh !important;
+            margin: 0 auto;
+            position: relative !important;
+            z-index: 2;
           }
           /* Detail 1 - Staggered Bottom Left */
           .image-grid-container > :global(div:nth-child(2)) {
-             display: block !important;
-             position: absolute !important;
-             bottom: -10dvh !important;
-             left: 0 !important;
-             width: 50% !important;
-             height: 25vh !important;
-             z-index: 5; /* On top */
-             box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            width: 55% !important;
+            height: 25vh !important;
+            position: absolute !important;
+            bottom: 0 !important;
+            left: 0 !important;
+            z-index: 5 !important;
+            transform: translateY(20%) !important;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
           }
           /* Detail 2 - Staggered Top Right */
           .image-grid-container > :global(div:nth-child(3)) {
-             display: block !important;
-             position: absolute !important;
-             top: -5dvh !important;
-             right: 5% !important;
-             width: 40% !important;
-             height: 20vh !important;
-             opacity: 0.8 !important;
-             z-index: 1; /* Behind */
+            width: 45% !important;
+            height: 22vh !important;
+            position: absolute !important;
+            top: 2rem !important;
+            right: -5% !important;
+            z-index: 1 !important;
+            opacity: 0.7 !important;
           }
           .studio-content {
             padding-left: 0 !important;
@@ -278,20 +276,25 @@ export default function MassInterio() {
             flex-direction: column;
             align-items: center;
             position: relative;
-            z-index: 50 !important; /* Above everything */
-            margin-top: 4rem;
+            z-index: 10;
           }
           h2 {
-            font-size: clamp(2.5rem, 8vw, 3.5rem) !important;
+            font-size: clamp(2.4rem, 10vw, 3.2rem) !important;
+            margin-bottom: 2rem !important;
+          }
+          p {
+            font-size: 1rem !important;
+            margin-bottom: 3rem !important;
           }
           .background-label {
-            font-size: 40vw !important;
-            top: 10%;
+            font-size: 45vw !important;
+            top: 5% !important;
             opacity: 0.01 !important;
           }
           .interio-btn-alt {
             width: 100% !important;
             justify-content: center;
+            padding: 1.2rem !important;
           }
         }
       `}</style>
