@@ -514,7 +514,6 @@ export default function About() {
               <FadeIn direction="left">
                 <div
                   style={{
-                    section: 'Who we are',
                     display: 'flex',
                     flexDirection: 'column',
                     gap: '1.5rem',
