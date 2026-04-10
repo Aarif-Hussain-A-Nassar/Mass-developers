@@ -12,6 +12,7 @@ import Testimonials from '@/components/Testimonials';
 import Journal from '@/components/Journal';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
+import FloatingButton from '@/components/FloatingButton';
 import { SECTIONS_IDS } from '@/lib/constants';
 
 export default function Page() {
@@ -40,6 +41,7 @@ export default function Page() {
         <MassInterio />
       </main>
       <Footer />
+      <FloatingButton />
     </>
   );
 }
