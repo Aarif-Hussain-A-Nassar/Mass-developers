@@ -2,6 +2,7 @@
 
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
+import Footer from '@/components/Footer';
 
 /* ─── Easing ─── */
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
@@ -986,8 +987,8 @@ export default function About() {
             </FadeIn>
           </div>
         </div>
-
       </main>
+      <Footer />
     </>
   );
 }
