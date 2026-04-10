@@ -72,17 +72,33 @@ export default function Footer() {
             <div>
               <h4 style={{ fontFamily: 'var(--font-inter)', fontSize: '0.65rem', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.3em', marginBottom: '2rem', color: '#fff', opacity: 0.3 }}>Locations</h4>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-                <p style={{ fontFamily: 'var(--font-manrope)', fontSize: 'clamp(0.85rem, 1vw, 0.9rem)', lineHeight: 1.6, color: 'rgba(255,255,255,0.8)', fontWeight: 600 }}>
-                  <span style={{ fontSize: '0.6rem', opacity: 0.4, display: 'block', marginBottom: '0.4rem' }}>REGISTERED BASE</span>
-                  46/1169- A1, Madappat Road,<br />
-                  Chalikavattom, Vennala PO,<br />
-                  Ernakulam, 682028
-                </p>
-                <p style={{ fontFamily: 'var(--font-manrope)', fontSize: 'clamp(0.85rem, 1vw, 0.9rem)', lineHeight: 1.6, color: 'rgba(255,255,255,0.8)', fontWeight: 600 }}>
-                  <span style={{ fontSize: '0.6rem', opacity: 0.4, display: 'block', marginBottom: '0.4rem' }}>BRANCH OFFICE</span>
-                  XI/139, KD Tower, Vaduthala,<br />
-                  Nadvath Nagar PO, Aroor - 688535
-                </p>
+                <a 
+                  href="https://share.google/BAzOirco2LayMt023" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  style={{ textDecoration: 'none', transition: 'opacity 0.3s ease' }}
+                  className="location-link"
+                >
+                  <p style={{ fontFamily: 'var(--font-manrope)', fontSize: 'clamp(0.85rem, 1vw, 0.9rem)', lineHeight: 1.6, color: 'rgba(255,255,255,0.8)', fontWeight: 600 }}>
+                    <span style={{ fontSize: '0.6rem', opacity: 0.4, display: 'block', marginBottom: '0.4rem' }}>REGISTERED BASE</span>
+                    46/1169- A1, Madappat Road,<br />
+                    Chalikavattom, Vennala PO,<br />
+                    Ernakulam, 682028
+                  </p>
+                </a>
+                <a 
+                  href="https://share.google/Y8J1veezkVUBwoQ8lus" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  style={{ textDecoration: 'none', transition: 'opacity 0.3s ease' }}
+                  className="location-link"
+                >
+                  <p style={{ fontFamily: 'var(--font-manrope)', fontSize: 'clamp(0.85rem, 1vw, 0.9rem)', lineHeight: 1.6, color: 'rgba(255,255,255,0.8)', fontWeight: 600 }}>
+                    <span style={{ fontSize: '0.6rem', opacity: 0.4, display: 'block', marginBottom: '0.4rem' }}>BRANCH OFFICE</span>
+                    XI/139, KD Tower, Vaduthala,<br />
+                    Nadvath Nagar PO, Aroor - 688535
+                  </p>
+                </a>
               </div>
             </div>
 
@@ -142,6 +158,13 @@ export default function Footer() {
           display: flex;
           justify-content: space-between;
           align-items: center;
+        }
+        .location-link:hover p {
+          color: #ffffff !important;
+          transform: translateX(4px);
+        }
+        .location-link p {
+          transition: all 0.3s ease;
         }
         .social-btn:hover {
           background-color: #ffffff !important;
