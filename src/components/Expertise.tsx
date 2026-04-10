@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef } from 'react';
-import { motion, useScroll, useSpring } from 'framer-motion';
+import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
 import { EXPERTISE } from '@/lib/constants';
 import { EASE } from '@/lib/utils';
 import FadeIn from './FadeIn';
@@ -71,15 +71,30 @@ export default function Expertise() {
 }
 
 function ExpertiseItemEnhanced({ exp, index }: { exp: any, index: number }) {
+  const itemRef = useRef<HTMLDivElement>(null);
+  
+  // Track scroll progress of THIS specific item as it enters and reaches the center
+  const { scrollYProgress } = useScroll({
+    target: itemRef,
+    offset: ["start end", "center center"]
+  });
+
+  // Smooth out the progress
+  const smoothProgress = useSpring(scrollYProgress, { stiffness: 60, damping: 20 });
+
+  // Index number comes from LEFT
+  const indexX = useTransform(smoothProgress, [0, 1], [-200, 0]);
+  const indexOpacity = useTransform(smoothProgress, [0, 0.4], [0, 1]);
+
+  // Image comes from RIGHT
+  const imageX = useTransform(smoothProgress, [0, 1], [200, 0]);
+  const imageOpacity = useTransform(smoothProgress, [0, 0.4], [0, 1]);
+
   return (
-    <div style={{ paddingLeft: '11rem', position: 'relative' }}>
-      
-      {/* GIGANTIC WATERMARK INDEX — Solid & Structural */}
+    <div ref={itemRef} style={{ paddingLeft: '11rem', position: 'relative' }}>
+
+      {/* GIGANTIC WATERMARK INDEX — Sliding from Left */}
       <motion.div
-        initial={{ opacity: 0, x: -80 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 1.8, ease: [0.16, 1, 0.3, 1] }}
         style={{
           position: 'absolute',
           left: '2rem',
@@ -87,25 +102,27 @@ function ExpertiseItemEnhanced({ exp, index }: { exp: any, index: number }) {
           fontFamily: 'var(--font-inter)',
           fontSize: '16rem',
           fontWeight: 900,
-          color: 'var(--white-06)', 
+          color: 'var(--white-06)',
           zIndex: 0,
           pointerEvents: 'none',
-          lineHeight: 1
+          lineHeight: 1,
+          x: indexX,
+          opacity: indexOpacity
         }}
       >
         {index + 1}
       </motion.div>
 
-      {/* THE CONNECTING LINE — Cleaner integration */}
-      <motion.div 
+      {/* THE CONNECTING LINE */}
+      <motion.div
         initial={{ width: 0, opacity: 0 }}
         whileInView={{ width: '9rem', opacity: 0.3 }}
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 1.2, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-        style={{ 
-          position: 'absolute', 
-          left: '2rem', 
-          top: '6rem', 
+        style={{
+          position: 'absolute',
+          left: '2rem',
+          top: '6rem',
           height: '1px',
           background: 'var(--white)',
           zIndex: 1
@@ -113,14 +130,9 @@ function ExpertiseItemEnhanced({ exp, index }: { exp: any, index: number }) {
       />
 
       <div style={{ display: 'grid', gridTemplateColumns: '0.6fr 1.6fr', gap: '5vw', alignItems: 'center', position: 'relative', zIndex: 2 }}>
-        {/* Left Column: Technical Text Anchor */}
+        {/* Left Column: Text reveals normally */}
         <div style={{ paddingRight: '1rem' }}>
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1, delay: 0.2, ease: EASE }}
-          >
+          <FadeIn delay={0.2}>
             <div style={{ height: '1px', width: '40px', background: 'var(--white)', marginBottom: '2rem' }} />
             <h3 style={{
               fontFamily: 'var(--font-inter)',
@@ -136,18 +148,12 @@ function ExpertiseItemEnhanced({ exp, index }: { exp: any, index: number }) {
             <p className="t-body" style={{ color: 'var(--white-60)', maxWidth: '320px', fontSize: '0.9rem', lineHeight: 1.8 }}>
               {exp.body}
             </p>
-          </motion.div>
+          </FadeIn>
         </div>
 
-        {/* Right Column: Ultra-Large Image */}
-        <div style={{ position: 'relative' }}>
-          <motion.div
-            initial={{ clipPath: 'inset(0 100% 0 0)' }}
-            whileInView={{ clipPath: 'inset(0 0% 0 0)' }}
-            viewport={{ once: true }}
-            transition={{ duration: 1.6, ease: EASE }}
-            style={{ position: 'relative', borderRadius: '2px', overflow: 'hidden', boxShadow: '0 60px 100px -30px rgba(0,0,0,0.6)' }}
-          >
+        {/* Right Column: Image sliding from RIGHT */}
+        <motion.div style={{ position: 'relative', x: imageX, opacity: imageOpacity }}>
+          <div style={{ position: 'relative', borderRadius: '2px', overflow: 'hidden', boxShadow: '0 60px 100px -30px rgba(0,0,0,0.6)' }}>
             <motion.img
               src={exp.bg}
               alt={exp.title}
@@ -155,14 +161,14 @@ function ExpertiseItemEnhanced({ exp, index }: { exp: any, index: number }) {
               transition={{ duration: 1.2, ease: EASE }}
               style={{ width: '100%', aspectRatio: '16/9', objectFit: 'cover' }}
             />
-          </motion.div>
+          </div>
 
-          {/* Technical drafting details expanded for large image */}
           <div style={{ position: 'absolute', top: '-1.5rem', right: 0, fontFamily: 'monospace', fontSize: '0.6rem', color: 'var(--white-30)', letterSpacing: '0.1em' }}>
             COORD_REF: {index}.002 / MASTER_VIEW
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );
 }
+
