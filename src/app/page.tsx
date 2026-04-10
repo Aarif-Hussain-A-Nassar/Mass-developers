@@ -9,7 +9,7 @@ const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
 /* ═══════════════════ DATA ═══════════════════ */
 const NAV_LINKS = [
   { label: 'Home', href: '#hero' },
-  { label: 'About', href: '#philosophy' },
+  { label: 'About', href: '#about-us' },
   { label: 'Expertise', href: '#expertise' },
   { label: 'Projects', href: '#projects' },
   { label: 'Testimonials', href: '#testimonials' },
@@ -302,7 +302,7 @@ function Navbar() {
 }
 
 /* ═══════════════════ DOT NAV ═══════════════════ */
-const SECTIONS_IDS = ['hero', 'philosophy', 'expertise', 'projects', 'testimonials', 'journal', 'contact'];
+const SECTIONS_IDS = ['hero', 'about-us', 'expertise', 'projects', 'testimonials', 'journal', 'contact'];
 
 function DotNav({ active }: { active: number }) {
   return (
@@ -452,7 +452,7 @@ function Hero() {
         </motion.p>
 
         <motion.div style={{ display: 'inline-flex', alignItems: 'center', gap: 'clamp(0.75rem, 2vw, 1.5rem)', flexWrap: 'wrap', justifyContent: 'center' }}>
-          {['projects', 'philosophy'].map((target, idx) => (
+          {['projects', 'about-us'].map((target, idx) => (
             <motion.a
               key={target}
               href={`#${target}`}
@@ -505,12 +505,12 @@ function Hero() {
   );
 }
 
-/* ═══════════════════ PHILOSOPHY ═══════════════════ */
+/* ═══════════════════ ABOUT US ═══════════════════ */
 function Philosophy() {
   return (
-    <section id="philosophy" className="section-snap" style={{ background: 'var(--bg)', display: 'flex', alignItems: 'center' }}>
+    <section id="about-us" className="section-snap" style={{ background: 'var(--bg)', display: 'flex', alignItems: 'center' }}>
       <div className="container" style={{ padding: '6rem 1rem' }}>
-        <FadeIn><div className="section-eyebrow"><span>Philosophy / 001</span></div></FadeIn>
+        <FadeIn><div className="section-eyebrow"><span>About Us / 001</span></div></FadeIn>
         <div className="grid-2-col" style={{ gap: 'clamp(3rem, 6vw, 6rem)', alignItems: 'center' }}>
           <FadeIn delay={0.1}>
             <h2 style={{ fontFamily: 'var(--font-inter)', fontSize: 'clamp(2rem, 4.5vw, 4.5rem)', fontWeight: 900, lineHeight: 0.95, textTransform: 'uppercase' }}>
@@ -532,6 +532,9 @@ function Philosophy() {
                     <div className="t-label">{label}</div>
                   </div>
                 ))}
+              </div>
+              <div style={{ marginTop: '2.5rem' }}>
+                <a href="/about" className="btn-ghost" style={{ padding: '0.65rem 1.75rem', fontSize: '0.6rem' }}>Read Full Story</a>
               </div>
             </div>
           </FadeIn>
