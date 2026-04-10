@@ -465,10 +465,12 @@ function Hero() {
         </motion.div>
       </motion.div>
 
-      <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 2, duration: 1 }} style={{ position: 'absolute', bottom: '2rem', left: '50%', transform: 'translateX(-50%)', zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
-        <div style={{ width: '1px', height: '60px', background: 'linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 50%, rgba(255,255,255,0) 100%)', backgroundSize: '100% 200%', animation: 'scroll-line 2s cubic-bezier(0.76, 0, 0.24, 1) infinite' }} />
-        <span style={{ fontFamily: 'var(--font-manrope)', fontSize: '0.5rem', fontWeight: 700, letterSpacing: '0.4em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.5)' }}>Scroll</span>
-      </motion.div>
+      <div style={{ position: 'absolute', bottom: '2rem', left: 0, right: 0, zIndex: 2, display: 'flex', justifyContent: 'center' }}>
+        <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 2, duration: 1 }} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
+          <div style={{ width: '1px', height: '60px', background: 'linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 50%, rgba(255,255,255,0) 100%)', backgroundSize: '100% 200%', animation: 'scroll-line 2s cubic-bezier(0.76, 0, 0.24, 1) infinite' }} />
+          <span style={{ fontFamily: 'var(--font-manrope)', fontSize: '0.5rem', fontWeight: 700, letterSpacing: '0.4em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.5)' }}>Scroll</span>
+        </motion.div>
+      </div>
 
       <style jsx>{`
         @keyframes scroll-line {
