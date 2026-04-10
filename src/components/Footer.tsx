@@ -163,7 +163,7 @@ export default function Footer() {
               Precision in Silence.
             </p>
             <a 
-              href="https://twodots.dev" 
+              href="https://two-dots-two.vercel.app/" 
               target="_blank" 
               rel="noopener noreferrer"
               style={{ fontSize: '0.6rem', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.2em', color: 'rgba(0,0,0,0.2)', textDecoration: 'none' }}

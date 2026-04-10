@@ -235,27 +235,42 @@ export default function MassInterio() {
           }
           .image-grid-container {
             height: auto !important;
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
+            display: block !important;
+            margin-bottom: 4rem;
           }
           .image-grid-container > :global(div) {
             position: relative !important;
-            width: 100% !important;
-            height: auto !important;
-            top: auto !important;
-            left: auto !important;
-            right: auto !important;
-            bottom: auto !important;
             transform: none !important;
             y: 0 !important;
           }
+          /* Main Image */
           .image-grid-container > :global(div:nth-child(1)) {
+             width: 90% !important;
              aspect-ratio: 4/5;
+             margin: 0 auto;
+             z-index: 2;
           }
-          .image-grid-container > :global(div:nth-child(2)), 
+          /* Detail 1 - Staggered Bottom Left */
+          .image-grid-container > :global(div:nth-child(2)) {
+             display: block !important;
+             position: absolute !important;
+             bottom: -15% !important;
+             left: 0 !important;
+             width: 45% !important;
+             height: 25vh !important;
+             z-index: 3;
+             box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+          }
+          /* Detail 2 - Staggered Top Right */
           .image-grid-container > :global(div:nth-child(3)) {
-             display: none;
+             display: block !important;
+             position: absolute !important;
+             top: -10% !important;
+             right: 5% !important;
+             width: 35% !important;
+             height: 20vh !important;
+             opacity: 0.8 !important;
+             z-index: 1;
           }
           .studio-content {
             padding-left: 0 !important;
