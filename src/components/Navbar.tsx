@@ -140,15 +140,25 @@ export default function Navbar() {
         </AnimatePresence>
 
         <motion.button
+          layout
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          whileTap={{ scale: 0.95 }}
+          whileTap={{ scale: 0.92, y: 2 }}
+          animate={{ 
+            backgroundColor: isMenuOpen ? '#ffffff' : '#000000',
+            color: isMenuOpen ? '#000000' : '#ffffff'
+          }}
+          transition={{ 
+            type: 'spring', 
+            stiffness: 400, 
+            damping: 30,
+            backgroundColor: { duration: 0.4 },
+            color: { duration: 0.4 }
+          }}
           style={{
             position: 'fixed',
             bottom: 'clamp(14px, 3vh, 24px)',
             right: 'clamp(12px, 3vw, 20px)',
             zIndex: 1001,
-            background: isMenuOpen ? '#ffffff' : '#000000',
-            color: isMenuOpen ? '#000000' : '#ffffff',
             border: 'none',
             padding: 'clamp(0.45rem, 1.2vh, 0.75rem) clamp(1rem, 4vw, 1.8rem)',
             borderRadius: '3rem',
@@ -159,19 +169,22 @@ export default function Navbar() {
             textTransform: 'uppercase',
             display: 'flex',
             alignItems: 'center',
+            justifyContent: 'center',
             gap: '0.5rem',
             boxShadow: '0 10px 30px rgba(0,0,0,0.4)',
-            transition: 'background 0.3s ease, color 0.3s ease',
             whiteSpace: 'nowrap',
-            maxWidth: 'calc(100vw - 24px)'
+            maxWidth: 'calc(100vw - 24px)',
+            cursor: 'pointer'
           }}
         >
-          {isMenuOpen ? 'Close' : (
-            <>
-              <span style={{ color: 'rgba(255,255,255,0.6)' }}>{NAV_LINKS[activeIdx].label}</span>
-              <span>+</span>
-            </>
-          )}
+          <motion.span layout="position">
+            {isMenuOpen ? 'Close' : (
+              <>
+                <span style={{ opacity: 0.6 }}>{NAV_LINKS[activeIdx].label}</span>
+                <span style={{ marginLeft: '0.4rem' }}>+</span>
+              </>
+            )}
+          </motion.span>
         </motion.button>
       </div>
     </>
