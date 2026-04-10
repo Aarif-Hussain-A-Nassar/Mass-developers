@@ -51,6 +51,7 @@ export default function FloatingButton() {
             padding: '12px',
             transition: 'background-color 0.3s ease'
           }}
+          className="twodots-dock"
         >
           <img
             src="/twodotss.png"
@@ -59,6 +60,15 @@ export default function FloatingButton() {
           />
         </motion.a>
       )}
+      <style jsx>{`
+        @media (max-width: 900px) {
+          :global(.twodots-dock) {
+            right: auto !important;
+            left: 1.5rem !important;
+            bottom: 1.5rem !important;
+          }
+        }
+      `}</style>
     </AnimatePresence>
   );
 }

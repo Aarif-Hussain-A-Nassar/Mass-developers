@@ -225,30 +225,56 @@ export default function MassInterio() {
           .container {
             grid-template-columns: 1fr;
             gap: 4rem;
+            width: 90%;
+            margin: 0 auto;
           }
           section {
             min-height: auto !important;
-            padding: clamp(4rem, 10vw, 8rem) 0 !important;
+            padding: 6rem 0 !important;
+            overflow-x: hidden;
           }
           .image-grid-container {
-            height: 60vh !important;
-            margin-bottom: 2rem;
+            height: auto !important;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
           }
-        }
-
-        @media (max-width: 600px) {
-          .image-grid-container {
-            height: 50vh !important;
+          .image-grid-container > :global(div) {
+            position: relative !important;
+            width: 100% !important;
+            height: auto !important;
+            top: auto !important;
+            left: auto !important;
+            right: auto !important;
+            bottom: auto !important;
+            transform: none !important;
+            y: 0 !important;
           }
-          h2 {
-            font-size: 3rem !important;
+          .image-grid-container > :global(div:nth-child(1)) {
+             aspect-ratio: 4/5;
+          }
+          .image-grid-container > :global(div:nth-child(2)), 
+          .image-grid-container > :global(div:nth-child(3)) {
+             display: none;
           }
           .studio-content {
             padding-left: 0 !important;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+          }
+          h2 {
+            font-size: clamp(2.5rem, 8vw, 3.5rem) !important;
           }
           .background-label {
-            font-size: 30vw !important;
+            font-size: 40vw !important;
+            top: 10%;
             opacity: 0.01 !important;
+          }
+          .interio-btn-alt {
+            width: 100% !important;
+            justify-content: center;
           }
         }
       `}</style>
