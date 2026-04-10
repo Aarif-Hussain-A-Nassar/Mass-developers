@@ -14,6 +14,7 @@
   margin: 0;
   padding: 0;
   outline: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 *:focus-visible {
@@ -241,10 +242,12 @@ html {
   transition: all 0.25s ease;
 }
 
-.nav-cta:hover {
-  background: var(--white);
-  color: var(--bg);
-  border-color: var(--white);
+@media (hover: hover) {
+  .nav-cta:hover {
+    background: var(--white);
+    color: var(--bg);
+    border-color: var(--white);
+  }
 }
 
 /* ─── Dot navigation ─── */
@@ -294,10 +297,12 @@ html {
   transition: all 0.3s var(--ease-expo);
 }
 
-.btn-ghost:hover {
-  background: var(--white);
-  color: var(--bg);
-  border-color: var(--white);
+@media (hover: hover) {
+  .btn-ghost:hover {
+    background: var(--white);
+    color: var(--bg);
+    border-color: var(--white);
+  }
 }
 
 .btn-solid {
@@ -317,9 +322,11 @@ html {
   transition: all 0.3s var(--ease-expo);
 }
 
-.btn-solid:hover {
-  background: transparent;
-  color: var(--white);
+@media (hover: hover) {
+  .btn-solid:hover {
+    background: transparent;
+    color: var(--white);
+  }
 }
 
 /* ─── Section label with line ─── */

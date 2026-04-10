@@ -102,6 +102,14 @@ const JOURNAL = [
   },
 ];
 
+/* ═══════════════════ SMOOTH SCROLL UTILITY ═══════════════════ */
+function smoothScrollTo(selector: string) {
+  const el = document.querySelector(selector) as HTMLElement | null;
+  if (!el) return;
+  const top = el.getBoundingClientRect().top + window.scrollY;
+  window.scrollTo({ top, behavior: 'smooth' });
+}
+
 /* ═══════════════════ NAVBAR ═══════════════════ */
 
 function Navbar() {
@@ -140,8 +148,7 @@ function Navbar() {
     if (href === '#hero') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
-      const target = document.querySelector(href);
-      if (target) target.scrollIntoView({ behavior: 'smooth' });
+      smoothScrollTo(href);
     }
   };
 
@@ -437,7 +444,7 @@ function Hero() {
               href={`#${target}`}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
-              onClick={(e) => { e.preventDefault(); document.querySelector(`#${target}`)?.scrollIntoView({ behavior: 'smooth' }); }}
+              onClick={(e) => { e.preventDefault(); smoothScrollTo(`#${target}`); }}
               style={{
                 fontFamily: 'var(--font-manrope)',
                 fontSize: 'clamp(0.5rem, 0.8vw, 0.65rem)',
@@ -454,7 +461,8 @@ function Hero() {
                 transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
                 display: 'inline-flex',
                 alignItems: 'center',
-                whiteSpace: 'nowrap'
+                whiteSpace: 'nowrap',
+                WebkitTapHighlightColor: 'transparent',
               }}
               onMouseEnter={e => { Object.assign(e.currentTarget.style, { backgroundColor: '#ffffff', color: '#000000', borderColor: '#ffffff', opacity: '1' }); }}
               onMouseLeave={e => { Object.assign(e.currentTarget.style, { backgroundColor: 'rgba(255,255,255,0.15)', color: '#ffffff', borderColor: 'rgba(255,255,255,0.3)', opacity: '0.9' }); }}
