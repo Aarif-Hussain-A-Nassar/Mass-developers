@@ -149,10 +149,10 @@ function Navbar() {
     <>
       <nav className={`nav ${scrolled ? 'scrolled' : ''}`}>
         <a href="#hero" className="nav-logo" style={{ marginLeft: '1.5rem' }} onClick={(e) => handleClick(e, '#hero', 0)}>
-          <motion.img 
-            src="/logo.png" 
-            alt="MASS Logo" 
-            className="nav-logo-img" 
+          <motion.img
+            src="/logo.png"
+            alt="MASS Logo"
+            className="nav-logo-img"
             whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.3, ease: EASE }}
           />
@@ -173,13 +173,13 @@ function Navbar() {
           ))}
         </ul>
 
-        <a 
-          href="#contact" 
-          className="nav-cta" 
+        <a
+          href="#contact"
+          className="nav-cta"
           onClick={(e) => handleClick(e, '#contact', NAV_LINKS.length - 1)}
-          style={{ 
-            color: scrolled ? '#000000' : '#ffffff', 
-            borderColor: scrolled ? 'rgba(0,0,0,0.3)' : 'rgba(255,255,255,0.3)' 
+          style={{
+            color: scrolled ? '#000000' : '#ffffff',
+            borderColor: scrolled ? 'rgba(0,0,0,0.3)' : 'rgba(255,255,255,0.3)'
           }}
         >
           Inquire
@@ -231,7 +231,7 @@ function Navbar() {
                       gap: '0.6rem'
                     }}
                   >
-                    <span style={{ fontSize: '0.55rem', opacity: 0.3 }}>0{i+1}</span>
+                    <span style={{ fontSize: '0.55rem', opacity: 0.3 }}>0{i + 1}</span>
                     {l.label}
                   </motion.a>
                 ))}
@@ -354,7 +354,7 @@ function Hero() {
   const opac = useTransform(smoothProgress, [0, 0.6], [1, 0]);
   const blur = useTransform(smoothProgress, [0, 0.8], [0, 15]);
 
-  const handleMouseMove = () => {};
+  const handleMouseMove = () => { };
 
   const titleText = "MASS";
 
@@ -406,14 +406,14 @@ function Hero() {
               initial={{ opacity: 0, y: 80, filter: 'blur(10px)' }}
               animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
               transition={{ duration: 1.4, delay: 0.2 + i * 0.1, ease: EASE }}
-              style={{ 
-                fontFamily: 'var(--font-inter)', 
-                fontSize: 'clamp(2.5rem, 10vw, 13rem)', 
-                fontWeight: 100, 
-                letterSpacing: 'clamp(0.2em, 5vw, 0.55em)', 
-                textTransform: 'uppercase', 
-                lineHeight: 1, 
-                color: '#ffffff' 
+              style={{
+                fontFamily: 'var(--font-inter)',
+                fontSize: 'clamp(2.5rem, 10vw, 13rem)',
+                fontWeight: 100,
+                letterSpacing: 'clamp(0.2em, 5vw, 0.55em)',
+                textTransform: 'uppercase',
+                lineHeight: 1,
+                color: '#ffffff'
               }}
             >
               {char}
