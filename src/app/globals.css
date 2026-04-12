@@ -73,8 +73,10 @@ section:not(#hero) {
 }
 
 html {
-  scrollbar-width: none;        /* Firefox */
-  -ms-overflow-style: none;     /* IE / Edge */
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE / Edge */
 }
 
 /* ─── Selection ─── */
@@ -591,7 +593,7 @@ html {
   }
 
   /* Philosophy section gap fix */
-  #philosophy .container > div {
+  #philosophy .container>div {
     gap: 3rem !important;
   }
 
@@ -623,6 +625,7 @@ html {
 
 /* ─── Mobile ─── */
 @media (max-width: 768px) {
+
   /* Show floating dock only on mobile */
   .floating-nav-dock {
     display: block;
@@ -646,7 +649,8 @@ html {
     font-size: 0.5rem;
     padding: 0.4rem 0.8rem;
     letter-spacing: 0.15em;
-    margin-right: 0.75rem; /* Move slightly left on mobile */
+    margin-right: 0.75rem;
+    /* Move slightly left on mobile */
   }
 
   .container {
@@ -704,7 +708,7 @@ html {
     padding: 4rem 0 !important;
   }
 
-  #expertise .expertise-card > div {
+  #expertise .expertise-card>div {
     padding: 1.5rem 1.25rem !important;
   }
 

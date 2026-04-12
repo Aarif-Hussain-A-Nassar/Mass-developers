@@ -48,18 +48,109 @@ export const EXPERTISE = [
 
 export const PROJECTS = [
   {
+    id: 'the-obsidian-loft',
     title: 'The Obsidian Loft',
     label: 'Project 039 / 2022',
     location: 'Residential / Los Angeles',
     bg: 'linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.65) 100%), url("/arch-1.jpg") center/cover no-repeat',
+    heroImage: '/arch-1.jpg',
     placeholder: 'linear-gradient(135deg, var(--surface) 0%, var(--surface-hi) 60%, var(--surface) 100%)',
+    description: 'A study in monochromatic minimalism, the Obsidian Loft redefines urban living through its brutalist yet refined geometry. The project focuses on light-play against dark textures, creating a living space that feels both grounded and ethereal.',
+    specifications: [
+      { label: 'Type', value: 'Residential' },
+      { label: 'Area', value: '4,500 Sqft' },
+      { label: 'Location', value: 'California, US' },
+      { label: 'Status', value: 'Completed' }
+    ],
+    gallery: [
+      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1600',
+      'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=1600',
+      'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=1600'
+    ]
   },
   {
+    id: 'summit-corporate-center',
     title: 'Summit Corporate Center',
     label: 'Project 012 / 2023',
     location: 'Commercial / Singapore',
     bg: 'linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.65) 100%), url("/arch-2.jpg") center/cover no-repeat',
+    heroImage: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1600',
     placeholder: 'linear-gradient(135deg, var(--surface-hi) 0%, var(--surface) 60%, var(--surface-hi) 100%)',
+    description: 'Designed as a vertical ecosystem for modern business, the Summit Corporate Center integrates biophilic design with cutting-edge structural engineering. It serves as a landmark of sustainability and technological innovation in the heart of Singapore.',
+    specifications: [
+      { label: 'Type', value: 'Commercial' },
+      { label: 'Area', value: '120,000 Sqft' },
+      { label: 'Location', value: 'Singapore' },
+      { label: 'Status', value: 'In-Use' }
+    ],
+    gallery: [
+      'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1600',
+      'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1600',
+      'https://images.unsplash.com/photo-1542314831-c6a4d14cd22b?q=80&w=1600'
+    ]
+  },
+  {
+    id: 'vellum-residences',
+    title: 'Vellum Residences',
+    label: 'Project 088 / 2021',
+    location: 'Residential / Mumbai',
+    bg: 'url(https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1600) center/cover no-repeat',
+    heroImage: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1600',
+    placeholder: 'linear-gradient(135deg, #222 0%, #000 100%)',
+    description: 'Vellum Residences is an exploration of raw materiality, where concrete meets the warmth of tropical light. The project redefines the high-density luxury living with private terraced gardens and adaptive ventilation systems.',
+    specifications: [
+      { label: 'Type', value: 'Residential' },
+      { label: 'Area', value: '62,000 Sqft' },
+      { label: 'Location', value: 'Mumbai, IN' },
+      { label: 'Status', value: 'Completed' }
+    ],
+    gallery: [
+      'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=1600',
+      'https://images.unsplash.com/photo-1600573472591-ee6b68d14c68?q=80&w=1600',
+      'https://images.unsplash.com/photo-1600121848594-d8644e57abab?q=80&w=1600'
+    ]
+  },
+  {
+    id: 'lumix-tower',
+    title: 'Lumix IT Tower',
+    label: 'Project 045 / 2024',
+    location: 'Commercial / Kochi',
+    bg: 'url(https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1600) center/cover no-repeat',
+    heroImage: 'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1600',
+    placeholder: 'linear-gradient(135deg, #111 0%, #333 100%)',
+    description: 'A monument to modern productivity, the Lumix IT Tower features a kinetic glass facade that regulates internal temperatures based on sun position. It is designed to be the digital heartbeat of the emerging smart-city infrastructure.',
+    specifications: [
+      { label: 'Type', value: 'IT / Commercial' },
+      { label: 'Area', value: '250,000 Sqft' },
+      { label: 'Location', value: 'Kochi, IN' },
+      { label: 'Status', value: 'Handover' }
+    ],
+    gallery: [
+      'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1600',
+      'https://images.unsplash.com/photo-1542314831-c6a4d14cd22b?q=80&w=1600',
+      'https://images.unsplash.com/photo-1497366754035-f200968a6e72?q=80&w=1600'
+    ]
+  },
+  {
+    id: 'aether-pavilion',
+    title: 'Aether Pavilion',
+    label: 'Project 009 / 2020',
+    location: 'Cultural / Dubai',
+    bg: 'url(https://images.unsplash.com/photo-1510641041908-662484694409?q=80&w=1600) center/cover no-repeat',
+    heroImage: 'https://images.unsplash.com/photo-1510641041908-662484694409?q=80&w=1600',
+    placeholder: 'linear-gradient(135deg, #000 0%, #1a1a1a 100%)',
+    description: 'The Aether Pavilion is a philosophical exercise in light and shadow. Serving as an art-center, its floating steel structures and vast open-air void spaces create a sanctuary for quiet contemplation in the desert.',
+    specifications: [
+      { label: 'Type', value: 'Cultural' },
+      { label: 'Area', value: '18,500 Sqft' },
+      { label: 'Location', value: 'Dubai, UAE' },
+      { label: 'Status', value: 'Awarded' }
+    ],
+    gallery: [
+      'https://images.unsplash.com/photo-1510641041908-662484694409?q=80&w=1600',
+      'https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=1600',
+      'https://images.unsplash.com/photo-1497366811353-6870744d04b2?q=80&w=1600'
+    ]
   },
 ];
 
