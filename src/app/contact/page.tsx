@@ -231,7 +231,7 @@ export default function Contact() {
                       animate={{ opacity: 1, y: 0 }}
                       style={{ textAlign: 'center', padding: '4rem 0' }}
                     >
-                      <h2 style={{ fontFamily: 'var(--font-inter)', fontSize: '2.5rem', fontWeight: 900, textTransform: 'uppercase' }}>Recieved.</h2>
+                      <h2 style={{ fontFamily: 'var(--font-inter)', fontSize: '2.5rem', fontWeight: 900, textTransform: 'uppercase' }}>Received.</h2>
                       <p style={{ marginTop: '1rem', opacity: 0.5 }}>Expect a callback within 24 hours.</p>
                       <button onClick={() => setFormState('idle')} style={{ marginTop: '3rem', background: 'none', border: '1px solid rgba(0,0,0,0.1)', color: '#000', padding: '1rem 2rem', cursor: 'pointer', fontSize: '0.6rem', fontWeight: 800, textTransform: 'uppercase' }}>Send Another</button>
                     </motion.div>
