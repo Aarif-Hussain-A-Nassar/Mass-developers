@@ -16,7 +16,7 @@ function MagneticCTA({ href, children }: { href: string; children: React.ReactNo
     const { left, top } = ref.current.getBoundingClientRect();
     const x = e.clientX - (left + ref.current.offsetWidth / 2);
     const y = e.clientY - (top + ref.current.offsetHeight / 2);
-    setPosition({ x: x * 0.15, y: y * 0.15 });
+    setPosition({ x: x * 0.1, y: y * 0.1 });
   };
 
   const reset = () => setPosition({ x: 0, y: 0 });
@@ -27,21 +27,21 @@ function MagneticCTA({ href, children }: { href: string; children: React.ReactNo
       onMouseMove={handleMouse}
       onMouseLeave={reset}
       animate={{ x: position.x, y: position.y }}
-      transition={{ type: 'spring', stiffness: 150, damping: 15, mass: 0.1 }}
+      transition={{ type: 'spring', stiffness: 150, damping: 20, mass: 0.1 }}
     >
-      <Link
+      <Link 
         href={href}
         className="innovative-btn"
         style={{
           display: 'inline-flex',
           alignItems: 'center',
-          padding: 'clamp(1rem, 2vw, 1.4rem) clamp(2rem, 4vw, 3.5rem)',
+          padding: '1.25rem 2.8rem',
           background: '#ffffff',
           color: '#000000',
-          fontSize: 'clamp(0.6rem, 1vw, 0.7rem)',
+          fontSize: '0.65rem',
           fontWeight: 950,
           textTransform: 'uppercase',
-          letterSpacing: '0.4em',
+          letterSpacing: '0.42em',
           textDecoration: 'none',
           position: 'relative',
           overflow: 'hidden'
@@ -58,78 +58,51 @@ export default function Projects() {
   const [active, setActive] = useState(0);
 
   return (
-    <section id="projects" style={{ background: '#0a0a0a', padding: 'clamp(4rem, 12vw, 10rem) 0', overflow: 'hidden' }}>
+    <section id="projects" style={{ background: '#0a0a0a', padding: 'clamp(4rem, 15vw, 12rem) 0 0 0', position: 'relative', overflow: 'hidden' }}>
       <div className="container">
         <div className="projects-grid">
-
-          {/* Left Side: Immersive Image Gallery */}
-          <div className="projects-image-side">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={active}
-                initial={{ opacity: 0, scale: 1.05 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.98 }}
-                transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-                style={{
-                  position: 'absolute',
-                  inset: 0,
-                }}
-              >
-                <img
-                  src={PROJECTS[active].heroImage}
-                  alt={PROJECTS[active].title}
-                  style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top' }}
-                />
-              </motion.div>
-            </AnimatePresence>
-
-            <div className="project-ghost-label">
-              PROJECT.0{active + 1}
-            </div>
-          </div>
-
-          {/* Right Side: Content Slate */}
-          <div className="projects-content-side">
+           
+           {/* Right Side: Content Slate (Placed first on mobile) */}
+           <div className="projects-content-side">
             <FadeIn>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: 'clamp(2rem, 5vw, 4rem)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '3rem' }}>
                 <div style={{ width: '40px', height: '1px', background: 'rgba(255,255,255,0.15)' }} />
-                <span style={{ fontSize: '0.6rem', fontWeight: 900, color: 'rgba(255,255,255,0.3)', textTransform: 'uppercase', letterSpacing: '0.5em' }}>WORK / ARCHIVE / 03</span>
+                <span style={{ fontSize: '0.6rem', fontWeight: 900, color: 'rgba(255,255,255,0.25)', textTransform: 'uppercase', letterSpacing: '0.5em' }}>WORK / 2.0</span>
               </div>
             </FadeIn>
 
             <AnimatePresence mode="wait">
               <motion.div
                 key={active}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -30 }}
-                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                exit={{ opacity: 0, y: -15 }}
+                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
               >
-                <h2 style={{
-                  fontFamily: 'var(--font-inter)',
-                  fontSize: 'clamp(2.5rem, 6vw, 4.8rem)',
-                  fontWeight: 950,
-                  color: '#ffffff',
-                  lineHeight: 0.9,
-                  textTransform: 'uppercase',
+                <h2 style={{ 
+                  fontFamily: 'var(--font-inter)', 
+                  fontSize: 'clamp(2.5rem, 7vw, 5rem)', 
+                  fontWeight: 950, 
+                  color: '#ffffff', 
+                  lineHeight: 0.85, 
+                  textTransform: 'uppercase', 
                   letterSpacing: '-0.04em',
                   marginBottom: '2.5rem'
                 }}>
                   {PROJECTS[active].title}
                 </h2>
-
+                
                 <div className="project-highlight-specs">
-                  {PROJECTS[active].specifications?.slice(0, 2).map((spec: any, i: number) => (
-                    <div key={i}>
-                      <span style={{ display: 'block', fontSize: '0.55rem', color: 'rgba(255,255,255,0.3)', fontWeight: 800, textTransform: 'uppercase', marginBottom: '0.5rem' }}>{spec.label}</span>
-                      <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#fff' }}>{spec.value}</span>
-                    </div>
-                  ))}
+                   {PROJECTS[active].specifications?.slice(0, 2).map((spec: any, i: number) => (
+                      <div key={i}>
+                        <span style={{ display: 'block', fontSize: '0.52rem', color: 'rgba(255,255,255,0.3)', fontWeight: 800, textTransform: 'uppercase', marginBottom: '0.6rem' }}>{spec.label}</span>
+                        <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#fff' }}>{spec.value}</span>
+                      </div>
+                   ))}
                 </div>
 
                 <MagneticCTA href={`/projects/${PROJECTS[active].id}`}>
-                  Explore Detail
+                  Explore Architectural Vision
                 </MagneticCTA>
               </motion.div>
             </AnimatePresence>
@@ -149,30 +122,57 @@ export default function Projects() {
             </div>
           </div>
 
+          {/* Left Side: Immersive Image Gallery (Full bleed on mobile) */}
+          <div className="projects-image-side">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={active}
+                initial={{ opacity: 0, scale: 1 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 1 }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                style={{
+                  position: 'absolute',
+                  inset: 0,
+                }}
+              >
+                <img 
+                  src={PROJECTS[active].heroImage} 
+                  alt={PROJECTS[active].title} 
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center center' }}
+                />
+              </motion.div>
+            </AnimatePresence>
+            
+            <div className="project-ghost-label">
+              MASS.{active + 1}
+            </div>
+          </div>
+
         </div>
       </div>
 
       <style jsx>{`
         .projects-grid {
           display: grid;
-          grid-template-columns: 1.1fr 0.9fr;
-          gap: clamp(3rem, 6vw, 8rem);
+          grid-template-columns: 0.85fr 1.15fr; /* Text left, Image right */
+          gap: clamp(4rem, 10vw, 12rem);
           align-items: center;
-          min-height: 80vh;
+          min-height: 85vh;
         }
 
         .projects-image-side {
           position: relative;
           height: 80vh;
           overflow: hidden;
-          background: #111;
+          background: #000;
         }
 
         .project-ghost-label {
           position: absolute; 
-          top: 2rem; 
-          left: 2rem; 
-          font-size: clamp(4rem, 15vw, 10rem); 
+          bottom: 2rem; 
+          right: 2rem; 
+          font-size: clamp(5rem, 15vw, 12rem); 
           font-weight: 950; 
           color: rgba(255,255,255,0.03); 
           font-family: var(--font-inter);
@@ -183,14 +183,13 @@ export default function Projects() {
 
         .project-highlight-specs {
            display: flex; 
-           gap: 2.5rem; 
-           margin-bottom: clamp(2.5rem, 5vw, 4rem);
+           gap: 3.5rem; 
+           margin-bottom: 4rem;
         }
 
         .innovative-btn:hover {
            background: #000000 !important;
            color: #ffffff !important;
-           outline: 1px solid rgba(255,255,255,0.3);
         }
 
         .btn-gliss {
@@ -207,8 +206,8 @@ export default function Projects() {
 
         .projects-pagination {
            display: flex; 
-           gap: clamp(1rem, 2vw, 1.5rem); 
-           margin-top: clamp(4rem, 8vw, 6rem);
+           gap: 1.5rem; 
+           margin-top: 6rem;
            flex-wrap: wrap;
         }
 
@@ -219,7 +218,7 @@ export default function Projects() {
            padding: 0;
            display: flex;
            flex-direction: column;
-           gap: 0.6rem;
+           gap: 0.8rem;
            opacity: 0.2;
            transition: opacity 0.4s ease;
         }
@@ -230,20 +229,20 @@ export default function Projects() {
 
         .pag-num {
            font-family: var(--font-inter);
-           font-size: 0.7rem;
+           font-size: 0.8rem;
            font-weight: 900;
            color: #fff;
         }
 
         .pag-line {
-           width: 30px;
+           width: 40px;
            height: 2px;
            background: rgba(255,255,255,0.1);
            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .pag-dot.active .pag-line {
-           width: clamp(50px, 10vw, 80px);
+           width: 100px;
            background: #fff;
         }
 
@@ -252,26 +251,23 @@ export default function Projects() {
             grid-template-columns: 1fr;
             gap: 4rem;
           }
+          /* Break container for full bleed on mobile */
           .projects-image-side {
-            height: clamp(500px, 80vh, 800px); /* Increased height for better visibility */
-            width: 100%;
+            width: 100vw;
+            margin-left: calc(-1 * clamp(1.25rem, 5vw, 3rem));
+            height: 65vh;
+            aspect-ratio: 4/5;
           }
-          .projects-content-side {
-             order: -1;
+          .project-ghost-label {
+             bottom: 1rem;
+             right: 1rem;
+             font-size: 6rem;
           }
         }
 
         @media (max-width: 640px) {
-           .projects-image-side {
-              aspect-ratio: 3/4; /* Architectural vertical focus */
-              height: auto;
-           }
            .project-highlight-specs {
-              gap: 2rem;
-           }
-           .project-ghost-label {
-              top: 1rem;
-              left: 1rem;
+              gap: 2.5rem;
            }
         }
       `}</style>

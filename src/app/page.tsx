@@ -30,7 +30,7 @@ export default function Page() {
     <>
       <Navbar />
       <DotNav active={activeDot} />
-      <main>
+      <main className="relative z-10" style={{ background: '#0a0a0a', minHeight: '100vh', overflowX: 'hidden' }}>
         <Hero />
         <Philosophy />
         <Expertise />

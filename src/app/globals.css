@@ -721,23 +721,6 @@ html {
     margin-top: 0 !important;
   }
 
-  /* ── Projects section ── */
-  #projects {
-    height: auto !important;
-    min-height: 80vw !important;
-    aspect-ratio: 3/4;
-  }
-
-  .projects-overlay {
-    left: 1.25rem !important;
-    right: 1.25rem !important;
-    bottom: 2rem !important;
-  }
-
-  .projects-title {
-    font-size: clamp(2rem, 12vw, 4rem) !important;
-  }
-
   /* ── Testimonials ── */
   #testimonials {
     padding: 4rem 0 !important;
