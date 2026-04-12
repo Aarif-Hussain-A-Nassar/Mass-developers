@@ -13,10 +13,10 @@ function MagneticCTA({ href, children }: { href: string; children: React.ReactNo
 
   const handleMouse = (e: React.MouseEvent) => {
     if (!ref.current) return;
-    const { clientX, clientY } = ref.current.getBoundingClientRect();
-    const x = e.clientX - (clientX + ref.current.offsetWidth / 2);
-    const y = e.clientY - (clientY + ref.current.offsetHeight / 2);
-    setPosition({ x: x * 0.2, y: y * 0.2 });
+    const { left, top } = ref.current.getBoundingClientRect();
+    const x = e.clientX - (left + ref.current.offsetWidth / 2);
+    const y = e.clientY - (top + ref.current.offsetHeight / 2);
+    setPosition({ x: x * 0.15, y: y * 0.15 });
   };
 
   const reset = () => setPosition({ x: 0, y: 0 });
