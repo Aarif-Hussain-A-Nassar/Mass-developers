@@ -26,11 +26,11 @@ export default function Contact() {
 
         <div className="contact-layout-grid">
           {/* Left Column: Heading */}
-          <div style={{ marginBottom: '2rem' }}>
+          <div className="contact-heading-box">
             <h2 style={{ 
               fontFamily: 'var(--font-inter)', 
-              fontSize: 'clamp(3.5rem, 8.5vw, 8rem)', 
-              fontWeight: 950, 
+              fontSize: 'clamp(3.5rem, 8.5vw, 7.5rem)', 
+              fontWeight: 900, 
               color: '#000', 
               lineHeight: 0.85, 
               letterSpacing: '-0.04em',
@@ -43,20 +43,20 @@ export default function Contact() {
           </div>
 
           {/* Right Column: CTA */}
-          <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', paddingLeft: 'clamp(0rem, 5vw, 4rem)' }}>
+          <div className="contact-info-box">
             <p style={{
               fontFamily: 'var(--font-manrope)',
-              fontSize: 'clamp(1rem, 1.25vw, 1.15rem)',
+              fontSize: 'clamp(1rem, 1.25vw, 1.1rem)',
               lineHeight: 1.6,
               color: 'rgba(0,0,0,0.5)',
               maxWidth: '460px',
               fontWeight: 500,
-              marginBottom: '3.5rem'
+              marginBottom: '3rem'
             }}>
               Whether it&apos;s a residential masterpiece or a commercial landmark, your vision deserves the highest standards of integrity.
             </p>
 
-            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+            <div className="contact-buttons">
                <motion.a
                  href="/contact"
                  whileHover={{ scale: 1.02, backgroundColor: '#333' }}
@@ -64,15 +64,19 @@ export default function Contact() {
                  style={{
                    background: '#000',
                    color: '#fff',
-                   padding: '1.4rem 3rem',
-                   fontSize: '0.65rem',
+                   padding: 'clamp(1rem, 2vw, 1.4rem) clamp(1.5rem, 3vw, 3rem)',
+                   fontSize: 'clamp(0.55rem, 1vw, 0.65rem)',
                    fontWeight: 900,
                    textTransform: 'uppercase',
                    letterSpacing: '0.2em',
                    textDecoration: 'none',
                    borderRadius: '2px',
-                   display: 'inline-block',
-                   textAlign: 'center'
+                   display: 'flex',
+                   alignItems: 'center',
+                   justifyContent: 'center',
+                   textAlign: 'center',
+                   whiteSpace: 'nowrap',
+                   flex: 1
                  }}
                >
                  Get In Touch
@@ -84,16 +88,20 @@ export default function Contact() {
                  style={{
                    background: 'transparent',
                    color: '#000',
-                   padding: '1.4rem 3rem',
-                   fontSize: '0.65rem',
+                   padding: 'clamp(1rem, 2vw, 1.4rem) clamp(1.5rem, 3vw, 3rem)',
+                   fontSize: 'clamp(0.55rem, 1vw, 0.65rem)',
                    fontWeight: 900,
                    textTransform: 'uppercase',
                    letterSpacing: '0.2em',
                    border: '1px solid rgba(0,0,0,0.15)',
                    textDecoration: 'none',
                    borderRadius: '2px',
-                   display: 'inline-block',
+                   display: 'flex',
+                   alignItems: 'center',
+                   justifyContent: 'center',
                    textAlign: 'center',
+                   whiteSpace: 'nowrap',
+                   flex: 1,
                    transition: 'all 0.3s ease'
                  }}
                >
@@ -107,17 +115,41 @@ export default function Contact() {
       <style jsx>{`
         .contact-layout-grid {
           display: grid;
-          grid-template-columns: 1.1fr 0.9fr;
+          grid-template-columns: 1.15fr 0.85fr;
           gap: 4rem;
           align-items: center;
         }
 
-        @media (max-width: 900px) {
-          .contact-layout-grid {
-            grid-template-columns: 1fr;
-            gap: 2rem;
-          }
-          div { padding-left: 0 !important; }
+        .contact-buttons {
+          display: flex;
+          gap: 1rem;
+          width: 100%;
+          max-width: 600px;
+        }
+
+        @media (max-width: 1024px) {
+           .contact-layout-grid {
+              grid-template-columns: 1fr;
+              gap: 3rem;
+           }
+           .contact-info-box {
+              padding-left: 0 !important;
+           }
+        }
+
+        @media (max-width: 640px) {
+           .contact-buttons {
+              gap: 0.75rem;
+           }
+           .contact-heading-box {
+              margin-bottom: 0.5rem;
+           }
+        }
+
+        @media (max-width: 480px) {
+           .contact-buttons {
+              gap: 0.5rem;
+           }
         }
       `}</style>
     </section>
