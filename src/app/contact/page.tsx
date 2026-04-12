@@ -58,6 +58,7 @@ function MagneticButton({ children, className, style, ...props }: any) {
       onMouseLeave={reset}
       animate={{ x: position.x, y: position.y }}
       transition={{ type: 'spring', stiffness: 150, damping: 15, mass: 0.1 }}
+      style={{ width: '100%' }}
     >
       <motion.button {...props} className={className} style={{ ...style }}>
         {children}
@@ -137,10 +138,14 @@ export default function Contact() {
           background: 'rgba(255,255,255,0.95)',
           backdropFilter: 'blur(20px)',
           borderBottom: '1px solid rgba(0,0,0,0.06)',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          padding: '0 1rem'
         }}
       >
-        <a href="/" className="nav-logo" style={{ marginLeft: '1.5rem' }}>
-          <img src="/logo.png" alt="MASS Logo" style={{ height: '75px', mixBlendMode: 'multiply' }} />
+        <a href="/" className="nav-logo">
+          <img src="/logo.png" alt="MASS Logo" style={{ height: 'clamp(50px, 10vw, 75px)', mixBlendMode: 'multiply' }} />
         </a>
         <motion.a
           href="/"
@@ -150,25 +155,27 @@ export default function Contact() {
           style={{
             color: '#000',
             borderColor: 'rgba(0,0,0,0.3)',
-            marginRight: '1.5rem',
             backgroundColor: 'rgba(0,0,0,0.05)',
             backdropFilter: 'blur(12px)',
+            fontSize: '0.6rem',
+            padding: '0.6rem 1.2rem'
           }}
         >
-          ← Back to Home
+          ← Home
         </motion.a>
       </nav>
 
-      <main style={{ background: '#ffffff', color: '#000000', minHeight: '100vh', paddingTop: '10rem' }}>
+      <main style={{ background: '#ffffff', color: '#000000', minHeight: '100vh', paddingTop: 'clamp(8rem, 20vw, 12rem)' }}>
         <div className="container">
           <FadeIn>
-            <div className="section-eyebrow" style={{ color: 'rgba(0,0,0,0.3)', borderLeft: '2px solid #000', paddingLeft: '1rem' }}>
-              <span style={{ color: '#000' }}>Connect / 001</span>
+            <div className="section-eyebrow" style={{ color: 'rgba(0,0,0,0.3)', borderLeft: '2px solid #000', paddingLeft: '1rem', marginBottom: '2rem' }}>
+              <span style={{ color: '#000', fontSize: '0.65rem', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.2em' }}>Connect / 001</span>
             </div>
             <h1
+              className="contact-title"
               style={{
                 fontFamily: 'var(--font-inter)',
-                fontSize: 'clamp(2.5rem, 8vw, 7.5rem)',
+                fontSize: 'clamp(3rem, 10vw, 7.5rem)',
                 fontWeight: 900,
                 lineHeight: 0.85,
                 textTransform: 'uppercase',
@@ -181,38 +188,35 @@ export default function Contact() {
             </h1>
           </FadeIn>
 
-          <div
-            className="grid-2-col"
-            style={{ gap: '6rem', marginBottom: '8rem', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1.2fr)' }}
-          >
+          <div className="contact-main-grid">
             {/* Contact Information */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '3rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '4rem' }}>
               <FadeIn delay={0.1}>
-                <div style={{ display: 'grid', gap: '2rem' }}>
+                <div style={{ display: 'grid', gap: '3rem' }}>
                   <div style={{ borderLeft: '1px solid #ddd', paddingLeft: '1.5rem' }}>
                     <h3 style={{ fontSize: '0.65rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.2em', color: '#888', marginBottom: '1rem' }}>Call Us</h3>
-                    <p style={{ fontSize: '1.25rem', fontWeight: 700, fontFamily: 'var(--font-inter)' }}>+91 70255 76777</p>
-                    <p style={{ fontSize: '1.25rem', fontWeight: 700, fontFamily: 'var(--font-inter)', opacity: 0.4 }}>+91 80892 48246</p>
+                    <p style={{ fontSize: 'clamp(1.1rem, 2vw, 1.4rem)', fontWeight: 700, fontFamily: 'var(--font-inter)' }}>+91 70255 76777</p>
+                    <p style={{ fontSize: 'clamp(1.1rem, 2vw, 1.4rem)', fontWeight: 700, fontFamily: 'var(--font-inter)', opacity: 0.4 }}>+91 80892 48246</p>
                   </div>
                   <div style={{ borderLeft: '1px solid #ddd', paddingLeft: '1.5rem' }}>
                     <h3 style={{ fontSize: '0.65rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.2em', color: '#888', marginBottom: '1rem' }}>Mail Us</h3>
-                    <p style={{ fontSize: '1.1rem', fontWeight: 700, fontFamily: 'var(--font-inter)' }}>project@massdevelopers.in</p>
-                    <p style={{ fontSize: '1.1rem', fontWeight: 700, fontFamily: 'var(--font-inter)', opacity: 0.4 }}>massdevelopers@outlook.com</p>
+                    <p style={{ fontSize: 'clamp(1rem, 1.8vw, 1.2rem)', fontWeight: 700, fontFamily: 'var(--font-inter)', wordBreak: 'break-all' }}>project@massdevelopers.in</p>
+                    <p style={{ fontSize: 'clamp(1rem, 1.8vw, 1.2rem)', fontWeight: 700, fontFamily: 'var(--font-inter)', opacity: 0.4, wordBreak: 'break-all' }}>massdevelopers@outlook.com</p>
                   </div>
                 </div>
               </FadeIn>
 
               {/* Offices */}
               <FadeIn delay={0.25} direction="left">
-                <div style={{ padding: '3.5rem', background: '#f8f8f8', border: '1px solid #eee' }}>
-                  <h3 style={{ fontFamily: 'var(--font-inter)', fontSize: '0.75rem', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.2em', marginBottom: '2rem' }}>Office Directory</h3>
+                <div className="office-directory-box">
+                  <h3 style={{ fontFamily: 'var(--font-inter)', fontSize: '0.75rem', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.2em', marginBottom: '2.5rem' }}>Office Directory</h3>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '3rem' }}>
                     <div>
-                      <span style={{ fontSize: '0.6rem', fontWeight: 800, color: '#aaa', textTransform: 'uppercase', display: 'block', marginBottom: '0.5rem' }}>Registered Base</span>
+                      <span style={{ fontSize: '0.6rem', fontWeight: 800, color: '#aaa', textTransform: 'uppercase', display: 'block', marginBottom: '0.8rem' }}>Registered Base</span>
                       <p style={{ fontSize: '0.9rem', lineHeight: 1.6, fontWeight: 600 }}>46/1169- A1, Madappat Road, Chalikavattom,<br />Vennala PO, Ernakulam, 682028</p>
                     </div>
                     <div>
-                      <span style={{ fontSize: '0.6rem', fontWeight: 800, color: '#aaa', textTransform: 'uppercase', display: 'block', marginBottom: '0.5rem' }}>Branch Base</span>
+                      <span style={{ fontSize: '0.6rem', fontWeight: 800, color: '#aaa', textTransform: 'uppercase', display: 'block', marginBottom: '0.8rem' }}>Branch Base</span>
                       <p style={{ fontSize: '0.9rem', lineHeight: 1.6, fontWeight: 600 }}>XI/139, KD Tower, Vaduthala,<br />Nadvath Nagar PO, Aroor - 688535</p>
                     </div>
                   </div>
@@ -222,7 +226,7 @@ export default function Contact() {
 
             {/* Form */}
             <FadeIn delay={0.2}>
-              <div style={{ background: '#fcfcfc', color: '#000', padding: 'clamp(2rem, 5vw, 5rem)', position: 'relative', overflow: 'hidden', border: '1px solid #eee' }}>
+              <div className="contact-form-container">
                 <AnimatePresence mode="wait">
                   {formState === 'sent' ? (
                     <motion.div
@@ -239,7 +243,7 @@ export default function Contact() {
                     <motion.form key="form" exit={{ opacity: 0, y: -20 }} onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '3rem' }}>
                       <p style={{ fontSize: '0.7rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.2em', opacity: 0.4 }}>Send an Inquiry</p>
                       <FloatingInput label="Your Full Name" required />
-                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
+                      <div className="form-row-grid">
                         <FloatingInput label="Phone Number" type="tel" required />
                         <FloatingInput label="Email Address" type="email" required />
                       </div>
@@ -248,8 +252,8 @@ export default function Contact() {
                          <textarea required placeholder="TELL US ABOUT YOUR VISION" style={{ width: '100%', background: 'none', border: 'none', borderBottom: '1px solid #ddd', padding: '1rem 0', fontFamily: 'var(--font-manrope)', fontSize: '1rem', fontWeight: 600, outline: 'none', color: '#000', resize: 'none' }} rows={4} />
                       </div>
                       
-                      <div style={{ marginTop: '1rem' }}>
-                        <MagneticButton type="submit" style={{ width: '100%', padding: '1.8rem', background: '#000', color: '#fff', border: 'none', fontFamily: 'var(--font-inter)', fontWeight: 900, fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.3em', cursor: 'pointer' }}>
+                      <div style={{ marginTop: '1rem', width: '100%' }}>
+                        <MagneticButton type="submit" style={{ width: '100%', padding: '1.8rem 1rem', background: '#000', color: '#fff', border: 'none', fontFamily: 'var(--font-inter)', fontWeight: 900, fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.3em', cursor: 'pointer' }}>
                           Initialize Project
                         </MagneticButton>
                       </div>
@@ -265,7 +269,7 @@ export default function Contact() {
         </div>
 
         {/* Dynamic Map Visualization */}
-        <div style={{ height: '50vh', background: '#f0f0f0', position: 'relative', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div style={{ height: '50vh', background: '#f8f8f8', position: 'relative', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <motion.div
             animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.4, 0.3] }}
             transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
@@ -276,10 +280,64 @@ export default function Contact() {
             transition={{ duration: 15, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
             style={{ width: '80vw', height: '80vw', borderRadius: '50%', border: '1px solid #ddd', position: 'absolute' }}
           />
-          <h2 style={{ fontFamily: 'var(--font-inter)', fontSize: '1.5rem', fontWeight: 900, textTransform: 'uppercase', opacity: 0.1, letterSpacing: '0.5em' }}>Foundations Everywhere</h2>
+          <h2 style={{ fontFamily: 'var(--font-inter)', fontSize: 'clamp(1rem, 2.5vw, 1.5rem)', fontWeight: 900, textTransform: 'uppercase', opacity: 0.1, letterSpacing: '0.5em', textAlign: 'center', padding: '0 2rem' }}>Foundations Everywhere</h2>
         </div>
       </main>
       <Footer />
+
+      <style jsx>{`
+        .contact-main-grid {
+          display: grid;
+          grid-template-columns: 1fr 1.2fr;
+          gap: 6rem;
+          margin-bottom: 8rem;
+        }
+
+        .office-directory-box {
+          padding: 4rem;
+          background: #f8f8f8;
+          border: 1px solid #eee;
+        }
+
+        .contact-form-container {
+          background: #fcfcfc;
+          color: #000;
+          padding: clamp(2rem, 5vw, 5rem);
+          position: relative;
+          overflow: hidden;
+          border: 1px solid #eee;
+        }
+
+        .form-row-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 2rem;
+        }
+
+        @media (max-width: 1024px) {
+          .contact-main-grid {
+            grid-template-columns: 1fr;
+            gap: 4rem;
+            margin-bottom: 6rem;
+          }
+          .office-directory-box {
+             padding: 3rem 2rem;
+          }
+        }
+
+        @media (max-width: 640px) {
+          .form-row-grid {
+            grid-template-columns: 1fr;
+            gap: 3rem;
+          }
+          .contact-form-container {
+            padding: 2.5rem 1.5rem;
+          }
+          .contact-title {
+             margin-bottom: 3.5rem !important;
+          }
+        }
+      `}</style>
     </>
   );
 }
