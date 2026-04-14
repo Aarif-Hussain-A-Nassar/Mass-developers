@@ -878,7 +878,7 @@ export default function About() {
                 extraordinary.
               </h2>
               <motion.a
-                href="/#contact"
+                href="/contact"
                 className="btn-ghost"
                 style={{ display: 'inline-flex' }}
                 whileHover={{ scale: 1.05 }}
