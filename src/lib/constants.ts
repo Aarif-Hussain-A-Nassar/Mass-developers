@@ -112,6 +112,7 @@ export const PROJECTS = [
       '/siyad-15.jpeg',
     ]
   },
+
   {
     id: 'summit-corporate-center',
     title: 'Summit Corporate Center',
