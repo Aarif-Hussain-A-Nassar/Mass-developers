@@ -150,15 +150,15 @@ export const TESTIMONIALS = [
 export const JOURNAL = [
   {
     tag: 'Journal / 01',
-    title: 'The Ontology of Concrete',
-    excerpt: 'An exploration into the Brutalist heritage and its modern application to the digital-physical divide. How materiality speaks in an age of simulation.',
-    date: '2024 / Mar',
+    title: 'Maximizing Space: The 2.5 Cent Challenge',
+    excerpt: 'Detailed insights on how we engineered Mr. Siyad’s 4BHK residence on a compact plot in Fort Kochi without compromising on light or luxury.',
+    date: '2024 / Apr',
   },
   {
     tag: 'Journal / 02',
-    title: 'Void as Material',
-    excerpt: 'How negative space becomes the most powerful architectural element. A study of light, shadow, and the geometry of absence.',
-    date: '2024 / Jan',
+    title: 'The Vertical Landscape: Choice Paradise Interiors',
+    excerpt: 'Design strategies used for South India’s tallest residential tower, focusing on wind-dynamics and panoramic spatial flow.',
+    date: '2024 / Feb',
   },
 ];
 
