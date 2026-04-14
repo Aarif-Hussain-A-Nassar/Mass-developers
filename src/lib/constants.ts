@@ -80,24 +80,36 @@ export const PROJECTS = [
     ]
   },
   {
-    id: 'the-obsidian-loft',
-    title: 'The Obsidian Loft',
-    label: 'Project 002 / 2022',
-    location: 'Residential / Los Angeles',
-    bg: 'linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.65) 100%), url("/arch-1.jpg") center/cover no-repeat',
-    heroImage: '/arch-1.jpg',
-    placeholder: 'linear-gradient(135deg, var(--surface) 0%, var(--surface-hi) 60%, var(--surface) 100%)',
-    description: 'A study in monochromatic minimalism, the Obsidian Loft redefines urban living through its brutalist yet refined geometry. The project focuses on light-play against dark textures, creating a living space that feels both grounded and ethereal.',
+    id: 'siyad-residence',
+    title: "Mr. Siyad's Residence",
+    label: 'Project 002 / 2024',
+    location: 'Residential / Fort Kochi',
+    bg: 'url("/siyad-1.jpeg") center/cover no-repeat',
+    heroImage: '/siyad-1.jpeg',
+    placeholder: 'linear-gradient(135deg, #111 0%, #333 100%)',
+    description: 'A contemporary 4BHK home designed for Mr. Siyad at Fort Kochi, Ernakulam. Built on a compact 2.5 cents plot with a total area of 1442 sqft, this home showcases clean lines, modern detailing, and efficient planning—a perfect blend of style, comfort, and smart space utilization.',
     specifications: [
-      { label: 'Type', value: 'Residential' },
-      { label: 'Area', value: '4,500 Sqft' },
-      { label: 'Location', value: 'California, US' },
-      { label: 'Status', value: 'Completed' }
+      { label: 'Client', value: 'Mr. Siyad' },
+      { label: 'Area', value: '1442 Sqft (2.5 cents)' },
+      { label: 'Location', value: 'Fort Kochi, Ernakulam' },
+      { label: 'Status', value: 'Designed' }
     ],
     gallery: [
-      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1600',
-      'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=1600',
-      'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=1600'
+      '/siyad-1.jpeg',
+      '/siyad-2.jpeg',
+      '/siyad-3.jpeg',
+      '/siyad-4.jpeg',
+      '/siyad-5.jpeg',
+      '/siyad-6.jpeg',
+      '/siyad-7.jpeg',
+      '/siyad-8.jpeg',
+      '/siyad-9.jpeg',
+      '/siyad-10.jpeg',
+      '/siyad-11.jpeg',
+      '/siyad-12.jpeg',
+      '/siyad-13.jpeg',
+      '/siyad-14.jpeg',
+      '/siyad-15.jpeg',
     ]
   },
   {
@@ -182,27 +194,6 @@ export const PROJECTS = [
       'https://images.unsplash.com/photo-1510641041908-662484694409?q=80&w=1600',
       'https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=1600',
       'https://images.unsplash.com/photo-1497366811353-6870744d04b2?q=80&w=1600'
-    ]
-  },
-  {
-    id: 'siyad-residence',
-    title: "Mr. Siyad's Residence",
-    label: 'Project 007 / 2024',
-    location: 'Residential / Fort Kochi',
-    bg: 'url(https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1600) center/cover no-repeat',
-    heroImage: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1600',
-    placeholder: 'linear-gradient(135deg, #111 0%, #333 100%)',
-    description: 'A contemporary 4BHK home designed for Mr. Siyad at Fort Kochi, Ernakulam. Built on a compact 2.5 cents plot with a total area of 1442 sqft, this home showcases clean lines, modern detailing, and efficient planning—a perfect blend of style, comfort, and smart space utilization.',
-    specifications: [
-      { label: 'Client', value: 'Mr. Siyad' },
-      { label: 'Area', value: '1442 Sqft (2.5 cents)' },
-      { label: 'Location', value: 'Fort Kochi, Ernakulam' },
-      { label: 'Status', value: 'Designed' }
-    ],
-    gallery: [
-      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1600',
-      'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=1600',
-      'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=1600'
     ]
   },
 ];
