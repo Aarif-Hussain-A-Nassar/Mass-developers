@@ -503,10 +503,11 @@ export default function About() {
                 gap: '2rem',
               }}
             >
-              <AnimatedStat value={new Date().getFullYear() - 2018} suffix="+" label="Years of Excellence" />
-              <AnimatedStat value={450} suffix="+" label="Projects Delivered" />
-              <AnimatedStat value={12000} suffix="+" label="Happy Families" />
-              <AnimatedStat value={18} suffix="" label="Cities Active" />
+              <AnimatedStat value={new Date().getFullYear() - 2019} suffix="+" label="Years of Excellence" />
+              <AnimatedStat value={150} suffix="+" label="Projects Delivered" />
+              <AnimatedStat value={1000} suffix="+" label="Happy Families" />
+              <AnimatedStat value={2} suffix="" label="Offices Across Kerala" />
+              <AnimatedStat value={50} suffix="+" label="Full-Time Employees" />
             </div>
           </div>
         </div>
@@ -602,7 +603,7 @@ export default function About() {
                           color: 'var(--white)',
                         }}
                       >
-                        {new Date().getFullYear() - 2018}
+                        {new Date().getFullYear() - 2019}
                       </span>
                       <span
                         style={{
@@ -651,7 +652,7 @@ export default function About() {
                     >
                       Est.
                       <br />
-                      2018
+                      2019
                     </span>
                   </motion.div>
                 </div>
