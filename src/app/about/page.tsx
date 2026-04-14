@@ -356,6 +356,30 @@ export default function About() {
 
   const [activeTab, setActiveTab] = useState<'vision' | 'mission'>('vision');
 
+  /* URL Hash Sync logic */
+  useEffect(() => {
+    const sections = document.querySelectorAll('section[id], div[id]');
+    const options = {
+      root: null,
+      rootMargin: '-40% 0px -40% 0px',
+      threshold: 0
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('id');
+          if (id) {
+            window.history.replaceState(null, '', `#${id}`);
+          }
+        }
+      });
+    }, options);
+
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
+
   const values = [
     {
       title: 'Integrity',
@@ -428,7 +452,8 @@ export default function About() {
       <main style={{ background: 'var(--bg)', color: 'var(--white)', minHeight: '100vh' }}>
 
         {/* ══════════ HERO ══════════ */}
-        <div
+        <section
+          id="hero"
           ref={heroRef}
           style={{
             position: 'relative',
@@ -502,10 +527,11 @@ export default function About() {
               </p>
             </FadeIn>
           </div>
-        </div>
+        </section>
 
         {/* ══════════ STATS BAR ══════════ */}
-        <div
+        <section
+          id="stats"
           style={{
             borderTop: '1px solid var(--white-06)',
             borderBottom: '1px solid var(--white-06)',
@@ -528,7 +554,7 @@ export default function About() {
               <AnimatedStat value={50} suffix="+" label="Full-Time Employees" />
             </div>
           </div>
-        </div>
+        </section>
 
         {/* ══════════ THE STORY ══════════ */}
         <Story />
@@ -536,7 +562,8 @@ export default function About() {
 
 
         {/* ══════════ VISION & MISSION TABS ══════════ */}
-        <div
+        <section
+          id="direction"
           style={{
             padding: '6rem 0',
             background: 'var(--surface)',
@@ -740,10 +767,10 @@ export default function About() {
               )}
             </AnimatePresence>
           </div>
-        </div>
+        </section>
 
         {/* ══════════ VALUES (expandable) ══════════ */}
-        <div style={{ padding: '8rem 0' }}>
+        <section id="values" style={{ padding: '8rem 0' }}>
           <div className="container">
             <FadeIn>
               <div className="section-eyebrow" style={{ marginBottom: '1rem' }}>
@@ -781,10 +808,11 @@ export default function About() {
               </p>
             </FadeIn>
           </div>
-        </div>
+        </section>
 
         {/* ══════════ TEAM ══════════ */}
-        <div
+        <section
+          id="leadership"
           style={{
             padding: '8rem 0',
             background: 'var(--surface)',
@@ -825,10 +853,10 @@ export default function About() {
               ))}
             </div>
           </div>
-        </div>
+        </section>
 
         {/* ══════════ CTA ══════════ */}
-        <div style={{ padding: '8rem 0', textAlign: 'center' }}>
+        <section id="cta" style={{ padding: '8rem 0', textAlign: 'center' }}>
           <div className="container">
             <FadeIn>
               <div className="section-eyebrow" style={{ justifyContent: 'center', marginBottom: '2rem' }}>
@@ -861,7 +889,7 @@ export default function About() {
               </motion.a>
             </FadeIn>
           </div>
-        </div>
+        </section>
       </main>
       <Footer />
     </>

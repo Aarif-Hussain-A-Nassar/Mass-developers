@@ -30,10 +30,13 @@ export default function Page() {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => { 
         if (e.isIntersecting) {
-          setActiveDot(SECTIONS_IDS.indexOf(e.target.id));
+          const index = SECTIONS_IDS.indexOf(e.target.id);
+          setActiveDot(index);
+          // Sync URL hash
+          window.history.replaceState(null, '', `/#${e.target.id}`);
         }
       });
-    }, { threshold: 0.5 });
+    }, { threshold: 0.4 });
 
     SECTIONS_IDS.forEach(id => { 
       const el = document.getElementById(id); 
