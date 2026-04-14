@@ -1,4 +1,4 @@
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• DATA â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+﻿/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• DATA â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
 export const NAV_LINKS = [
   { label: 'Home', href: '#hero' },
@@ -216,16 +216,11 @@ export const PROJECTS = [
 
 export const TESTIMONIALS = [
   {
-    quote: "MASS doesn't just build structures; they sculpt silence and light. Our headquarters is now a physical manifestation of our brand's future.",
-    name: 'Julian Vance',
-    title: 'CEO, Aether Global',
-    poster: 'https://images.unsplash.com/photo-1542314831-c6a4d14cd22b?q=80&w=800&auto=format&fit=crop'
-  },
-  {
-    quote: 'The materiality of their work achieves a level of geological permanence rarely seen today. An absolute standard in modern construction.',
-    name: 'Priya Nair',
-    title: 'Principal, Nair Architecture Review',
-    poster: 'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800&auto=format&fit=crop'
+    quote: "It was our pleasure designing this elegant 3BHK home at Choice Paradise, Tripunithura — South India’s tallest residential tower. A timeless blend of comfort and fine craftsmanship.",
+    name: "Sreejith & Keerthi",
+    title: "Residents, Choice Paradise",
+    poster: "/choice-paradise.webp",
+    videoUrl: "https://kihgreuv2nuypbvt.public.blob.vercel-storage.com/IMG_9793.MP4"
   },
   {
     quote: "Working with MASS Developers was a transformative experience. Their attention to detail and ability to maximize space on my compact plot resulted in a home that exceeds all my expectations.",
