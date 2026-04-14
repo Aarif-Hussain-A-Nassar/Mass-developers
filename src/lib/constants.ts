@@ -184,6 +184,27 @@ export const PROJECTS = [
       'https://images.unsplash.com/photo-1497366811353-6870744d04b2?q=80&w=1600'
     ]
   },
+  {
+    id: 'siyad-residence',
+    title: "Mr. Siyad's Residence",
+    label: 'Project 007 / 2024',
+    location: 'Residential / Fort Kochi',
+    bg: 'url(https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1600) center/cover no-repeat',
+    heroImage: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1600',
+    placeholder: 'linear-gradient(135deg, #111 0%, #333 100%)',
+    description: 'A contemporary 4BHK home designed for Mr. Siyad at Fort Kochi, Ernakulam. Built on a compact 2.5 cents plot with a total area of 1442 sqft, this home showcases clean lines, modern detailing, and efficient planning—a perfect blend of style, comfort, and smart space utilization.',
+    specifications: [
+      { label: 'Client', value: 'Mr. Siyad' },
+      { label: 'Area', value: '1442 Sqft (2.5 cents)' },
+      { label: 'Location', value: 'Fort Kochi, Ernakulam' },
+      { label: 'Status', value: 'Designed' }
+    ],
+    gallery: [
+      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1600',
+      'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=1600',
+      'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=1600'
+    ]
+  },
 ];
 
 export const TESTIMONIALS = [
