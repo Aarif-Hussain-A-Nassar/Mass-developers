@@ -1,4 +1,4 @@
-﻿/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• DATA â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• DATA â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
 export const NAV_LINKS = [
   { label: 'Home', href: '#hero' },
@@ -127,7 +127,30 @@ export const PROJECTS = [
       '/siyad-30.webp',
     ]
   },
-
+  {
+    id: 'jalal-residence',
+    title: "Mr. Jalal's Residence",
+    label: 'Project 003 / 2024',
+    location: 'Residential / Arookutty',
+    bg: 'url("/jalal-1.webp") center/cover no-repeat',
+    heroImage: '/jalal-1.webp',
+    placeholder: 'linear-gradient(135deg, #1a1a1a 0%, #000 100%)',
+    description: 'A high-end 1950 sqft residence designed for Mr. Jalal in Arookutty. This project emphasizes open spatial flow, premium finishes, and a seamless integration with the coastal landscape, reflecting a modern architectural ethos tailored to the unique environment of Kerala.',
+    specifications: [
+      { label: 'Client', value: 'Mr. Jalal' },
+      { label: 'Area', value: '1950 Sqft' },
+      { label: 'Location', value: 'Arookutty, Kerala' },
+      { label: 'Status', value: 'Designed' }
+    ],
+    gallery: [
+      '/jalal-1.webp',
+      '/jalal-2.webp',
+      '/jalal-3.webp',
+      '/jalal-4.webp',
+      '/jalal-5.webp',
+      '/jalal-6.webp',
+    ]
+  },
 ];
 
 export const TESTIMONIALS = [
