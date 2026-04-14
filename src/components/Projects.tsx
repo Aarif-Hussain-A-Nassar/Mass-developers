@@ -29,7 +29,7 @@ function MagneticCTA({ href, children }: { href: string; children: React.ReactNo
       animate={{ x: position.x, y: position.y }}
       transition={{ type: 'spring', stiffness: 150, damping: 20, mass: 0.1 }}
     >
-      <Link 
+      <Link
         href={href}
         className="innovative-btn"
         style={{
@@ -60,10 +60,15 @@ export default function Projects() {
   return (
     <section id="projects" style={{ background: '#0a0a0a', padding: 'clamp(4rem, 15vw, 12rem) 0 0 0', position: 'relative', overflow: 'hidden' }}>
       <div className="container">
+        <FadeIn>
+          <div className="section-eyebrow white-line" >
+            <span style={{ color: '#ffffff' }}>Projects / 003</span>
+          </div>
+        </FadeIn>
         <div className="projects-grid">
-           
-           {/* Left Side: Immersive Image Gallery (Swapped to be first in DOM for mobile ordering) */}
-           <div className="projects-image-side">
+
+          {/* Left Side: Immersive Image Gallery (Swapped to be first in DOM for mobile ordering) */}
+          <div className="projects-image-side">
             <AnimatePresence mode="wait">
               <motion.div
                 key={active}
@@ -76,21 +81,21 @@ export default function Projects() {
                   inset: 0,
                 }}
               >
-                <img 
-                  src={PROJECTS[active].heroImage} 
-                  alt={PROJECTS[active].title} 
+                <img
+                  src={PROJECTS[active].heroImage}
+                  alt={PROJECTS[active].title}
                   style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center center' }}
                 />
               </motion.div>
             </AnimatePresence>
-            
+
             <div className="project-ghost-label">
               MASS.{active + 1}
             </div>
           </div>
 
-           {/* Right Side: Content Slate */}
-           <div className="projects-content-side">
+          {/* Right Side: Content Slate */}
+          <div className="projects-content-side">
             <FadeIn>
               <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '3rem' }}>
                 <div style={{ width: '40px', height: '1px', background: 'rgba(255,255,255,0.15)' }} />
@@ -106,26 +111,26 @@ export default function Projects() {
                 exit={{ opacity: 0, y: -15 }}
                 transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
               >
-                <h2 style={{ 
-                  fontFamily: 'var(--font-inter)', 
-                  fontSize: 'clamp(2.5rem, 6vw, 4.5rem)', 
-                  fontWeight: 950, 
-                  color: '#ffffff', 
-                  lineHeight: 0.85, 
-                  textTransform: 'uppercase', 
+                <h2 style={{
+                  fontFamily: 'var(--font-inter)',
+                  fontSize: 'clamp(2.5rem, 6vw, 4.5rem)',
+                  fontWeight: 950,
+                  color: '#ffffff',
+                  lineHeight: 0.85,
+                  textTransform: 'uppercase',
                   letterSpacing: '-0.04em',
                   marginBottom: '2.5rem'
                 }}>
                   {PROJECTS[active].title}
                 </h2>
-                
+
                 <div className="project-highlight-specs">
-                   {PROJECTS[active].specifications?.slice(0, 2).map((spec: any, i: number) => (
-                      <div key={i}>
-                        <span style={{ display: 'block', fontSize: '0.52rem', color: 'rgba(255,255,255,0.3)', fontWeight: 800, textTransform: 'uppercase', marginBottom: '0.6rem' }}>{spec.label}</span>
-                        <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#fff' }}>{spec.value}</span>
-                      </div>
-                   ))}
+                  {PROJECTS[active].specifications?.slice(0, 2).map((spec: any, i: number) => (
+                    <div key={i}>
+                      <span style={{ display: 'block', fontSize: '0.52rem', color: 'rgba(255,255,255,0.3)', fontWeight: 800, textTransform: 'uppercase', marginBottom: '0.6rem' }}>{spec.label}</span>
+                      <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#fff' }}>{spec.value}</span>
+                    </div>
+                  ))}
                 </div>
 
                 <MagneticCTA href={`/projects/${PROJECTS[active].id}`}>
@@ -153,6 +158,9 @@ export default function Projects() {
       </div>
 
       <style jsx>{`
+        .section-eyebrow.white-line::before {
+          background: rgba(255, 255, 255, 0.3) !important;
+        }
         .projects-grid {
           display: grid;
           grid-template-columns: 1.15fr 0.85fr; /* Swapped columns: Image left, Text right */
