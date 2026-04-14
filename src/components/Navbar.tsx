@@ -49,6 +49,10 @@ export default function Navbar() {
     e.preventDefault();
     setActiveIdx(idx);
     setIsMenuOpen(false);
+    
+    // Update URL hash without jumping
+    window.history.pushState(null, '', href);
+
     if (href === '#hero') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
