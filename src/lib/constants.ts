@@ -68,7 +68,15 @@ export const PROJECTS = [
       '/bektash/bektash4.jpeg',
       '/bektash/bektash5.jpeg',
       '/bektash/bektash7.jpeg',
-      '/bektash/bektash 8.jpeg'
+      '/bektash/bektash 8.jpeg',
+      '/bektash/bektash 3.jpeg',
+      '/bektash/bektash 6.jpeg',
+      '/bektash/bektash 10.jpeg',
+      '/bektash/bektash 9.jpeg',
+      '/bektash/bektash 11.jpeg',
+      '/bektash/bektash 12.jpeg',
+      '/bektash/bektash 13.jpeg',
+      '/bektash/bektash 14.jpeg',
     ]
   },
   {
