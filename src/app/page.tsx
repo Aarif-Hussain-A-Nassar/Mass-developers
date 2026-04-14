@@ -19,10 +19,27 @@ export default function Page() {
   const [activeDot, setActiveDot] = useState(0);
 
   useEffect(() => {
+    // Handle initial scroll to hash if present on mount
+    if (window.location.hash) {
+      setTimeout(() => {
+        const el = document.querySelector(window.location.hash);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 600);
+    }
+
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) setActiveDot(SECTIONS_IDS.indexOf(e.target.id)); });
+      entries.forEach(e => { 
+        if (e.isIntersecting) {
+          setActiveDot(SECTIONS_IDS.indexOf(e.target.id));
+        }
+      });
     }, { threshold: 0.5 });
-    SECTIONS_IDS.forEach(id => { const el = document.getElementById(id); if (el) observer.observe(el); });
+
+    SECTIONS_IDS.forEach(id => { 
+      const el = document.getElementById(id); 
+      if (el) observer.observe(el); 
+    });
+
     return () => observer.disconnect();
   }, []);
 
