@@ -1,6 +1,7 @@
 'use client';
 
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
+import Image from 'next/image';
 import { useRef } from 'react';
 
 export default function MassInterio() {
@@ -55,6 +56,7 @@ export default function MassInterio() {
         
         {/* Left: Asymmetric Image Grid */}
         <div className="image-grid-container" style={{ position: 'relative', height: '80vh' }}>
+
           {/* Main Large Image */}
           <motion.div 
             style={{ 
@@ -67,10 +69,13 @@ export default function MassInterio() {
               zIndex: 1
             }}
           >
-            <img 
-              src="/interio.png" 
+            <Image 
+              src="/interio.webp" 
               alt="Mass Interio Main" 
-              style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+              fill
+              placeholder="blur"
+              blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="
+              style={{ objectFit: 'cover' }} 
             />
           </motion.div>
 
@@ -90,10 +95,13 @@ export default function MassInterio() {
               border: '1px solid rgba(255,255,255,0.1)'
             }}
           >
-            <img 
-              src="/sculptural.png" 
+            <Image 
+              src="/sculptural.webp" 
               alt="Sculptural Detail" 
-              style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+              fill
+              placeholder="blur"
+              blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="
+              style={{ objectFit: 'cover' }} 
             />
           </motion.div>
 
@@ -113,10 +121,13 @@ export default function MassInterio() {
               filter: 'grayscale(100%) brightness(0.7)'
             }}
           >
-            <img 
-              src="/lighting.png" 
+            <Image 
+              src="/lighting.webp" 
               alt="Lighting Detail" 
-              style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+              fill
+              placeholder="blur"
+              blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="
+              style={{ objectFit: 'cover' }} 
             />
           </motion.div>
         </div>

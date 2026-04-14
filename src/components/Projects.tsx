@@ -76,7 +76,7 @@ export default function Projects() {
                 initial={{ opacity: 0, scale: 1 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 1 }}
-                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                 style={{
                   position: 'absolute',
                   inset: 0,
@@ -95,6 +95,27 @@ export default function Projects() {
                 />
               </motion.div>
             </AnimatePresence>
+
+            {/* Preload adjacent images for instant switching */}
+            <div style={{ display: 'none' }}>
+              {PROJECTS.map((proj, i) => {
+                // Preload current +- 1
+                const isAdjacent = Math.abs(i - active) === 1 || (active === 0 && i === PROJECTS.length - 1) || (active === PROJECTS.length - 1 && i === 0);
+                if (isAdjacent) {
+                  return (
+                    <Image
+                      key={i}
+                      src={proj.heroImage}
+                      alt="preload"
+                      width={10}
+                      height={10}
+                      priority={false}
+                    />
+                  );
+                }
+                return null;
+              })}
+            </div>
 
             <div className="project-ghost-label">
               MASS.{active + 1}
