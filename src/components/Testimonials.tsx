@@ -29,7 +29,7 @@ export default function Testimonials() {
           {/* Text Column */}
           <div style={{ position: 'relative' }}>
             <AnimatePresence mode="wait">
-              <motion.div key={active} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.6, ease: EASE }}>
+              <motion.div key={active} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.4, ease: EASE }}>
                 <p className="testimonial-quote" style={{ marginBottom: '2rem', color: '#000000', fontSize: 'clamp(1.2rem, 2.5vw, 1.8rem)' }}>&quot;{TESTIMONIALS[active].quote}&quot;</p>
                 <div>
                   <div style={{ fontFamily: 'var(--font-inter)', fontSize: '1.1rem', fontWeight: 800, color: '#000000', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{TESTIMONIALS[active].name}</div>
@@ -59,7 +59,7 @@ export default function Testimonials() {
           {/* Video Column */}
           <div style={{ position: 'relative', width: '100%', aspectRatio: 'clamp(1/1, 4/5, 4/5)', background: '#000', overflow: 'hidden' }}>
             <AnimatePresence mode="wait">
-              <motion.div key={active} initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 1.05 }} transition={{ duration: 0.8, ease: EASE }} style={{ width: '100%', height: '100%', position: 'absolute', inset: 0 }}>
+              <motion.div key={active} initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 1.05 }} transition={{ duration: 0.4, ease: EASE }} style={{ width: '100%', height: '100%', position: 'absolute', inset: 0 }}>
                 {!isPlaying ? (
                   <>
                     <Image
@@ -102,6 +102,20 @@ export default function Testimonials() {
                 </div>
               </motion.div>
             </AnimatePresence>
+
+            {/* Preload all testimonial posters for instant switching */}
+            <div style={{ display: 'none' }}>
+              {TESTIMONIALS.map((t, i) => (
+                <Image 
+                  key={i} 
+                  src={t.poster} 
+                  alt="preload" 
+                  width={10} 
+                  height={10} 
+                  priority={i === 0}
+                />
+              ))}
+            </div>
           </div>
 
         </div>
