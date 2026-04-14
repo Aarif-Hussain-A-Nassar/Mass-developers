@@ -120,6 +120,24 @@ export default function Projects() {
             <div className="project-ghost-label">
               MASS.{active + 1}
             </div>
+
+            {/* Stage Navigation Arrows (Overlaying Image) */}
+            <div className="stage-nav">
+              <button 
+                onClick={() => setActive((prev) => (prev > 0 ? prev - 1 : PROJECTS.length - 1))}
+                className="stage-btn prev"
+                aria-label="Previous"
+              >
+                ←
+              </button>
+              <button 
+                onClick={() => setActive((prev) => (prev < PROJECTS.length - 1 ? prev + 1 : 0))}
+                className="stage-btn next"
+                aria-label="Next"
+              >
+                →
+              </button>
+            </div>
           </div>
 
           {/* Right Side: Content Slate */}
@@ -127,17 +145,24 @@ export default function Projects() {
             <FadeIn>
               <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '3rem' }}>
                 <div style={{ width: '40px', height: '1px', background: 'rgba(255,255,255,0.15)' }} />
-                <span style={{ fontSize: '0.6rem', fontWeight: 900, color: 'rgba(255,255,255,0.25)', textTransform: 'uppercase', letterSpacing: '0.5em' }}>INDEX / 0{active + 1}</span>
+                <span style={{ fontSize: '0.6rem', fontWeight: 900, color: 'rgba(255,255,255,0.25)', textTransform: 'uppercase', letterSpacing: '0.5em' }}>INDEX / {(active + 1).toString().padStart(2, '0')}</span>
               </div>
             </FadeIn>
 
             <AnimatePresence mode="wait">
               <motion.div
                 key={active}
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -15 }}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
                 transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                drag="x"
+                dragConstraints={{ left: 0, right: 0 }}
+                onDragEnd={(_, info) => {
+                  if (info.offset.x < -50 && active < PROJECTS.length - 1) setActive(active + 1);
+                  if (info.offset.x > 50 && active > 0) setActive(active - 1);
+                }}
+                style={{ cursor: 'grab' }}
               >
                 <h2 style={{
                   fontFamily: 'var(--font-inter)',
@@ -167,7 +192,7 @@ export default function Projects() {
               </motion.div>
             </AnimatePresence>
 
-            {/* Pagination Controls */}
+            {/* Desktop Pagination */}
             <div className="projects-pagination">
               {PROJECTS.map((_, i) => (
                 <button
@@ -175,10 +200,47 @@ export default function Projects() {
                   onClick={() => setActive(i)}
                   className={`pag-dot ${i === active ? 'active' : ''}`}
                 >
-                  <span className="pag-num">0{i + 1}</span>
+                  <span className="pag-num">
+                    {(i + 1).toString().padStart(2, '0')}
+                  </span>
                   <div className="pag-line" />
                 </button>
               ))}
+            </div>
+
+            {/* Mobile Index Number Carousel */}
+            <div className="mobile-index-slider">
+              <div className="slider-nav-wrap">
+                <button 
+                  onClick={() => setActive((prev) => (prev > 0 ? prev - 1 : PROJECTS.length - 1))}
+                  className="slider-btn"
+                  aria-label="Previous Project"
+                >
+                  <span className="btn-icon">←</span>
+                </button>
+
+                <div className="slider-track">
+                  {PROJECTS.map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setActive(i)}
+                      className={`slider-item ${i === active ? 'active' : ''}`}
+                    >
+                      <span className="slider-num">
+                        {(i + 1).toString().padStart(2, '0')}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+
+                <button 
+                  onClick={() => setActive((prev) => (prev < PROJECTS.length - 1 ? prev + 1 : 0))}
+                  className="slider-btn"
+                  aria-label="Next Project"
+                >
+                  <span className="btn-icon">→</span>
+                </button>
+              </div>
             </div>
           </div>
 
@@ -202,6 +264,47 @@ export default function Projects() {
           height: 80vh;
           overflow: hidden;
           background: #000;
+        }
+
+        .stage-nav {
+           position: absolute;
+           top: 50%;
+           left: 0;
+           right: 0;
+           transform: translateY(-50%);
+           display: none; /* Hidden by default (Desktop) */
+           justify-content: space-between;
+           padding: 0 1.5rem;
+           z-index: 10;
+           pointer-events: none;
+        }
+
+        @media (max-width: 1024px) {
+          .stage-nav {
+             display: flex; /* Visible on smaller screens */
+          }
+        }
+
+        .stage-btn {
+           width: 50px;
+           height: 50px;
+           background: #ffffff;
+           color: #000000;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           font-size: 1.2rem;
+           cursor: pointer;
+           pointer-events: auto;
+           transition: all 0.3s ease;
+           box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+           border: none;
+        }
+
+        .stage-btn:hover {
+           background: rgba(255,255,255,0.1);
+           border-color: rgba(255,255,255,0.3);
+           transform: translateY(-50%) scale(1.05);
         }
 
         .project-ghost-label {
@@ -240,18 +343,35 @@ export default function Projects() {
            left: 100%;
         }
 
-        .projects-pagination {
-           display: flex; 
-           gap: 2rem; 
-           margin-top: 6rem;
-           flex-wrap: nowrap;
-           overflow-x: auto;
-           padding-bottom: 1rem;
-           scrollbar-width: none;
+        .mobile-nav-arrows {
+           display: none;
+           gap: 1.5rem;
+           margin-top: 2rem;
         }
 
-        .projects-pagination::-webkit-scrollbar {
-           display: none;
+        .nav-arrow {
+           width: 44px;
+           height: 44px;
+           background: #ffffff;
+           border: none;
+           color: #000000;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           font-size: 1.2rem;
+           cursor: pointer;
+           transition: all 0.3s ease;
+        }
+
+        .nav-arrow:hover {
+           background: var(--surface-hi);
+           border-color: var(--white-30);
+        }
+
+        .projects-pagination {
+           margin-top: 6rem;
+           display: flex;
+           gap: 2rem;
         }
 
         .pag-dot {
@@ -260,12 +380,10 @@ export default function Projects() {
            cursor: pointer;
            padding: 0;
            display: flex;
-           flex-direction: row;
            align-items: center;
            gap: 1rem;
-           opacity: 0.2;
+           opacity: 0.25;
            transition: all 0.4s ease;
-           white-space: nowrap;
         }
 
         .pag-dot.active {
@@ -277,31 +395,107 @@ export default function Projects() {
            font-size: 0.75rem;
            font-weight: 900;
            color: #fff;
-           order: 1;
         }
 
         .pag-line {
            width: 30px;
            height: 1px;
            background: rgba(255,255,255,0.1);
-           transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-           order: 2;
         }
 
         .pag-dot.active .pag-line {
-           width: 30px; /* Keep it consistent and simple */
            background: #fff;
-           height: 1.5px;
+        }
+
+        .mobile-index-slider {
+           display: none;
+           margin-top: 4rem;
+           width: 100%;
+        }
+
+        .slider-nav-wrap {
+           display: flex;
+           align-items: center;
+           gap: 1.5rem;
+           justify-content: space-between;
+        }
+
+        .slider-btn {
+           background: #ffffff;
+           border: none;
+           color: #000000;
+           width: 50px;
+           height: 50px;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           cursor: pointer;
+           flex-shrink: 0;
+           transition: all 0.3s ease;
+        }
+
+        .slider-btn:hover {
+           background: var(--surface-hi);
+           border-color: var(--white-30);
+        }
+
+        .btn-icon {
+           font-size: 1.4rem;
+           line-height: 1;
+        }
+
+        .slider-track {
+           display: flex;
+           gap: 3rem;
+           overflow-x: auto;
+           padding: 1rem 0;
+           scrollbar-width: none;
+           scroll-snap-type: x mandatory;
+           flex: 1;
+        }
+
+        .slider-track::-webkit-scrollbar {
+           display: none;
+        }
+
+        .slider-item {
+           background: none;
+           border: none;
+           cursor: pointer;
+           padding: 0;
+           scroll-snap-align: center;
+           flex-shrink: 0;
+           opacity: 0.2;
+           transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .slider-item.active {
+           opacity: 1;
+           transform: scale(1.2);
+        }
+
+        .slider-num {
+           font-family: var(--font-inter);
+           font-size: 4rem;
+           font-weight: 950;
+           color: #fff;
+           letter-spacing: -0.05em;
         }
 
         @media (max-width: 1024px) {
+          .projects-pagination {
+             display: none;
+          }
+          .mobile-index-slider {
+             display: block;
+          }
           .projects-grid {
             grid-template-columns: 1fr;
             gap: 3rem;
             min-height: auto;
           }
           .projects-image-side {
-            width: calc(100% + 2rem); /* Dynamic full bleed based on container padding */
+            width: calc(100% + 2rem); 
             margin-left: -1rem;
             height: 50vh;
             min-height: 350px;
@@ -311,19 +505,15 @@ export default function Projects() {
              right: 1rem;
              font-size: clamp(4rem, 15vw, 8rem);
           }
-          .projects-content-side {
-              padding: 0;
-          }
-          .projects-pagination {
-              margin-top: 3.5rem;
-              justify-content: flex-start;
-              gap: 1.25rem;
-              overflow-x: auto;
-              padding-bottom: 0.5rem;
-          }
-          .pag-num { font-size: 0.65rem; }
-          .pag-line { width: 20px; }
-          .pag-dot.active .pag-line { width: 40px; }
+        }
+
+        @media (max-width: 480px) {
+           .slider-num {
+              font-size: 3.5rem;
+           }
+           .slider-track {
+              gap: 2rem;
+           }
         }
 
         @media (max-width: 768px) {
@@ -338,6 +528,10 @@ export default function Projects() {
              margin-bottom: 2.5rem;
              gap: 2rem;
           }
+          .projects-pagination {
+             margin-left: -1.25rem;
+             padding: 0 1.25rem;
+          }
         }
 
         @media (max-width: 480px) {
@@ -349,12 +543,9 @@ export default function Projects() {
            .project-ghost-label {
               font-size: 5rem;
            }
-           .projects-pagination {
-              gap: 1rem;
+           .pag-card {
+              width: 180px;
            }
-           .pag-num { font-size: 0.6rem; }
-           .pag-line { width: 15px; }
-           .pag-dot.active .pag-line { width: 30px; }
         }
       `}</style>
     </section>
