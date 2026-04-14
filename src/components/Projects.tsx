@@ -49,14 +49,21 @@ export default function Projects() {
       <div className="container">
         <div className="projects-grid">
            
-           {/* IMAGE SIDE (Right on Desktop, Top on Mobile) */}
+           {/* MOBILE ONLY: Numbering Badge (Top Right of section) */}
+           <div className="mobile-index-badge">
+             <span className="mobile-num-curr">0{active + 1}</span>
+             <span className="mobile-num-sep">/</span>
+             <span className="mobile-num-total">0{PROJECTS.length}</span>
+           </div>
+
+           {/* IMAGE SIDE */}
           <div className="projects-image-side">
             <AnimatePresence mode="wait">
               <motion.div
                 key={active}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
+                initial={{ opacity: 0, scale: 1.05 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                 className="image-wrapper"
               >
@@ -67,61 +74,64 @@ export default function Projects() {
               </motion.div>
             </AnimatePresence>
             
+            {/* Desktop Only Ghost Label */}
             <div className="project-ghost-label">
               MASS.{active + 1}
             </div>
           </div>
 
-           {/* CONTENT SIDE (Left on Desktop, Bottom on Mobile) */}
+           {/* CONTENT SIDE */}
            <div className="projects-content-side">
-            <FadeIn>
-              <div className="project-tag-wrap">
-                <div style={{ width: '40px', height: '1px', background: 'rgba(255,255,255,0.15)' }} />
-                <span className="project-tag">WORK / 2.0</span>
-              </div>
-            </FadeIn>
-
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={active}
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -15 }}
-                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              >
-                <h2 className="project-title">
-                  {PROJECTS[active].title}
-                </h2>
-                
-                <div className="project-highlight-specs">
-                   {PROJECTS[active].specifications?.slice(0, 2).map((spec: any, i: number) => (
-                      <div key={i} className="spec-item">
-                        <span className="spec-label">{spec.label}</span>
-                        <span className="spec-value">{spec.value}</span>
-                      </div>
-                   ))}
+            <div className="content-inner-wrapper">
+              <FadeIn>
+                <div className="project-tag-wrap">
+                  <div style={{ width: '40px', height: '1px', background: 'rgba(255,255,255,0.15)' }} />
+                  <span className="project-tag">{PROJECTS[active].label}</span>
                 </div>
+              </FadeIn>
 
-                <div className="cta-container">
-                  <MagneticCTA href={`/projects/${PROJECTS[active].id}`}>
-                    Explore Architectural Vision
-                  </MagneticCTA>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-
-            {/* Pagination Controls */}
-            <div className="projects-pagination">
-              {PROJECTS.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setActive(i)}
-                  className={`pag-dot ${i === active ? 'active' : ''}`}
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={active}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 20 }}
+                  transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                 >
-                  <span className="pag-num">0{i + 1}</span>
-                  <div className="pag-line" />
-                </button>
-              ))}
+                  <h2 className="project-title">
+                    {PROJECTS[active].title}
+                  </h2>
+                  
+                  <div className="project-highlight-specs">
+                     {PROJECTS[active].specifications?.slice(0, 2).map((spec: any, i: number) => (
+                        <div key={i} className="spec-item">
+                          <span className="spec-label">{spec.label}</span>
+                          <span className="spec-value">{spec.value}</span>
+                        </div>
+                     ))}
+                  </div>
+
+                  <div className="cta-container">
+                    <MagneticCTA href={`/projects/${PROJECTS[active].id}`}>
+                      View Project
+                    </MagneticCTA>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+
+              {/* Pagination Controls */}
+              <div className="projects-pagination">
+                {PROJECTS.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setActive(i)}
+                    className={`pag-dot ${i === active ? 'active' : ''}`}
+                  >
+                    <span className="pag-num">0{i + 1}</span>
+                    <div className="pag-line" />
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
 
@@ -133,21 +143,24 @@ export default function Projects() {
           background: #0a0a0a;
           padding: clamp(6rem, 15vw, 12rem) 0;
           position: relative;
-          overflow: hidden;
         }
 
         .projects-grid {
           display: grid;
           grid-template-columns: 0.9fr 1.1fr;
-          gap: clamp(4rem, 8vw, 12rem);
+          gap: clamp(4rem, 8vw, 10rem);
           align-items: center;
           min-height: 85vh;
+        }
+
+        .mobile-index-badge {
+          display: none; /* Desktop hidden */
         }
 
         /* Image Handling */
         .projects-image-side {
           position: relative;
-          height: clamp(500px, 80vh, 900px);
+          height: 80vh;
           overflow: hidden;
           background: #000;
           order: 2;
@@ -174,7 +187,7 @@ export default function Projects() {
           margin-bottom: 3.5rem;
         }
         .project-tag {
-          fontSize: 0.6rem;
+          font-size: 0.6rem;
           font-weight: 900;
           color: rgba(255,255,255,0.25);
           text-transform: uppercase;
@@ -183,8 +196,8 @@ export default function Projects() {
 
         .project-title {
           font-family: var(--font-inter);
-          fontSize: clamp(2.8rem, 6.5vw, 5.5rem);
-          fontWeight: 950;
+          font-size: clamp(2.8rem, 6.5vw, 5.5rem);
+          font-weight: 950;
           color: #ffffff;
           line-height: 0.9;
           text-transform: uppercase;
@@ -199,45 +212,41 @@ export default function Projects() {
         }
         .spec-label {
           display: block;
-          fontSize: 0.52rem;
+          font-size: 0.52rem;
           color: rgba(255,255,255,0.3);
-          fontWeight: 800;
+          font-weight: 800;
           text-transform: uppercase;
           margin-bottom: 0.75rem;
           letter-spacing: 0.1em;
         }
         .spec-value {
-          fontSize: clamp(0.75rem, 2vw, 0.95rem);
-          fontWeight: 700;
+          font-size: clamp(0.75rem, 2vw, 0.95rem);
+          font-weight: 700;
           color: #fff;
           text-transform: uppercase;
           letter-spacing: 0.05em;
         }
 
         /* Innovative Button Styles */
-        .magnetic-btn-wrap {
-          display: inline-block;
-        }
         .innovative-btn {
           display: inline-flex;
           align-items: center;
-          padding: clamp(1.1rem, 3vw, 1.4rem) clamp(2.2rem, 5vw, 3.2rem);
+          padding: 1.1rem 2.4rem;
           background: #ffffff;
           color: #000000;
-          fontSize: clamp(0.55rem, 1.5vw, 0.65rem);
-          fontWeight: 950;
-          textTransform: uppercase;
-          letterSpacing: 0.4em;
-          textDecoration: none;
+          font-size: 0.6rem;
+          font-weight: 950;
+          text-transform: uppercase;
+          letter-spacing: 0.4em;
+          text-decoration: none;
           position: relative;
           overflow: hidden;
           transition: all 0.4s ease;
-          border-radius: 2px;
         }
         .innovative-btn:hover {
           background: #000 !important;
           color: #fff !important;
-          border: 1px solid rgba(255,255,255,0.2);
+          box-shadow: 0 0 0 1px rgba(255,255,255,0.2);
         }
         .btn-gliss {
            position: absolute;
@@ -268,8 +277,7 @@ export default function Projects() {
         .projects-pagination {
            display: flex; 
            gap: 1.5rem; 
-           margin-top: clamp(4rem, 8vw, 8rem);
-           flex-wrap: wrap;
+           margin-top: 6rem;
         }
         .pag-dot {
            background: none;
@@ -298,62 +306,83 @@ export default function Projects() {
            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .pag-dot.active .pag-line {
-           width: 80px;
+           width: 70px;
            background: #fff;
         }
 
-        /* RESPONSIVE BREAKPOINTS */
-        @media (max-width: 1100px) {
+        /* UNIQE MOBILE IDENTITY */
+        @media (max-width: 1024px) {
+          .projects-section {
+            padding-top: 2rem;
+          }
           .projects-grid {
             grid-template-columns: 1fr;
-            gap: 5rem;
+            gap: 0; /* Tight together */
           }
-          .projects-content-side {
-            order: 2;
-            padding: 0 5%;
+          
+          .mobile-index-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            position: absolute;
+            top: 4rem;
+            right: 1.5rem;
+            z-index: 20;
+            background: #fff;
+            color: #000;
+            padding: 0.8rem 1.2rem;
+            font-family: var(--font-inter);
+            font-weight: 900;
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
           }
+          .mobile-num-curr { font-size: 1rem; }
+          .mobile-num-sep { opacity: 0.2; }
+          .mobile-num-total { font-size: 0.6rem; opacity: 0.4; }
+
           .projects-image-side {
             order: 1;
             width: 100vw;
-            margin-left: calc(-5vw - 1rem); /* Break container for full bleed */
-            height: clamp(450px, 70vh, 650px);
+            margin-left: -1rem; /* Adjust for padding if needed */
+            height: 55vh;
+            border-bottom: 4px solid #fff;
           }
-           .project-title {
-            marginBottom: 2rem;
-          }
-          .project-highlight-specs {
-            marginBottom: 4rem;
-          }
-          .projects-pagination {
-            marginTop: 5rem;
-          }
-        }
+          .project-ghost-label { display: none; }
 
-        @media (max-width: 640px) {
-          .projects-section {
-            padding: 4rem 0;
+          .projects-content-side {
+            order: 2;
+            padding: 2.5rem 1.25rem 4rem 1.25rem;
+            position: relative;
+            background: #0a0a0a;
+            margin-top: -2rem; /* The "Architect's Overlap" */
+            border-left: 1px solid rgba(255,255,255,0.1);
           }
-          .projects-image-side {
-            height: 60vh;
-            margin-left: -5%; /* Approximate container padding */
-          }
+          
+          .project-tag-wrap { margin-bottom: 2rem; }
           .project-title {
-            fontSize: 2.5rem;
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
           }
           .project-highlight-specs {
             flex-direction: column;
-            gap: 2rem;
-            margin-bottom: 3.5rem;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
           }
+          .spec-label { margin-bottom: 0.4rem; }
+          .spec-value { font-size: 0.85rem; }
+
           .innovative-btn {
-            width: 100%;
-            justify-content: center;
+            padding: 1rem 1.8rem;
+            font-size: 0.55rem;
+            letter-spacing: 0.3em;
           }
-          .project-ghost-label {
-            font-size: 5rem;
-            bottom: 1rem;
-            right: 1rem;
+          
+          .projects-pagination {
+            margin-top: 4rem;
+            gap: 1rem;
           }
+          .pag-line { width: 20px; }
+          .pag-dot.active .pag-line { width: 40px; }
         }
       `}</style>
     </section>
