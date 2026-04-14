@@ -48,9 +48,33 @@ export const EXPERTISE = [
 
 export const PROJECTS = [
   {
+    id: 'bektash-turkish-cafe',
+    title: 'Bektash Turkish Cafe',
+    label: 'Project 001 / 2024',
+    location: 'Hospitality / Kakkanad',
+    bg: 'url(/bektash/bektash 14.jpeg) center/cover no-repeat',
+    heroImage: '/bektash/bektash 14.jpeg',
+    placeholder: 'linear-gradient(135deg, #1a1a1a 0%, #000 100%)',
+    description: 'Bektash is a culinary sanctuary where traditional Turkish charm meets minimalist architectural precision. Located in the heart of Kakkanad, the space features intricate textures, warm ambient lighting, and a layout designed for intimate social connection. Every corner of the cafe is a dialogue between heritage and contemporary luxury.',
+    specifications: [
+      { label: 'Type', value: 'Turkish Cafe' },
+      { label: 'Area', value: '2,800 Sqft' },
+      { label: 'Location', value: 'Kakkanad, Ernakulam' },
+      { label: 'Status', value: 'Completed' }
+    ],
+    gallery: [
+      '/bektash/bektash 1.jpeg',
+      '/bektash/bektash 2.jpeg',
+      '/bektash/bektash4.jpeg',
+      '/bektash/bektash5.jpeg',
+      '/bektash/bektash7.jpeg',
+      '/bektash/bektash 8.jpeg'
+    ]
+  },
+  {
     id: 'the-obsidian-loft',
     title: 'The Obsidian Loft',
-    label: 'Project 039 / 2022',
+    label: 'Project 002 / 2022',
     location: 'Residential / Los Angeles',
     bg: 'linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.65) 100%), url("/arch-1.jpg") center/cover no-repeat',
     heroImage: '/arch-1.jpg',
@@ -71,7 +95,7 @@ export const PROJECTS = [
   {
     id: 'summit-corporate-center',
     title: 'Summit Corporate Center',
-    label: 'Project 012 / 2023',
+    label: 'Project 003 / 2023',
     location: 'Commercial / Singapore',
     bg: 'linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.65) 100%), url("/arch-2.jpg") center/cover no-repeat',
     heroImage: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1600',
@@ -92,7 +116,7 @@ export const PROJECTS = [
   {
     id: 'vellum-residences',
     title: 'Vellum Residences',
-    label: 'Project 088 / 2021',
+    label: 'Project 004 / 2021',
     location: 'Residential / Mumbai',
     bg: 'url(https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1600) center/cover no-repeat',
     heroImage: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1600',
@@ -113,7 +137,7 @@ export const PROJECTS = [
   {
     id: 'lumix-tower',
     title: 'Lumix IT Tower',
-    label: 'Project 045 / 2024',
+    label: 'Project 005 / 2024',
     location: 'Commercial / Kochi',
     bg: 'url(https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1600) center/cover no-repeat',
     heroImage: 'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1600',
