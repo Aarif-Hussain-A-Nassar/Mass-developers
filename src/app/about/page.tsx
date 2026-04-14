@@ -22,8 +22,8 @@ function FadeIn({
     direction === 'up'
       ? { opacity: 0, y: 48 }
       : direction === 'left'
-      ? { opacity: 0, x: -48 }
-      : { opacity: 0, x: 48 };
+        ? { opacity: 0, x: -48 }
+        : { opacity: 0, x: 48 };
 
   return (
     <motion.div
@@ -226,11 +226,13 @@ function TeamCard({
   name,
   role,
   initials,
+  image,
   delay,
 }: {
   name: string;
   role: string;
   initials: string;
+  image?: string;
   delay: number;
 }) {
   const [hovered, setHovered] = useState(false);
@@ -258,18 +260,34 @@ function TeamCard({
             transition: 'background 0.4s ease',
           }}
         >
-          <span
-            style={{
-              fontFamily: 'var(--font-inter)',
-              fontSize: '3rem',
-              fontWeight: 900,
-              color: hovered ? 'var(--white)' : 'var(--white-30)',
-              letterSpacing: '-0.04em',
-              transition: 'color 0.35s ease',
-            }}
-          >
-            {initials}
-          </span>
+          {image ? (
+            <motion.img
+              src={image}
+              alt={name}
+              animate={{ scale: hovered ? 1.05 : 1 }}
+              transition={{ duration: 0.6, ease: EASE }}
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                filter: hovered ? 'grayscale(0)' : 'grayscale(1)',
+                transition: 'filter 0.4s ease',
+              }}
+            />
+          ) : (
+            <span
+              style={{
+                fontFamily: 'var(--font-inter)',
+                fontSize: '3rem',
+                fontWeight: 900,
+                color: hovered ? 'var(--white)' : 'var(--white-30)',
+                letterSpacing: '-0.04em',
+                transition: 'color 0.35s ease',
+              }}
+            >
+              {initials}
+            </span>
+          )}
 
           {/* Role overlay on hover */}
           <motion.div
@@ -366,10 +384,9 @@ export default function About() {
   ];
 
   const team = [
-    { name: 'Mohammed Hussain', role: 'Founder & Chairman', initials: 'MH' },
-    { name: 'Aisha Rahman', role: 'Principal Architect', initials: 'AR' },
-    { name: 'Ravi Shankar', role: 'Head of Engineering', initials: 'RS' },
-    { name: 'Fatima Al-Nasser', role: 'Director of Projects', initials: 'FN' },
+    { name: 'Al Ameen', role: 'Mep Engineer', initials: 'AA', image: '/founder-1.jpg' },
+    { name: 'Siyad', role: 'Site Co-ordinator', initials: 'SY', image: '/founder-2.jpg' },
+    { name: 'Mus-ab', role: 'Civil Engineer', initials: 'MA', image: '/founder-3.jpg' },
   ];
 
   return (
@@ -832,9 +849,9 @@ export default function About() {
                 <br />
                 extraordinary.
               </h2>
-              <motion.a 
-                href="/#contact" 
-                className="btn-ghost" 
+              <motion.a
+                href="/#contact"
+                className="btn-ghost"
                 style={{ display: 'inline-flex' }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
