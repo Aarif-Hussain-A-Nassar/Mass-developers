@@ -1,4 +1,4 @@
-﻿/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• DATA â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• DATA â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
 export const NAV_LINKS = [
   { label: 'Home', href: '#hero' },
@@ -228,10 +228,11 @@ export const TESTIMONIALS = [
     poster: 'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800&auto=format&fit=crop'
   },
   {
-    quote: 'A manifesto in stone and light. From the first render to final handover â€” exceptional precision at every stage.',
-    name: 'Ravi Menon',
-    title: 'Director, Zenith Development',
-    poster: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=800&auto=format&fit=crop'
+    quote: "Working with MASS Developers was a transformative experience. Their attention to detail and ability to maximize space on my compact plot resulted in a home that exceeds all my expectations.",
+    name: 'Mr. Siyad',
+    title: 'Client, Fort Kochi',
+    poster: '/siyad-1.webp',
+    videoUrl: 'https://kihgreuv2nuypbvt.public.blob.vercel-storage.com/siyad-vedio.mov'
   },
 ];
 
