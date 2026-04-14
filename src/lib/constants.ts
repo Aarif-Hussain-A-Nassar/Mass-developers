@@ -1,14 +1,14 @@
 /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• DATA â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
 export const NAV_LINKS = [
-  { label: 'Home', href: '#hero' },
-  { label: 'About', href: '#about-us' },
-  { label: 'Expertise', href: '#expertise' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Testimonials', href: '#testimonials' },
-  { label: 'Journal', href: '#journal' },
-  { label: 'Contact', href: '#contact' },
-  { label: 'Interio', href: '#mass-interio' },
+  { label: 'Home', href: '/#hero' },
+  { label: 'About', href: '/#about-us' },
+  { label: 'Expertise', href: '/#expertise' },
+  { label: 'Projects', href: '/#projects' },
+  { label: 'Testimonials', href: '/#testimonials' },
+  { label: 'Journal', href: '/#journal' },
+  { label: 'Contact', href: '/#contact' },
+  { label: 'Interio', href: '/#mass-interio' },
 ];
 
 export const TICKER_ITEMS = [

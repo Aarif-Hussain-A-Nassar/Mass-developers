@@ -29,7 +29,7 @@ export default function ProjectDetail({ params }: { params: Promise<{ id: string
         {/* Cinematic Hero */}
         <section style={{ height: '100vh', position: 'relative', overflow: 'hidden', background: '#000' }}>
           <motion.div 
-            initial={{ scale: 1.15, opacity: 0 }}
+            initial={{ scale: 1, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
             style={{ position: 'absolute', inset: 0 }}

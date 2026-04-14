@@ -2,10 +2,12 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { usePathname } from 'next/navigation';
 import { NAV_LINKS } from '@/lib/constants';
 import { EASE, smoothScrollTo } from '@/lib/utils';
 
 export default function Navbar() {
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [activeIdx, setActiveIdx] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -17,7 +19,9 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-    const sectionIds = NAV_LINKS.map(l => l.href.replace('#', ''));
+    if (pathname !== '/') return;
+
+    const sectionIds = NAV_LINKS.map(l => l.href.replace('/#', '#').replace('#', ''));
     let ticking = false;
 
     const updateActive = () => {
@@ -43,27 +47,32 @@ export default function Navbar() {
     updateActive();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+  }, [pathname]);
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string, idx: number) => {
+    // If not on home page, let the link navigate normally
+    if (pathname !== '/') return;
+
     e.preventDefault();
     setActiveIdx(idx);
     setIsMenuOpen(false);
     
-    // Update URL hash without jumping
-    window.history.pushState(null, '', href);
+    const hash = href.replace('/', ''); // convert /#expertise to #expertise
 
-    if (href === '#hero') {
+    // Update URL hash without jumping
+    window.history.pushState(null, '', hash);
+
+    if (hash === '#hero') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
-      smoothScrollTo(href);
+      smoothScrollTo(hash);
     }
   };
 
   return (
     <>
       <nav className={`nav ${scrolled ? 'scrolled' : ''}`}>
-        <a href="#hero" className="nav-logo" style={{ marginLeft: '1.5rem' }} onClick={(e) => handleClick(e, '#hero', 0)}>
+        <a href="/#hero" className="nav-logo" style={{ marginLeft: '1.5rem' }} onClick={(e) => handleClick(e, '/#hero', 0)}>
           <motion.img
             src="/logo.png"
             alt="MASS Logo"
@@ -89,11 +98,11 @@ export default function Navbar() {
         </ul>
 
         <motion.a
-          href="#contact"
+          href="/#contact"
           className="nav-cta"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          onClick={(e) => handleClick(e, '#contact', NAV_LINKS.length - 1)}
+          onClick={(e) => handleClick(e, '/#contact', NAV_LINKS.length - 1)}
         >
           Inquire
         </motion.a>

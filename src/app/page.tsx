@@ -14,6 +14,7 @@ import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import FloatingButton from '@/components/FloatingButton';
 import { SECTIONS_IDS } from '@/lib/constants';
+import { smoothScrollTo } from '@/lib/utils';
 
 export default function Page() {
   const [activeDot, setActiveDot] = useState(0);
@@ -21,10 +22,11 @@ export default function Page() {
   useEffect(() => {
     // Handle initial scroll to hash if present on mount
     if (window.location.hash) {
-      setTimeout(() => {
-        const el = document.querySelector(window.location.hash);
-        if (el) el.scrollIntoView({ behavior: 'smooth' });
-      }, 600);
+      // Small delay to ensure all heights are calculated
+      const timer = setTimeout(() => {
+        smoothScrollTo(window.location.hash);
+      }, 100);
+      return () => clearTimeout(timer);
     }
 
     const observer = new IntersectionObserver((entries) => {
