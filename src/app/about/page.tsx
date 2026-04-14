@@ -3,6 +3,7 @@
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 import Footer from '@/components/Footer';
+import Story from '@/components/About';
 
 /* ─── Easing ─── */
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
@@ -512,154 +513,10 @@ export default function About() {
           </div>
         </div>
 
-        {/* ══════════ WHO WE ARE ══════════ */}
-        <div style={{ padding: '8rem 0' }}>
-          <div className="container">
-            <div className="grid-2-col" style={{ gap: '6rem', alignItems: 'center' }}>
-              <FadeIn direction="left">
-                <div
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: '1.5rem',
-                  }}
-                >
-                  <div className="section-eyebrow">
-                    <span>Who We Are / 002</span>
-                  </div>
-                  <h2
-                    style={{
-                      fontFamily: 'var(--font-inter)',
-                      fontSize: 'clamp(1.8rem, 3.5vw, 3rem)',
-                      fontWeight: 900,
-                      textTransform: 'uppercase',
-                      lineHeight: 1.0,
-                      letterSpacing: '-0.01em',
-                    }}
-                  >
-                    More than
-                    <br />a developer.
-                  </h2>
-                  <p className="t-body">
-                    In 2018, four friends from the same neighborhood—all established in different facets of the construction industry—recognized a recurring flaw: a concerning lack of transparency and quality in most firms. Driven by a passion to deliver better, we founded MASS Developers.
-                  </p>
-                  <p className="t-body">
-                    What started as a shared dream has evolved into a leading development firm. We began with simple goals: providing top-tier craftsmanship at fair prices. Today, from landmark residential projects to complex corporate offices, our narrative is defined by the trust we earn with every structure.
-                  </p>
-                </div>
-              </FadeIn>
+        {/* ══════════ THE STORY ══════════ */}
+        <Story />
 
-              {/* Minimal visual block */}
-              <FadeIn delay={0.2} direction="right">
-                <div style={{ position: 'relative' }}>
-                  <div
-                    style={{
-                      width: '100%',
-                      aspectRatio: '4/5',
-                      background: 'var(--surface)',
-                      position: 'relative',
-                      overflow: 'hidden',
-                    }}
-                  >
-                    {/* Geometric accent */}
-                    <div
-                      style={{
-                        position: 'absolute',
-                        top: '2rem',
-                        left: '2rem',
-                        right: '2rem',
-                        bottom: '2rem',
-                        border: '1px solid var(--white-10)',
-                      }}
-                    />
-                    <div
-                      style={{
-                        position: 'absolute',
-                        top: '4rem',
-                        left: '4rem',
-                        right: '4rem',
-                        bottom: '4rem',
-                        border: '1px solid var(--white-06)',
-                      }}
-                    />
-                    <div
-                      style={{
-                        position: 'absolute',
-                        inset: 0,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        gap: '0.5rem',
-                      }}
-                    >
-                      <span
-                        style={{
-                          fontFamily: 'var(--font-inter)',
-                          fontSize: 'clamp(3.5rem, 7vw, 7rem)',
-                          fontWeight: 900,
-                          letterSpacing: '-0.05em',
-                          lineHeight: 1,
-                          color: 'var(--white)',
-                        }}
-                      >
-                        {new Date().getFullYear() - 2019}
-                      </span>
-                      <span
-                        style={{
-                          fontFamily: 'var(--font-manrope)',
-                          fontSize: '0.62rem',
-                          fontWeight: 700,
-                          letterSpacing: '0.3em',
-                          textTransform: 'uppercase',
-                          color: 'var(--white-30)',
-                        }}
-                      >
-                        Years of Trust
-                      </span>
-                    </div>
-                  </div>
 
-                  {/* Sticker */}
-                  <motion.div
-                    animate={{ rotate: [0, 3, -3, 0] }}
-                    transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-                    style={{
-                      position: 'absolute',
-                      bottom: '-1.5rem',
-                      right: '-1.5rem',
-                      width: '96px',
-                      height: '96px',
-                      background: 'var(--white)',
-                      borderRadius: '50%',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      textAlign: 'center',
-                    }}
-                  >
-                    <span
-                      style={{
-                        fontFamily: 'var(--font-inter)',
-                        fontSize: '0.52rem',
-                        fontWeight: 800,
-                        letterSpacing: '0.15em',
-                        textTransform: 'uppercase',
-                        color: 'var(--bg)',
-                        lineHeight: 1.4,
-                        padding: '0.5rem',
-                      }}
-                    >
-                      Est.
-                      <br />
-                      2019
-                    </span>
-                  </motion.div>
-                </div>
-              </FadeIn>
-            </div>
-          </div>
-        </div>
 
         {/* ══════════ VISION & MISSION TABS ══════════ */}
         <div

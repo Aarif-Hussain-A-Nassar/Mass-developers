@@ -4,13 +4,13 @@ import React, { useRef } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 
 const milestones = [
-  { year: '2018', event: 'Founded by four neighborhood friends with a vision for honest construction.' },
-  { year: '2020', event: 'Gained recognition for quality and honesty, expanding into residential and commercial projects.' },
-  { year: '2022', event: 'Became known as one of the most trusted builders in the region.' },
-  { year: '2024', event: 'Continuing our mission: building dreams, one project at a time.' },
+  { year: '2019', event: 'Founded by four neighborhood friends with a vision for honest construction and uncompromising quality.' },
+  { year: '2021', event: 'Gained recognition for structural integrity, expanding into large-scale residential and commercial projects.' },
+  { year: '2023', event: 'Certified as one of the most trusted regional developers with 1000+ happy families served.' },
+  { year: '2024', event: 'Continuing our mission: building architectural legacies, one project at a time.' },
 ];
 
-/* Word-by-word reveal — reused pattern */
+/* Word-by-word reveal helper */
 function WordReveal({
   text,
   style = {},
@@ -32,7 +32,7 @@ function WordReveal({
             viewport={{ once: true }}
             transition={{
               duration: 0.8,
-              delay: delayBase + i * 0.1,
+              delay: delayBase + i * 0.08,
               ease: [0.16, 1, 0.3, 1],
             }}
           >
@@ -47,461 +47,353 @@ function WordReveal({
 
 const About: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  const imageRef = useRef<HTMLDivElement>(null);
 
-  const yearsOfExp = new Date().getFullYear() - 2018;
+  const yearsOfExp = new Date().getFullYear() - 2019;
 
-  /* Parallax: image moves slower than text as you scroll */
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ['start end', 'end start'],
   });
-  const rawImageY = useTransform(scrollYProgress, [0, 1], [50, -50]);
-  const imageY = useSpring(rawImageY, { stiffness: 80, damping: 20 });
+
+  const rawImageY = useTransform(scrollYProgress, [0, 1], [40, -40]);
+  const imageY = useSpring(rawImageY, { stiffness: 60, damping: 20 });
+
+  const stats = [
+    { value: `${yearsOfExp}+`, label: 'Years' },
+    { value: '150+', label: 'Projects' },
+    { value: '1000+', label: 'Families' },
+    { value: '02', label: 'Offices' },
+    { value: '50+', label: 'Staff' },
+  ];
 
   return (
     <section
       id="about"
       ref={sectionRef}
       style={{
-        paddingTop: '128px',
-        paddingBottom: '128px',
+        padding: 'clamp(5rem, 10vw, 10rem) 0',
         background: 'var(--section-bg-alt)',
-        overflow: 'hidden', /* contain the parallax */
+        overflow: 'hidden',
       }}
     >
-      <div className="container-max">
+      <div className="container" style={{ maxWidth: '1400px' }}>
 
-        {/* Header */}
-        <div style={{ textAlign: 'center', marginBottom: '6rem' }}>
-          {/* Label with animated line draw */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            style={{ display: 'flex', justifyContent: 'center', marginBottom: '1.5rem' }}
-          >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.625rem' }}>
-              <motion.span
-                initial={{ scaleX: 0 }}
-                whileInView={{ scaleX: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                style={{
-                  display: 'block',
-                  width: '2rem',
-                  height: '1px',
-                  background: 'rgba(198,198,198,0.5)',
-                  transformOrigin: 'left',
-                }}
-              />
-              <motion.span
-                initial={{ opacity: 0, x: -10 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-                style={{
-                  fontFamily: "'Manrope', sans-serif",
-                  fontSize: '0.68rem',
-                  fontWeight: 700,
-                  letterSpacing: '0.28em',
-                  textTransform: 'uppercase',
-                  color: 'var(--on-surface-variant)',
-                }}
-              >
-                Our Story
-              </motion.span>
+        {/* ─── Header Section ─── */}
+        <div style={{ textAlign: 'center', marginBottom: 'clamp(4rem, 8vw, 8rem)' }}>
+          <FadeIn>
+            <div className="section-eyebrow" style={{ justifyContent: 'center', marginBottom: '2rem' }}>
+              <span>Who We Are / 002</span>
             </div>
-          </motion.div>
+          </FadeIn>
 
           <h2 style={{
-            fontFamily: "'Inter', sans-serif",
-            fontSize: 'clamp(2rem, 5vw, 3.5rem)',
+            fontFamily: 'var(--font-inter)',
+            fontSize: 'clamp(2.2rem, 6vw, 5rem)',
             fontWeight: 900,
-            letterSpacing: '0.04em',
+            lineHeight: 1,
+            letterSpacing: '-0.04em',
             textTransform: 'uppercase',
-            marginBottom: '1.5rem',
-            color: '#e2e2e2',
+            color: 'var(--white)',
+            marginBottom: '2rem',
           }}>
-            <WordReveal text="Built on Friendship," delayBase={0} />
-            {' '}
-            <span className="gradient-text" style={{ display: 'inline-block' }}>
-              <WordReveal text="Driven by" delayBase={0.15} />
-            </span>
+            <WordReveal text="Foundations of Trust," delayBase={0} />
             <br />
-            <WordReveal
-              text="Quality"
-              delayBase={0.35}
-              style={{ fontWeight: 300, color: 'rgba(226,226,226,0.3)', letterSpacing: '0.06em' }}
-            />
+            <span style={{ color: 'var(--white-20)' }}>
+              <WordReveal text="Built by Friends." delayBase={0.3} />
+            </span>
           </h2>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            style={{
-              fontFamily: "'Manrope', sans-serif",
-              color: 'var(--muted)',
-              maxWidth: '560px',
-              margin: '0 auto',
-              lineHeight: '1.75',
-              fontSize: '1rem',
-            }}
-          >
-            Four friends in a neighborhood who shared a passion for construction —
-            and a belief that the industry could be so much better.
-          </motion.p>
         </div>
 
-        {/* Main Content Grid */}
-        <div
-          style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '4rem', alignItems: 'start' }}
-          className="about-grid"
-        >
-          {/* Image Column — parallax */}
-          <motion.div
-            ref={imageRef}
-            initial={{ opacity: 0, x: -60 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            style={{ position: 'relative' }}
-          >
-            <div style={{ overflow: 'hidden' }}>
-              {/* Image moves at different speed — the parallax effect */}
-              <motion.div style={{ y: imageY }}>
-                <div
+        {/* ─── Upper Content Split ─── */}
+        <div className="split-layout">
+          {/* Visual Column */}
+          <div className="visual-col">
+            <motion.div
+              className="image-wrapper"
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <motion.div style={{ y: imageY }} className="parallax-inner">
+                <img
+                  src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop"
+                  alt="Modern Architectural Design"
                   style={{
-                    aspectRatio: '4/5',
-                    background: 'var(--surface-container)',
-                    overflow: 'hidden',
-                    position: 'relative',
-                    borderRadius: 0,
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    filter: 'grayscale(1) contrast(1.1) brightness(0.8)',
                   }}
-                >
-                  <div style={{
-                    position: 'absolute',
-                    inset: 0,
-                    background: 'linear-gradient(135deg, #1b1b1b 0%, #2a2a2a 50%, #1b1b1b 100%)',
-                  }} />
-                  <div style={{
-                    position: 'absolute',
-                    inset: 0,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    opacity: 0.05,
-                  }}>
-                    <span style={{
-                      fontFamily: "'Inter', sans-serif",
-                      fontSize: '5rem',
-                      fontWeight: 900,
-                      letterSpacing: '0.08em',
-                      textTransform: 'uppercase',
-                      color: '#fff',
-                    }}>
-                      MASS
-                    </span>
-                  </div>
-                  <div style={{
-                    position: 'absolute',
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    padding: '2.5rem',
-                    background: 'linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%)',
-                    color: '#fff',
-                  }}>
-                    <h3 style={{
-                      fontFamily: "'Inter', sans-serif",
-                      fontSize: '1.3rem',
-                      fontWeight: 800,
-                      letterSpacing: '0.06em',
-                      textTransform: 'uppercase',
-                      marginBottom: '0.35rem',
-                    }}>
-                      Mass Developers
-                    </h3>
-                    <p style={{
-                      fontFamily: "'Manrope', sans-serif",
-                      fontSize: '0.72rem',
-                      opacity: 0.55,
-                      letterSpacing: '0.18em',
-                      textTransform: 'uppercase',
-                      fontWeight: 600,
-                    }}>
-                      Founded 2018 · Ernakulam, Kerala
-                    </p>
-                  </div>
+                />
+                <div className="overlay-text">
+                  <h3>Mass Developers</h3>
+                  <p>Ernakulam, KL · Est. 2019</p>
                 </div>
               </motion.div>
-            </div>
 
-            {/* Badge: Years — pops in after image */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.7, rotate: -6 }}
-              whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              whileHover={{ scale: 1.06 }}
-              style={{
-                position: 'absolute',
-                top: '1.5rem',
-                right: '-1.25rem',
-                background: '#ffffff',
-                color: '#131313',
-                padding: '1.1rem 1.35rem',
-                borderRadius: 0,
-                boxShadow: '0 8px 40px rgba(0,0,0,0.5)',
-                textAlign: 'center',
-                cursor: 'default',
-                zIndex: 2,
-              }}
-            >
-              <div style={{
-                fontFamily: "'Inter', sans-serif",
-                fontSize: '1.8rem',
-                fontWeight: 900,
-                lineHeight: 1,
-                letterSpacing: '-0.02em',
-              }}>
-                {new Date().getFullYear() - 2018}+
-              </div>
-              <div style={{
-                fontFamily: "'Manrope', sans-serif",
-                fontSize: '0.6rem',
-                fontWeight: 700,
-                letterSpacing: '0.18em',
-                textTransform: 'uppercase',
-                marginTop: '0.3rem',
-                opacity: 0.7,
-              }}>Years</div>
-            </motion.div>
-
-            {/* Badge: Families — second stat */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.7, rotate: 6 }}
-              whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              whileHover={{ scale: 1.06 }}
-              style={{
-                position: 'absolute',
-                top: '8rem',
-                right: '-1.25rem',
-                background: '#131313',
-                color: '#ffffff',
-                padding: '1.1rem 1.35rem',
-                borderRadius: 0,
-                boxShadow: '0 8px 40px rgba(0,0,0,0.6)',
-                textAlign: 'center',
-                cursor: 'default',
-                zIndex: 2,
-                border: '1px solid rgba(255,255,255,0.1)',
-              }}
-            >
-              <div style={{
-                fontFamily: "'Inter', sans-serif",
-                fontSize: '1.8rem',
-                fontWeight: 900,
-                lineHeight: 1,
-                letterSpacing: '-0.02em',
-              }}>
-                12k+
-              </div>
-              <div style={{
-                fontFamily: "'Manrope', sans-serif",
-                fontSize: '0.6rem',
-                fontWeight: 700,
-                letterSpacing: '0.18em',
-                textTransform: 'uppercase',
-                marginTop: '0.3rem',
-                opacity: 0.6,
-              }}>Families</div>
-            </motion.div>
-          </motion.div>
-
-          {/* Text Column */}
-          <motion.div
-            initial={{ opacity: 0, x: 60 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 1, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', marginBottom: '3.5rem' }}>
-              {[
-                'In our neighborhood, four buddies shared a passion for construction. Each worked in different companies in the industry — but we saw a common problem: most construction firms lacked honesty and quality.',
-                'So we thought: why not start our own? That\'s how MASS Developers was born in 2018. We started small, with big dreams — to provide top-notch work at fair prices. Slowly, people noticed our dedication.',
-              ].map((text, i) => (
-                <motion.p
-                  key={i}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.7, delay: i * 0.15, ease: [0.16, 1, 0.3, 1] }}
-                  style={{ fontFamily: "'Manrope', sans-serif", fontSize: '1rem', lineHeight: '1.8', color: 'var(--muted)' }}
-                >
-                  {text}
-                </motion.p>
-              ))}
-              <motion.p
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
+              <motion.div
+                className="badge badge-light"
+                initial={{ opacity: 0, x: 20, rotate: 5 }}
+                whileInView={{ opacity: 1, x: 0, rotate: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                style={{
-                  fontFamily: "'Manrope', sans-serif",
-                  fontSize: '1rem',
-                  lineHeight: '1.8',
-                  color: 'rgba(226,226,226,0.4)',
-                  fontStyle: 'italic',
-                  borderLeft: '1px solid rgba(255,255,255,0.2)',
-                  paddingLeft: '1.5rem',
-                }}
+                transition={{ duration: 0.8, delay: 0.6 }}
               >
-                &ldquo;Today, we&apos;re known as the most trusted builders around — and our
-                mission remains the same: keep building dreams, one project at a time.&rdquo;
-              </motion.p>
-            </div>
+                <strong>{yearsOfExp}+</strong>
+                <span>Years of Quality</span>
+              </motion.div>
+            </motion.div>
+          </div>
 
-            {/* Stats strip */}
+          {/* Narrative Text Column */}
+          <div className="text-col">
+            <div className="narrative-content">
+              <FadeIn delay={0.2} direction="left">
+                <p>
+                  In our neighborhood, four friends saw a gap. Construction firms were everywhere, but honest execution was rare. We pooled our expertise—engineering, design, and management—to launch MASS with a &apos;client-first&apos; DNA.
+                </p>
+              </FadeIn>
+              <FadeIn delay={0.35} direction="left">
+                <p>
+                  What started as a shared vision between four neighbors has evolved into a regional benchmark for architectural excellence. Today, we don&apos;t just build spaces; we build the trust that families call home.
+                </p>
+              </FadeIn>
+              <FadeIn delay={0.5} direction="left">
+                <div className="quote-box">
+                  <p>&ldquo;We do not build structures; we sculpt light and space with unwavering integrity.&rdquo;</p>
+                </div>
+              </FadeIn>
+            </div>
+          </div>
+        </div>
+
+        {/* ─── Lower Achievements Strip ─── */}
+        <div className="achievements-full">
+          {stats.map((stat, i) => (
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              key={i}
+              className="stat-item"
+              initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
-              style={{
-                display: 'grid',
-                gridTemplateColumns: '1fr 1fr 1fr',
-                gap: '0',
-                marginBottom: '3.5rem',
-                borderTop: '1px solid rgba(255,255,255,0.08)',
-                borderBottom: '1px solid rgba(255,255,255,0.08)',
-                padding: '1.75rem 0',
-              }}
+              transition={{ delay: i * 0.1 }}
             >
-              {[
-                { value: `${new Date().getFullYear() - 2018}+`, label: 'Years' },
-                { value: '12,000+', label: 'Families' },
-                { value: '200+', label: 'Projects' },
-              ].map((stat, i) => (
-                <div
-                  key={stat.label}
-                  style={{
-                    textAlign: 'center',
-                    borderRight: i < 2 ? '1px solid rgba(255,255,255,0.08)' : 'none',
-                  }}
-                >
-                  <div style={{
-                    fontFamily: "'Inter', sans-serif",
-                    fontSize: 'clamp(1.4rem, 3vw, 2rem)',
-                    fontWeight: 900,
-                    lineHeight: 1,
-                    letterSpacing: '-0.02em',
-                    color: '#e2e2e2',
-                    marginBottom: '0.35rem',
-                  }}>
-                    {stat.value}
-                  </div>
-                  <div style={{
-                    fontFamily: "'Manrope', sans-serif",
-                    fontSize: '0.58rem',
-                    fontWeight: 700,
-                    letterSpacing: '0.22em',
-                    textTransform: 'uppercase',
-                    color: 'var(--muted)',
-                  }}>
-                    {stat.label}
-                  </div>
-                </div>
-              ))}
+              <span className="stat-val">{stat.value}</span>
+              <span className="stat-lab">{stat.label}</span>
             </motion.div>
-
-            {/* Milestones */}
-            <motion.h3
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              style={{
-                fontFamily: "'Inter', sans-serif",
-                fontSize: '0.72rem',
-                fontWeight: 800,
-                letterSpacing: '0.22em',
-                textTransform: 'uppercase',
-                marginBottom: '1.75rem',
-                color: 'var(--on-surface-variant)',
-              }}
-            >
-              Our Journey
-            </motion.h3>
-
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
-              {milestones.map((m, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, x: 30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: i * 0.12, ease: [0.16, 1, 0.3, 1] }}
-                  whileHover={{ x: 6 }}
-                  style={{
-                    display: 'flex',
-                    gap: '1.25rem',
-                    paddingBottom: '1.5rem',
-                    marginBottom: '1.5rem',
-                    borderBottom: i < milestones.length - 1 ? '1px solid rgba(255,255,255,0.06)' : 'none',
-                    alignItems: 'flex-start',
-                    cursor: 'default',
-                  }}
-                >
-                  <motion.div
-                    whileHover={{ scale: 1.08, background: '#e2e2e2' }}
-                    transition={{ duration: 0.2 }}
-                    style={{
-                      minWidth: '52px',
-                      height: '52px',
-                      background: '#ffffff',
-                      color: '#131313',
-                      borderRadius: 0,
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      fontFamily: "'Inter', sans-serif",
-                      fontSize: '0.65rem',
-                      fontWeight: 900,
-                      letterSpacing: '0.06em',
-                      flexShrink: 0,
-                    }}
-                  >
-                    {m.year}
-                  </motion.div>
-                  <p style={{
-                    fontFamily: "'Manrope', sans-serif",
-                    fontSize: '0.9rem',
-                    lineHeight: '1.65',
-                    color: 'var(--muted)',
-                    paddingTop: '0.8rem',
-                  }}>
-                    {m.event}
-                  </p>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
+          ))}
         </div>
+
+        {/* ─── Journey Timeline (New UI) ─── */}
+        <div className="journey-section">
+          <FadeIn>
+            <h3 className="journey-head">Our Journey</h3>
+          </FadeIn>
+
+          <div className="journey-timeline">
+            {milestones.map((m, i) => (
+              <motion.div
+                key={i}
+                className="timeline-item"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.15, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <div className="time-marker">
+                  <span className="year-disk">{m.year}</span>
+                  <div className="connector-line" />
+                </div>
+                <p className="event-desc">{m.event}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
       </div>
 
       <style jsx>{`
-        @media (min-width: 900px) {
-          .about-grid { grid-template-columns: 1fr 1fr !important; }
+        /* --- Layout --- */
+        .split-layout {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 4rem;
+          margin-bottom: 6rem;
+          align-items: center;
+        }
+
+        @media (min-width: 1024px) {
+          .split-layout {
+            grid-template-columns: 1fr 1fr;
+            gap: 8rem;
+          }
+        }
+
+        /* --- Visuals --- */
+        .visual-col { position: relative; }
+        .image-wrapper {
+          position: relative;
+          width: 100%;
+          aspect-ratio: 16/9;
+          overflow: visible;
+        }
+        @media (min-width: 1024px) {
+          .image-wrapper { aspect-ratio: 4/5; max-width: 500px; margin-left: auto; }
+        }
+
+        .parallax-inner {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          border: 1px solid var(--white-10);
+          background: var(--surface);
+          overflow: hidden;
+        }
+
+        .overlay-text {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          padding: 2.5rem;
+          background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
+        }
+
+        .overlay-text h3 { font-size: 1.1rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.2rem; }
+        .overlay-text p { font-size: 0.65rem; color: var(--white-40); text-transform: uppercase; letter-spacing: 0.2em; font-weight: 700; }
+
+        .badge {
+          position: absolute;
+          top: 10%;
+          right: -5%;
+          padding: 1.25rem 1.75rem;
+          background: var(--white);
+          color: var(--bg);
+          box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+          z-index: 5;
+          text-align: center;
+        }
+        .badge strong { font-size: 1.8rem; font-weight: 900; line-height: 1; display: block; }
+        .badge span { font-size: 0.55rem; text-transform: uppercase; letter-spacing: 0.15em; font-weight: 800; }
+
+        @media (max-width: 1024px) { .badge { right: 0; } }
+
+        /* --- Text Column --- */
+        .narrative-content {
+          display: flex;
+          flex-direction: column;
+          gap: 2rem;
+          font-family: var(--font-manrope);
+          font-size: 1.1rem;
+          line-height: 1.8;
+          color: var(--white-60);
+        }
+
+        .quote-box {
+          border-left: 2px solid var(--white-10);
+          padding-left: 2rem;
+          color: var(--white-40);
+          font-style: italic;
+          font-size: 1rem;
+        }
+
+        /* --- Achievements --- */
+        .achievements-full {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 2rem;
+          padding: 3rem 0;
+          border-top: 1px solid var(--white-10);
+          border-bottom: 1px solid var(--white-10);
+          margin-bottom: 8rem;
+        }
+        @media (min-width: 640px) { .achievements-full { grid-template-columns: repeat(5, 1fr); } }
+
+        .stat-item { display: flex; flex-direction: column; align-items: center; text-align: center; }
+        .stat-val { font-family: var(--font-inter); font-size: 2rem; font-weight: 950; color: var(--white); line-height: 1; margin-bottom: 0.5rem; letter-spacing: -0.04em; }
+        .stat-lab { font-size: 0.55rem; text-transform: uppercase; letter-spacing: 0.25em; color: var(--white-30); font-weight: 800; }
+
+        /* --- Journey / Timeline --- */
+        .journey-section { max-width: 1200px; margin: 0 auto; }
+        .journey-head {
+          font-family: var(--font-inter);
+          font-size: 0.75rem;
+          font-weight: 900;
+          text-transform: uppercase;
+          letter-spacing: 0.4em;
+          color: var(--white-40);
+          margin-bottom: 4rem;
+          text-align: center;
+        }
+
+        .journey-timeline {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 3rem;
+        }
+
+        @media (min-width: 1024px) {
+          .journey-timeline { grid-template-columns: repeat(4, 1fr); gap: 2rem; height: 300px; }
+        }
+
+        .timeline-item { display: flex; flex-direction: column; gap: 1.5rem; }
+        .time-marker { position: relative; display: flex; align-items: center; }
+
+        .year-disk {
+          width: 54px;
+          height: 54px;
+          background: var(--white);
+          color: var(--bg);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-family: var(--font-inter);
+          font-weight: 950;
+          font-size: 0.75rem;
+          flex-shrink: 0;
+          z-index: 2;
+        }
+
+        .connector-line {
+          position: absolute;
+          left: 54px;
+          right: -2rem;
+          height: 1px;
+          background: var(--white-10);
+          display: none;
+        }
+
+        @media (min-width: 1024px) {
+          .connector-line { display: block; }
+          .timeline-item:last-child .connector-line { display: none; }
+        }
+
+        .event-desc {
+          font-family: var(--font-manrope);
+          font-size: 0.9rem;
+          line-height: 1.6;
+          color: var(--white-50);
         }
       `}</style>
     </section>
   );
 };
+
+/* Internal FadeIn Component */
+function FadeIn({ children, delay = 0, direction = 'up' }: { children: React.ReactNode, delay?: number, direction?: 'up' | 'down' | 'left' | 'right' }) {
+  const x = direction === 'left' ? 30 : direction === 'right' ? -30 : 0;
+  const y = direction === 'up' ? 30 : direction === 'down' ? -30 : 0;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, x, y }}
+      whileInView={{ opacity: 1, x: 0, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] }}
+    >
+      {children}
+    </motion.div>
+  );
+}
 
 export default About;
