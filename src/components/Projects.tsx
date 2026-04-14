@@ -214,9 +214,16 @@ export default function Projects() {
 
         .projects-pagination {
            display: flex; 
-           gap: 1.5rem; 
+           gap: 2rem; 
            margin-top: 6rem;
-           flex-wrap: wrap;
+           flex-wrap: nowrap;
+           overflow-x: auto;
+           padding-bottom: 1rem;
+           scrollbar-width: none;
+        }
+
+        .projects-pagination::-webkit-scrollbar {
+           display: none;
         }
 
         .pag-dot {
@@ -225,10 +232,12 @@ export default function Projects() {
            cursor: pointer;
            padding: 0;
            display: flex;
-           flex-direction: column;
-           gap: 0.8rem;
+           flex-direction: row;
+           align-items: center;
+           gap: 1rem;
            opacity: 0.2;
-           transition: opacity 0.4s ease;
+           transition: all 0.4s ease;
+           white-space: nowrap;
         }
 
         .pag-dot.active {
@@ -237,49 +246,87 @@ export default function Projects() {
 
         .pag-num {
            font-family: var(--font-inter);
-           font-size: 0.8rem;
+           font-size: 0.75rem;
            font-weight: 900;
            color: #fff;
+           order: 1;
         }
 
         .pag-line {
-           width: 40px;
-           height: 2px;
+           width: 30px;
+           height: 1px;
            background: rgba(255,255,255,0.1);
            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+           order: 2;
         }
 
         .pag-dot.active .pag-line {
-           width: 100px;
+           width: 30px; /* Keep it consistent and simple */
            background: #fff;
+           height: 1.5px;
         }
 
         @media (max-width: 1024px) {
           .projects-grid {
             grid-template-columns: 1fr;
-            gap: 4rem;
+            gap: 3rem;
+            min-height: auto;
           }
-          /* Image stays on top naturally as it is first in DOM now */
           .projects-image-side {
-            width: 100vw;
-            margin-left: calc(-1 * clamp(1.25rem, 5vw, 3rem));
-            height: clamp(400px, 60vh, 600px);
+            width: calc(100% + 2rem); /* Dynamic full bleed based on container padding */
+            margin-left: -1rem;
+            height: 50vh;
+            min-height: 350px;
           }
           .project-ghost-label {
              bottom: 1rem;
              right: 1rem;
-             font-size: 6rem;
+             font-size: clamp(4rem, 15vw, 8rem);
           }
           .projects-content-side {
-              padding: 0 1rem;
+              padding: 0;
+          }
+          .projects-pagination {
+              margin-top: 3.5rem;
+              justify-content: flex-start;
+              gap: 1.25rem;
+              overflow-x: auto;
+              padding-bottom: 0.5rem;
+          }
+          .pag-num { font-size: 0.65rem; }
+          .pag-line { width: 20px; }
+          .pag-dot.active .pag-line { width: 40px; }
+        }
+
+        @media (max-width: 768px) {
+          section {
+            padding-top: 6rem !important;
+          }
+          .projects-image-side {
+             width: calc(100% + 2.5rem);
+             margin-left: -1.25rem;
+          }
+          .project-highlight-specs {
+             margin-bottom: 2.5rem;
+             gap: 2rem;
           }
         }
 
-        @media (max-width: 640px) {
+        @media (max-width: 480px) {
            .project-highlight-specs {
-              flex-direction: column;
+              display: grid;
+              grid-template-columns: 1fr 1fr;
               gap: 1.5rem;
            }
+           .project-ghost-label {
+              font-size: 5rem;
+           }
+           .projects-pagination {
+              gap: 1rem;
+           }
+           .pag-num { font-size: 0.6rem; }
+           .pag-line { width: 15px; }
+           .pag-dot.active .pag-line { width: 30px; }
         }
       `}</style>
     </section>
