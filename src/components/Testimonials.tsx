@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 import { TESTIMONIALS } from '@/lib/constants';
 import { EASE } from '@/lib/utils';
 import FadeIn from './FadeIn';
@@ -52,7 +53,16 @@ export default function Testimonials() {
           <div style={{ position: 'relative', width: '100%', aspectRatio: 'clamp(1/1, 4/5, 4/5)', overflow: 'hidden' }}>
             <AnimatePresence mode="wait">
               <motion.div key={active} initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 1.05 }} transition={{ duration: 0.8, ease: EASE }} style={{ width: '100%', height: '100%', position: 'absolute', inset: 0 }}>
-                <img src={TESTIMONIALS[active].poster} alt="Testimonial Video" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'grayscale(30%)' }} />
+                <Image 
+                  src={TESTIMONIALS[active].poster} 
+                  alt="Testimonial Video" 
+                  fill
+                  loading="lazy"
+                  placeholder="blur"
+                  blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  style={{ objectFit: 'cover', filter: 'grayscale(30%)' }} 
+                />
                 <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.2)' }} />
 
                 {/* Custom Play Button */}

@@ -2,6 +2,7 @@
 
 import { useRef } from 'react';
 import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
+import Image from 'next/image';
 import { EXPERTISE } from '@/lib/constants';
 import { EASE } from '@/lib/utils';
 import FadeIn from './FadeIn';
@@ -160,16 +161,15 @@ function ExpertiseItemEnhanced({ exp, index }: { exp: any, index: number }) {
             </p>
           </FadeIn>
         </div>
-
         {/* Right Column: Image */}
         <motion.div className="expertise-image-col" style={{ position: 'relative', x: imageX, opacity: imageOpacity }}>
-          <div style={{ position: 'relative', borderRadius: '2px', overflow: 'hidden', boxShadow: '0 40px 80px -20px rgba(0,0,0,0.5)' }}>
-            <motion.img
+          <div style={{ position: 'relative', borderRadius: '2px', overflow: 'hidden', boxShadow: '0 40px 80px -20px rgba(0,0,0,0.5)', aspectRatio: '16/9' }}>
+            <Image
               src={exp.bg}
               alt={exp.title}
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 1.2, ease: EASE }}
-              style={{ width: '100%', aspectRatio: '16/9', objectFit: 'cover', display: 'block' }}
+              fill
+              sizes="(max-width: 900px) 100vw, 60vw"
+              style={{ objectFit: 'cover' }}
             />
           </div>
 

@@ -3,6 +3,7 @@
 import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 import { PROJECTS } from '@/lib/constants';
 import FadeIn from './FadeIn';
 
@@ -81,10 +82,16 @@ export default function Projects() {
                   inset: 0,
                 }}
               >
-                <img
+                <Image
                   src={PROJECTS[active].heroImage}
                   alt={PROJECTS[active].title}
-                  style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center center' }}
+                  fill
+                  priority={active === 0}
+                  loading={active === 0 ? undefined : "lazy"}
+                  placeholder="blur"
+                  blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  style={{ objectFit: 'cover', objectPosition: 'center center' }}
                 />
               </motion.div>
             </AnimatePresence>

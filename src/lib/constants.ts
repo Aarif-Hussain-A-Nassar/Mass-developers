@@ -1,4 +1,4 @@
-/* ═══════════════════ DATA ═══════════════════ */
+﻿/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• DATA â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
 export const NAV_LINKS = [
   { label: 'Home', href: '#hero' },
@@ -12,10 +12,10 @@ export const NAV_LINKS = [
 ];
 
 export const TICKER_ITEMS = [
-  'Residential', '✦', 'Commercial', '✦', 'Cultural', '✦', 'Interiors', '✦',
-  'Execution', '✦', 'Structural Integrity', '✦', 'Precision', '✦', 'Est. 2018',
-  'Residential', '✦', 'Commercial', '✦', 'Cultural', '✦', 'Interiors', '✦',
-  'Execution', '✦', 'Structural Integrity', '✦', 'Precision', '✦', 'Est. 2018',
+  'Residential', 'âœ¦', 'Commercial', 'âœ¦', 'Cultural', 'âœ¦', 'Interiors', 'âœ¦',
+  'Execution', 'âœ¦', 'Structural Integrity', 'âœ¦', 'Precision', 'âœ¦', 'Est. 2018',
+  'Residential', 'âœ¦', 'Commercial', 'âœ¦', 'Cultural', 'âœ¦', 'Interiors', 'âœ¦',
+  'Execution', 'âœ¦', 'Structural Integrity', 'âœ¦', 'Precision', 'âœ¦', 'Est. 2018',
 ];
 
 export const EXPERTISE = [
@@ -32,7 +32,7 @@ export const EXPERTISE = [
   {
     title: 'Turnkey Work',
     body: 'As a full-service construction firm, we offer turnkey solutions to streamline the building process for our clients. From conceptualization and design to construction and final handover, we take care of every aspect of the project, ensuring a seamless and hassle-free experience for our clients.',
-    bg: '/turnkey.png',
+    bg: '/turnkey.webp',
   },
   {
     title: 'Renovation Work',
@@ -52,8 +52,8 @@ export const PROJECTS = [
     title: 'Bektash Turkish Cafe',
     label: 'Project 001 / 2024',
     location: 'Hospitality / Kakkanad',
-    bg: 'url("/bektash-3.jpeg") center/cover no-repeat',
-    heroImage: '/bektash-3.jpeg',
+    bg: 'url("/bektash-3.webp") center/cover no-repeat',
+    heroImage: '/bektash-3.webp',
     placeholder: 'linear-gradient(135deg, #1a1a1a 0%, #000 100%)',
     description: 'Bektash is a culinary sanctuary where traditional Turkish charm meets minimalist architectural precision. Located in the heart of Kakkanad, the space features intricate textures, warm ambient lighting, and a layout designed for intimate social connection. Every corner of the cafe is a dialogue between heritage and contemporary luxury.',
     specifications: [
@@ -63,20 +63,20 @@ export const PROJECTS = [
       { label: 'Status', value: 'Completed' }
     ],
     gallery: [
-      '/bektash-1.jpeg',
-      '/bektash-2.jpeg',
-      '/bektash-3.jpeg',
-      '/bektash-4.jpeg',
-      '/bektash-5.jpeg',
-      '/bektash-6.jpeg',
-      '/bektash-7.jpeg',
-      '/bektash-8.jpeg',
-      '/bektash-9.jpeg',
-      '/bektash-10.jpeg',
-      '/bektash-11.jpeg',
-      '/bektash-12.jpeg',
-      '/bektash-13.jpeg',
-      '/bektash-14.jpeg',
+      '/bektash-1.webp',
+      '/bektash-2.webp',
+      '/bektash-3.webp',
+      '/bektash-4.webp',
+      '/bektash-5.webp',
+      '/bektash-6.webp',
+      '/bektash-7.webp',
+      '/bektash-8.webp',
+      '/bektash-9.webp',
+      '/bektash-10.webp',
+      '/bektash-11.webp',
+      '/bektash-12.webp',
+      '/bektash-13.webp',
+      '/bektash-14.webp',
     ]
   },
   {
@@ -84,10 +84,10 @@ export const PROJECTS = [
     title: "Mr. Siyad's Residence",
     label: 'Project 002 / 2024',
     location: 'Residential / Fort Kochi',
-    bg: 'url("/siyad-1.jpeg") center/cover no-repeat',
-    heroImage: '/siyad-1.jpeg',
+    bg: 'url("/siyad-1.webp") center/cover no-repeat',
+    heroImage: '/siyad-1.webp',
     placeholder: 'linear-gradient(135deg, #111 0%, #333 100%)',
-    description: 'A contemporary 4BHK home designed for Mr. Siyad at Fort Kochi, Ernakulam. Built on a compact 2.5 cents plot with a total area of 1442 sqft, this home showcases clean lines, modern detailing, and efficient planning—a perfect blend of style, comfort, and smart space utilization.',
+    description: 'A contemporary 4BHK home designed for Mr. Siyad at Fort Kochi, Ernakulam. Built on a compact 2.5 cents plot with a total area of 1442 sqft, this home showcases clean lines, modern detailing, and efficient planningâ€”a perfect blend of style, comfort, and smart space utilization.',
     specifications: [
       { label: 'Client', value: 'Mr. Siyad' },
       { label: 'Area', value: '1442 Sqft (2.5 cents)' },
@@ -95,21 +95,36 @@ export const PROJECTS = [
       { label: 'Status', value: 'Designed' }
     ],
     gallery: [
-      '/siyad-1.jpeg',
-      '/siyad-2.jpeg',
-      '/siyad-3.jpeg',
-      '/siyad-4.jpeg',
-      '/siyad-5.jpeg',
-      '/siyad-6.jpeg',
-      '/siyad-7.jpeg',
-      '/siyad-8.jpeg',
-      '/siyad-9.jpeg',
-      '/siyad-10.jpeg',
-      '/siyad-11.jpeg',
-      '/siyad-12.jpeg',
-      '/siyad-13.jpeg',
-      '/siyad-14.jpeg',
-      '/siyad-15.jpeg',
+      '/siyad-1.webp',
+      '/siyad-2.webp',
+      '/siyad-3.webp',
+      '/siyad-4.webp',
+      '/siyad-5.webp',
+      '/siyad-6.webp',
+      '/siyad-7.webp',
+      '/siyad-8.webp',
+      '/siyad-9.webp',
+      '/siyad-10.webp',
+      '/siyad-11.webp',
+      '/siyad-12.webp',
+      '/siyad-13.webp',
+      '/siyad-14.webp',
+      '/siyad-15.webp',
+      '/siyad-16.webp',
+      '/siyad-17.webp',
+      '/siyad-18.webp',
+      '/siyad-19.webp',
+      '/siyad-20.webp',
+      '/siyad-21.webp',
+      '/siyad-22.webp',
+      '/siyad-23.webp',
+      '/siyad-24.webp',
+      '/siyad-25.webp',
+      '/siyad-26.webp',
+      '/siyad-27.webp',
+      '/siyad-28.webp',
+      '/siyad-29.webp',
+      '/siyad-30.webp',
     ]
   },
 
@@ -118,7 +133,7 @@ export const PROJECTS = [
     title: 'Summit Corporate Center',
     label: 'Project 003 / 2023',
     location: 'Commercial / Singapore',
-    bg: 'linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.65) 100%), url("/arch-2.jpg") center/cover no-repeat',
+    bg: 'linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.65) 100%), url("/arch-2.webp") center/cover no-repeat',
     heroImage: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1600',
     placeholder: 'linear-gradient(135deg, var(--surface-hi) 0%, var(--surface) 60%, var(--surface-hi) 100%)',
     description: 'Designed as a vertical ecosystem for modern business, the Summit Corporate Center integrates biophilic design with cutting-edge structural engineering. It serves as a landmark of sustainability and technological innovation in the heart of Singapore.',
@@ -213,7 +228,7 @@ export const TESTIMONIALS = [
     poster: 'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800&auto=format&fit=crop'
   },
   {
-    quote: 'A manifesto in stone and light. From the first render to final handover — exceptional precision at every stage.',
+    quote: 'A manifesto in stone and light. From the first render to final handover â€” exceptional precision at every stage.',
     name: 'Ravi Menon',
     title: 'Director, Zenith Development',
     poster: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=800&auto=format&fit=crop'
