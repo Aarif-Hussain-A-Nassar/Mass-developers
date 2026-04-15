@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -57,6 +57,19 @@ function MagneticCTA({ href, children }: { href: string; children: React.ReactNo
 
 export default function Projects() {
   const [active, setActive] = useState(0);
+  const sliderTrackRef = useRef<HTMLDivElement>(null);
+
+  // Auto-scroll the active item into the center of the slider track
+  useEffect(() => {
+    const track = sliderTrackRef.current;
+    if (!track) return;
+    const activeEl = track.children[active] as HTMLElement;
+    if (!activeEl) return;
+    const trackWidth = track.offsetWidth;
+    const itemLeft = activeEl.offsetLeft;
+    const itemWidth = activeEl.offsetWidth;
+    track.scrollTo({ left: itemLeft - trackWidth / 2 + itemWidth / 2, behavior: 'smooth' });
+  }, [active]);
 
   return (
     <section id="projects" style={{ background: '#0a0a0a', padding: 'clamp(4rem, 15vw, 12rem) 0 0 0', position: 'relative', overflow: 'hidden' }}>
@@ -219,7 +232,7 @@ export default function Projects() {
                   <span className="btn-icon">←</span>
                 </button>
 
-                <div className="slider-track">
+                <div className="slider-track" ref={sliderTrackRef}>
                   {PROJECTS.map((_, i) => (
                     <button
                       key={i}
@@ -416,16 +429,19 @@ export default function Projects() {
         .slider-nav-wrap {
            display: flex;
            align-items: center;
-           gap: 1.5rem;
+           gap: 0.75rem;
            justify-content: space-between;
+           width: 100%;
+           box-sizing: border-box;
         }
 
         .slider-btn {
            background: #ffffff;
            border: none;
            color: #000000;
-           width: 50px;
-           height: 50px;
+           width: 44px;
+           height: 44px;
+           min-width: 44px;
            display: flex;
            align-items: center;
            justify-content: center;
@@ -440,18 +456,20 @@ export default function Projects() {
         }
 
         .btn-icon {
-           font-size: 1.4rem;
+           font-size: 1.2rem;
            line-height: 1;
         }
 
         .slider-track {
            display: flex;
-           gap: 3rem;
+           gap: 2rem;
            overflow-x: auto;
-           padding: 1rem 0;
+           padding: 0.75rem 0.5rem;
            scrollbar-width: none;
            scroll-snap-type: x mandatory;
+           scroll-behavior: smooth;
            flex: 1;
+           min-width: 0;
         }
 
         .slider-track::-webkit-scrollbar {
@@ -476,7 +494,7 @@ export default function Projects() {
 
         .slider-num {
            font-family: var(--font-inter);
-           font-size: 4rem;
+           font-size: clamp(2.5rem, 10vw, 4rem);
            font-weight: 950;
            color: #fff;
            letter-spacing: -0.05em;
@@ -508,11 +526,19 @@ export default function Projects() {
         }
 
         @media (max-width: 480px) {
-           .slider-num {
-              font-size: 3.5rem;
+           .slider-btn {
+              width: 36px;
+              height: 36px;
+              min-width: 36px;
+           }
+           .btn-icon {
+              font-size: 1rem;
            }
            .slider-track {
-              gap: 2rem;
+              gap: 1.25rem;
+           }
+           .slider-nav-wrap {
+              gap: 0.5rem;
            }
         }
 
