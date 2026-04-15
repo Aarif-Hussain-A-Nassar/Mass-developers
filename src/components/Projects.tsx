@@ -57,19 +57,6 @@ function MagneticCTA({ href, children }: { href: string; children: React.ReactNo
 
 export default function Projects() {
   const [active, setActive] = useState(0);
-  const sliderTrackRef = useRef<HTMLDivElement>(null);
-
-  // Auto-scroll the active item into the center of the slider track
-  useEffect(() => {
-    const track = sliderTrackRef.current;
-    if (!track) return;
-    const activeEl = track.children[active] as HTMLElement;
-    if (!activeEl) return;
-    const trackWidth = track.offsetWidth;
-    const itemLeft = activeEl.offsetLeft;
-    const itemWidth = activeEl.offsetWidth;
-    track.scrollTo({ left: itemLeft - trackWidth / 2 + itemWidth / 2, behavior: 'smooth' });
-  }, [active]);
 
   return (
     <section id="projects" style={{ background: '#0a0a0a', padding: 'clamp(4rem, 15vw, 12rem) 0 0 0', position: 'relative', overflow: 'hidden' }}>
@@ -205,53 +192,36 @@ export default function Projects() {
               </motion.div>
             </AnimatePresence>
 
-            {/* Desktop Pagination */}
-            <div className="projects-pagination">
-              {PROJECTS.map((_, i) => (
+            {/* Pagination — all screens */}
+            <div className="universal-pagination">
+              <div className="mob-pag-wrap">
                 <button
-                  key={i}
-                  onClick={() => setActive(i)}
-                  className={`pag-dot ${i === active ? 'active' : ''}`}
-                >
-                  <span className="pag-num">
-                    {(i + 1).toString().padStart(2, '0')}
-                  </span>
-                  <div className="pag-line" />
-                </button>
-              ))}
-            </div>
-
-            {/* Mobile Index Number Carousel */}
-            <div className="mobile-index-slider">
-              <div className="slider-nav-wrap">
-                <button 
                   onClick={() => setActive((prev) => (prev > 0 ? prev - 1 : PROJECTS.length - 1))}
-                  className="slider-btn"
+                  className="mob-pag-arrow"
                   aria-label="Previous Project"
                 >
-                  <span className="btn-icon">←</span>
+                  ←
                 </button>
 
-                <div className="slider-track" ref={sliderTrackRef}>
+                <div className="mob-pag-dots">
                   {PROJECTS.map((_, i) => (
                     <button
                       key={i}
                       onClick={() => setActive(i)}
-                      className={`slider-item ${i === active ? 'active' : ''}`}
+                      className={`mob-pag-dot ${i === active ? 'active' : ''}`}
+                      aria-label={`Project ${i + 1}`}
                     >
-                      <span className="slider-num">
-                        {(i + 1).toString().padStart(2, '0')}
-                      </span>
+                      {i + 1}
                     </button>
                   ))}
                 </div>
 
-                <button 
+                <button
                   onClick={() => setActive((prev) => (prev < PROJECTS.length - 1 ? prev + 1 : 0))}
-                  className="slider-btn"
+                  className="mob-pag-arrow"
                   aria-label="Next Project"
                 >
-                  <span className="btn-icon">→</span>
+                  →
                 </button>
               </div>
             </div>
@@ -356,165 +326,74 @@ export default function Projects() {
            left: 100%;
         }
 
-        .mobile-nav-arrows {
-           display: none;
-           gap: 1.5rem;
-           margin-top: 2rem;
+        .universal-pagination {
+           margin-top: 6rem;
+           width: 100%;
         }
 
-        .nav-arrow {
-           width: 44px;
-           height: 44px;
+        .mob-pag-wrap {
+           display: flex;
+           align-items: center;
+           justify-content: space-between;
+           gap: 0.75rem;
+           width: 100%;
+        }
+
+        .mob-pag-arrow {
            background: #ffffff;
            border: none;
            color: #000000;
+           width: 40px;
+           height: 40px;
+           min-width: 40px;
            display: flex;
            align-items: center;
            justify-content: center;
-           font-size: 1.2rem;
+           font-size: 1.1rem;
            cursor: pointer;
-           transition: all 0.3s ease;
+           flex-shrink: 0;
         }
 
-        .nav-arrow:hover {
-           background: var(--surface-hi);
-           border-color: var(--white-30);
-        }
-
-        .projects-pagination {
-           margin-top: 6rem;
-           display: flex;
-           gap: 2rem;
-        }
-
-        .pag-dot {
-           background: none;
-           border: none;
-           cursor: pointer;
-           padding: 0;
+        .mob-pag-dots {
            display: flex;
            align-items: center;
-           gap: 1rem;
-           opacity: 0.25;
-           transition: all 0.4s ease;
+           justify-content: center;
+           gap: 0.35rem;
+           flex: 1;
+           flex-wrap: wrap;
         }
 
-        .pag-dot.active {
-           opacity: 1;
-        }
-
-        .pag-num {
+        .mob-pag-dot {
+           background: none;
+           border: none;
+           color: rgba(255,255,255,0.25);
            font-family: var(--font-inter);
            font-size: 0.75rem;
-           font-weight: 900;
-           color: #fff;
-        }
-
-        .pag-line {
-           width: 30px;
-           height: 1px;
-           background: rgba(255,255,255,0.1);
-        }
-
-        .pag-dot.active .pag-line {
-           background: #fff;
-        }
-
-        .mobile-index-slider {
-           display: none;
-           margin-top: 4rem;
-           width: 100%;
-        }
-
-        .slider-nav-wrap {
-           display: flex;
-           align-items: center;
-           gap: 0.75rem;
-           justify-content: space-between;
-           width: 100%;
-           box-sizing: border-box;
-        }
-
-        .slider-btn {
-           background: #ffffff;
-           border: none;
-           color: #000000;
-           width: 44px;
-           height: 44px;
-           min-width: 44px;
+           font-weight: 700;
+           width: 28px;
+           height: 28px;
            display: flex;
            align-items: center;
            justify-content: center;
            cursor: pointer;
-           flex-shrink: 0;
-           transition: all 0.3s ease;
-        }
-
-        @media (hover: hover) {
-          .slider-btn:hover {
-             background: rgba(255,255,255,0.8);
-          }
-        }
-
-        .btn-icon {
-           font-size: 1.2rem;
-           line-height: 1;
-        }
-
-        .slider-track {
-           display: flex;
-           gap: 2rem;
-           overflow-x: auto;
-           padding: 0.75rem 0.5rem;
-           scrollbar-width: none;
-           scroll-snap-type: x mandatory;
-           scroll-behavior: smooth;
-           flex: 1;
-           min-width: 0;
-        }
-
-        .slider-track::-webkit-scrollbar {
-           display: none;
-        }
-
-        .slider-item {
-           background: none;
-           border: none;
-           cursor: pointer;
+           transition: color 0.3s ease;
            padding: 0;
-           scroll-snap-align: center;
-           flex-shrink: 0;
-           opacity: 0.2;
-           transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+           border-bottom: 1px solid transparent;
         }
 
-        .slider-item.active {
-           opacity: 1;
-           transform: scale(1.2);
-        }
-
-        .slider-num {
-           font-family: var(--font-inter);
-           font-size: clamp(2.5rem, 10vw, 4rem);
-           font-weight: 950;
-           color: #fff;
-           letter-spacing: -0.05em;
+        .mob-pag-dot.active {
+           color: #ffffff;
+           border-bottom-color: #ffffff;
         }
 
         @media (max-width: 1024px) {
-          .projects-pagination {
-             display: none;
-          }
-          .mobile-index-slider {
-             display: block;
-          }
           .projects-grid {
             grid-template-columns: 1fr;
             gap: 3rem;
             min-height: auto;
           }
           .projects-image-side {
-            width: calc(100% + 2rem); 
+            width: calc(100% + 2rem);
             margin-left: -1rem;
             height: 50vh;
             min-height: 350px;
@@ -524,23 +403,6 @@ export default function Projects() {
              right: 1rem;
              font-size: clamp(4rem, 15vw, 8rem);
           }
-        }
-
-        @media (max-width: 480px) {
-           .slider-btn {
-              width: 36px;
-              height: 36px;
-              min-width: 36px;
-           }
-           .btn-icon {
-              font-size: 1rem;
-           }
-           .slider-track {
-              gap: 1.25rem;
-           }
-           .slider-nav-wrap {
-              gap: 0.5rem;
-           }
         }
 
         @media (max-width: 768px) {
@@ -555,10 +417,6 @@ export default function Projects() {
              margin-bottom: 2.5rem;
              gap: 2rem;
           }
-          .projects-pagination {
-             margin-left: -1.25rem;
-             padding: 0 1.25rem;
-          }
         }
 
         @media (max-width: 480px) {
@@ -570,10 +428,19 @@ export default function Projects() {
            .project-ghost-label {
               font-size: 5rem;
            }
-           .pag-card {
-              width: 180px;
+           .mob-pag-arrow {
+              width: 34px;
+              height: 34px;
+              min-width: 34px;
+              font-size: 0.9rem;
+           }
+           .mob-pag-dot {
+              width: 24px;
+              height: 24px;
+              font-size: 0.65rem;
            }
         }
+
       `}</style>
     </section>
   );
