@@ -336,6 +336,13 @@ export const TESTIMONIALS = [
     poster: null,
     videoUrl: 'https://kihgreuv2nuypbvt.public.blob.vercel-storage.com/JAS%20RESIDENCE.mp4'
   },
+  {
+    quote: "Experience the exquisite allure of Mr. Husaib Residence, where stylish modernity meets unparalleled luxury.",
+    name: 'Mr. Husaib',
+    title: 'Client, Husaib Residence',
+    poster: null,
+    videoUrl: 'https://kihgreuv2nuypbvt.public.blob.vercel-storage.com/HUSAIB%20RESIDENCE.mp4'
+  },
 ];
 
 export const JOURNAL = [
