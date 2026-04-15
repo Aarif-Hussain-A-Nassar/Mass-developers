@@ -309,15 +309,15 @@ export default function Projects() {
            font-size: 1.2rem;
            cursor: pointer;
            pointer-events: auto;
-           transition: all 0.3s ease;
            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
            border: none;
         }
 
-        .stage-btn:hover {
-           background: rgba(255,255,255,0.1);
-           border-color: rgba(255,255,255,0.3);
-           transform: translateY(-50%) scale(1.05);
+        @media (hover: hover) {
+          .stage-btn:hover {
+             background: rgba(255,255,255,0.85);
+             transform: scale(1.05);
+          }
         }
 
         .project-ghost-label {
@@ -450,9 +450,10 @@ export default function Projects() {
            transition: all 0.3s ease;
         }
 
-        .slider-btn:hover {
-           background: var(--surface-hi);
-           border-color: var(--white-30);
+        @media (hover: hover) {
+          .slider-btn:hover {
+             background: rgba(255,255,255,0.8);
+          }
         }
 
         .btn-icon {
