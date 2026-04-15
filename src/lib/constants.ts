@@ -321,14 +321,50 @@ export const JOURNAL = [
   {
     tag: 'Journal / 01',
     title: 'Maximizing Space: The 2.5 Cent Challenge',
-    excerpt: 'Detailed insights on how we engineered Mr. Siyad’s 4BHK residence on a compact plot in Fort Kochi without compromising on light or luxury.',
+    excerpt: "Detailed insights on how we engineered Mr. Siyad's 4BHK residence on a compact plot in Fort Kochi without compromising on light or luxury.",
     date: '2024 / Apr',
   },
   {
     tag: 'Journal / 02',
     title: 'The Vertical Landscape: Choice Paradise Interiors',
-    excerpt: 'Design strategies used for South India’s tallest residential tower, focusing on wind-dynamics and panoramic spatial flow.',
+    excerpt: "Design strategies used for South India's tallest residential tower, focusing on wind-dynamics and panoramic spatial flow.",
     date: '2024 / Feb',
+  },
+  {
+    tag: 'Journal / 03',
+    title: 'Crafting Atmosphere: The Bektash Turkish Cafe',
+    excerpt: 'How we wove traditional Turkish architectural heritage into a 2,800 sqft modern hospitality space in Kakkanad — balancing intimacy, texture, and ambient drama.',
+    date: '2024 / Jun',
+  },
+  {
+    tag: 'Journal / 04',
+    title: 'Coastal Living: Designing for Arookutty',
+    excerpt: "A deep dive into Mr. Jalal's 1950 sqft residence — how the coastal microclimate of Arookutty shaped every spatial decision, from orientation to material selection.",
+    date: '2024 / Mar',
+  },
+  {
+    tag: 'Journal / 05',
+    title: "Making a Statement: Dr. Shefeek's 4500 Sqft Home",
+    excerpt: "Exploring how generous floor area unlocks elevated living — the design philosophy behind Dr. Shefeek's landmark residence in Eramallor, where scale and restraint coexist.",
+    date: '2024 / Aug',
+  },
+  {
+    tag: 'Journal / 06',
+    title: 'High-Rise Interior Design: Units 6D & 28D',
+    excerpt: 'The unique challenges of designing luxury apartments at height — how natural light, view corridors, and curated material palettes define the character of Choice Paradise residences.',
+    date: '2024 / Sep',
+  },
+  {
+    tag: 'Journal / 07',
+    title: 'Visualization as a Design Tool: Our 3D Process',
+    excerpt: 'Before a wall is raised, a space must be seen. A look behind the scenes at how MASS Developers uses photorealistic 3D visualization to refine design decisions and communicate vision.',
+    date: '2024 / Oct',
+  },
+  {
+    tag: 'Journal / 08',
+    title: 'Vernacular Meets Contemporary: Mishana Residence',
+    excerpt: "Designing the Mishana Residence in Arookutty required a sensitive approach to Kerala's built vernacular — integrating local sensibility with contemporary spatial planning for a home that feels both rooted and refined.",
+    date: '2024 / Nov',
   },
 ];
 
