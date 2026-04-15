@@ -274,6 +274,30 @@ export const PROJECTS = [
       '/3dworks-30.webp',
     ]
   },
+  {
+    id: 'mishana-residence',
+    title: 'Mishana Residence',
+    label: 'Project 008 / 2024',
+    location: 'Residential / Arookutty',
+    bg: 'url("/mihsana-1.webp") center/cover no-repeat',
+    heroImage: '/mihsana-1.webp',
+    placeholder: 'linear-gradient(135deg, #1a1a1a 0%, #000 100%)',
+    description: 'The Mishana Residence in Arookutty is a thoughtfully designed home that balances warmth, functionality, and architectural refinement. Situated in the serene landscape of Kerala, this project reflects a harmonious blend of contemporary form and local sensibility — crafted with precision and built to endure.',
+    specifications: [
+      { label: 'Project', value: 'Mishana Residence' },
+      { label: 'Location', value: 'Arookutty, Kerala' },
+      { label: 'Status', value: 'Completed' }
+    ],
+    gallery: [
+      '/mihsana-1.webp',
+      '/mihsana-2.webp',
+      '/mihsana-3.webp',
+      '/mihsana-4.webp',
+      '/mihsana-5.webp',
+      '/mihsana-6.webp',
+      '/mihsana-7.webp',
+    ]
+  },
 ];
 
 export const TESTIMONIALS = [
