@@ -329,6 +329,13 @@ export const TESTIMONIALS = [
     poster: null,
     videoUrl: 'https://kihgreuv2nuypbvt.public.blob.vercel-storage.com/JALAL%20RESIDENCE.mp4'
   },
+  {
+    quote: "Years of dreams, challenges, and aspirations culminate in this — the moment they step into their home, eyes gleaming with joy. And in that instant, their happiness becomes ours, making every endeavor profoundly rewarding.",
+    name: 'Muhammed Jas',
+    title: 'Client, Jas Residence',
+    poster: null,
+    videoUrl: 'https://kihgreuv2nuypbvt.public.blob.vercel-storage.com/JAS%20RESIDENCE.mp4'
+  },
 ];
 
 export const JOURNAL = [
