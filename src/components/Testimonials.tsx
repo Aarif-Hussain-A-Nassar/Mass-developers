@@ -1,11 +1,29 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { TESTIMONIALS } from '@/lib/constants';
 import { EASE } from '@/lib/utils';
 import FadeIn from './FadeIn';
+
+// Renders a muted video and seeks to 0.001s so the browser paints the first frame
+function VideoThumb({ src }: { src: string }) {
+  const ref = useRef<HTMLVideoElement>(null);
+  return (
+    <video
+      ref={ref}
+      src={src}
+      muted
+      playsInline
+      preload="metadata"
+      onLoadedMetadata={() => {
+        if (ref.current) ref.current.currentTime = 0.001;
+      }}
+      style={{ width: '100%', height: '100%', objectFit: 'contain', position: 'absolute', inset: 0 }}
+    />
+  );
+}
 
 export default function Testimonials() {
   const [active, setActive] = useState(0);
@@ -23,7 +41,7 @@ export default function Testimonials() {
   return (
     <section id="testimonials" style={{ background: 'var(--bg)', padding: 'clamp(4rem, 10vw, 8rem) 0' }}>
       <div className="container">
-        <FadeIn><div className="section-eyebrow"><span>Testimonials / 004</span></div></FadeIn>
+        <FadeIn><div className="section-eyebrow"><span>Testimonials / 003</span></div></FadeIn>
 
         <div className="grid-2-col" style={{ gap: 'clamp(4rem, 8vw, 6rem)', alignItems: 'center' }}>
           {/* Text Column */}
@@ -62,16 +80,21 @@ export default function Testimonials() {
               <motion.div key={active} initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 1.05 }} transition={{ duration: 0.4, ease: EASE }} style={{ width: '100%', height: '100%', position: 'absolute', inset: 0 }}>
                 {!isPlaying ? (
                   <>
-                    <Image
-                      src={TESTIMONIALS[active].poster}
-                      alt="Testimonial Poster"
-                      fill
-                      loading="lazy"
-                      placeholder="blur"
-                      blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                      style={{ objectFit: TESTIMONIALS[active].videoUrl ? 'contain' : 'cover', filter: 'grayscale(30%)' }}
-                    />
+                    {TESTIMONIALS[active].poster ? (
+                      <Image
+                        src={TESTIMONIALS[active].poster!}
+                        alt="Testimonial Poster"
+                        fill
+                        loading="lazy"
+                        placeholder="blur"
+                        blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        style={{ objectFit: TESTIMONIALS[active].videoUrl ? 'contain' : 'cover', filter: 'grayscale(30%)' }}
+                      />
+                    ) : (
+                      /* No poster — seek to first frame via ref */
+                      <VideoThumb src={TESTIMONIALS[active].videoUrl!} />
+                    )}
                     <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.2)' }} />
 
                     {/* Custom Play Button - Only show if video exists */}
@@ -89,7 +112,7 @@ export default function Testimonials() {
                 ) : (
                   <video
                     src={TESTIMONIALS[active].videoUrl}
-                    poster={TESTIMONIALS[active].poster}
+                    {...(TESTIMONIALS[active].poster ? { poster: TESTIMONIALS[active].poster! } : {})}
                     autoPlay
                     controls
                     playsInline
@@ -105,16 +128,18 @@ export default function Testimonials() {
 
             {/* Preload all testimonial posters for instant switching */}
             <div style={{ display: 'none' }}>
-              {TESTIMONIALS.map((t, i) => (
-                <Image 
-                  key={i} 
-                  src={t.poster} 
-                  alt="preload" 
-                  width={10} 
-                  height={10} 
-                  priority={i === 0}
-                />
-              ))}
+              {TESTIMONIALS.map((t, i) =>
+                t.poster ? (
+                  <Image
+                    key={i}
+                    src={t.poster}
+                    alt="preload"
+                    width={10}
+                    height={10}
+                    priority={i === 0}
+                  />
+                ) : null
+              )}
             </div>
           </div>
 

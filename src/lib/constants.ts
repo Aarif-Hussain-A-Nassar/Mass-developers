@@ -315,6 +315,13 @@ export const TESTIMONIALS = [
     poster: '/siyad-1.webp',
     videoUrl: 'https://kihgreuv2nuypbvt.public.blob.vercel-storage.com/siyad-vedio.mov'
   },
+  {
+    quote: "Every brick, and every detail — crafted with passion, built for a lifetime of memories. Seeing dreams take shape and witnessing the joy of a family stepping into their new home is the ultimate reward. A charming 1400 sqft Colonial-style home in Pachalam, Ernakulam blending timeless elegance with modern comfort.",
+    name: 'Shiju Residence',
+    title: 'Client, Pachalam, Ernakulam',
+    poster: null,
+    videoUrl: 'https://kihgreuv2nuypbvt.public.blob.vercel-storage.com/SHIJU%20RESIDENCE.mp4'
+  },
 ];
 
 export const JOURNAL = [
