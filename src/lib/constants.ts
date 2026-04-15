@@ -343,6 +343,27 @@ export const TESTIMONIALS = [
     poster: null,
     videoUrl: 'https://kihgreuv2nuypbvt.public.blob.vercel-storage.com/HUSAIB%20RESIDENCE.mp4'
   },
+  {
+    quote: "Explore the elegant allure of Mr. Aseez Residence, where modern aesthetics blend seamlessly with luxurious living.",
+    name: 'Mr. Aseez',
+    title: 'Client, Aseez Residence',
+    poster: null,
+    videoUrl: 'https://kihgreuv2nuypbvt.public.blob.vercel-storage.com/ASEEZ%20RESIDENCE.mp4'
+  },
+  {
+    quote: "Discover the perfect blend of style and affordability with our custom-designed contemporary house! Tailored for budget-conscious clients, this home offers sleek, modern architecture and high-quality finishes that create a warm and inviting atmosphere — the ideal choice for those seeking both luxury and cost-effective living.",
+    name: 'Mr. Rizvi',
+    title: 'Client, Thopumpady — 1424 Sqft',
+    poster: null,
+    videoUrl: 'https://kihgreuv2nuypbvt.public.blob.vercel-storage.com/RIZVI.mp4'
+  },
+  {
+    quote: "Bektash Turkish Restaurant — a culinary sanctuary where traditional Turkish charm meets minimalist architectural precision. Every corner is a dialogue between heritage and contemporary luxury, crafted by MASS Developers with passion and precision.",
+    name: 'Bektash Turkish Cafe',
+    title: 'Client, Kakkanad, Ernakulam',
+    poster: null,
+    videoUrl: 'https://kihgreuv2nuypbvt.public.blob.vercel-storage.com/BEKTASH%20REST.mp4'
+  },
 ];
 
 export const JOURNAL = [
