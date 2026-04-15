@@ -151,6 +151,30 @@ export const PROJECTS = [
       '/jalal-6.webp',
     ]
   },
+  {
+    id: 'shefeek-residence',
+    title: "Dr. Shefeek's Residence",
+    label: 'Project 004 / 2024',
+    location: 'Residential / Eramallor',
+    bg: 'url("/shafek-5.webp") center/cover no-repeat',
+    heroImage: '/shafek-5.webp',
+    placeholder: 'linear-gradient(135deg, #1a1a1a 0%, #000 100%)',
+    description: 'A distinguished 4500 sqft residence crafted for Dr. Shefeek in Eramallor. This project embodies refined architectural sensibility — blending generous spatial planning with premium finishes and thoughtful detailing, delivering a home that reflects the client\'s stature and lifestyle with timeless elegance.',
+    specifications: [
+      { label: 'Client', value: 'Dr. Shefeek' },
+      { label: 'Area', value: '4500 Sqft' },
+      { label: 'Location', value: 'Eramallor, Kerala' },
+      { label: 'Status', value: 'Completed' }
+    ],
+    gallery: [
+      '/shafek-1.webp',
+      '/shafek-2.webp',
+      '/shafek-3.webp',
+      '/shafek-4.webp',
+      '/shafek-5.webp',
+      '/shafek-6.webp',
+    ]
+  },
 ];
 
 export const TESTIMONIALS = [
