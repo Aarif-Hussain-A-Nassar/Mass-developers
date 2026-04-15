@@ -322,6 +322,13 @@ export const TESTIMONIALS = [
     poster: null,
     videoUrl: 'https://kihgreuv2nuypbvt.public.blob.vercel-storage.com/SHIJU%20RESIDENCE.mp4'
   },
+  {
+    quote: "The charming modern residence exudes its lively aesthetic through a dynamic fusion of minimalism and opulence. Every wall is vividly adorned with bold colors that reflect the resident's character and allure. This home stands as a quintessential representation of our designer's vibrant creativity in contemporary design.",
+    name: 'Mr. Jalal',
+    title: 'Client, Arookutty — 1950 Sqft',
+    poster: null,
+    videoUrl: 'https://kihgreuv2nuypbvt.public.blob.vercel-storage.com/JALAL%20RESIDENCE.mp4'
+  },
 ];
 
 export const JOURNAL = [
