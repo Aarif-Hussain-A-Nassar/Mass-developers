@@ -120,12 +120,25 @@ function FloatingInput({ label, type = 'text', ...props }: any) {
 
 /* ─── Main Contact Page ─── */
 export default function Contact() {
-  const [formState, setFormState] = useState<'idle' | 'sending' | 'sent'>('idle');
+  const [formState, setFormState] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setFormState('sending');
-    setTimeout(() => setFormState('sent'), 1500);
+    try {
+      const res = await fetch('https://formspree.io/f/mjgjwywd', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(e.currentTarget),
+      });
+      if (res.ok) {
+        setFormState('sent');
+      } else {
+        setFormState('error');
+      }
+    } catch {
+      setFormState('error');
+    }
   };
 
   return (
@@ -242,19 +255,29 @@ export default function Contact() {
                   ) : (
                     <motion.form key="form" exit={{ opacity: 0, y: -20 }} onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '3rem' }}>
                       <p style={{ fontSize: '0.7rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.2em', opacity: 0.4 }}>Send an Inquiry</p>
-                      <FloatingInput label="Your Full Name" required />
+                      <FloatingInput label="Your Full Name" name="name" required />
                       <div className="form-row-grid">
-                        <FloatingInput label="Phone Number" type="tel" required />
-                        <FloatingInput label="Email Address" type="email" required />
+                        <FloatingInput label="Phone Number" name="phone" type="tel" required />
+                        <FloatingInput label="Email Address" name="email" type="email" required />
                       </div>
                       <div style={{ position: 'relative' }}>
                          <label style={{ display: 'block', fontSize: '0.62rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.2em', marginBottom: '0.5rem', opacity: 0.4 }}>Project Details</label>
-                         <textarea required placeholder="TELL US ABOUT YOUR VISION" style={{ width: '100%', background: 'none', border: 'none', borderBottom: '1px solid #ddd', padding: '1rem 0', fontFamily: 'var(--font-manrope)', fontSize: '1rem', fontWeight: 600, outline: 'none', color: '#000', resize: 'none' }} rows={4} />
+                         <textarea name="message" required placeholder="TELL US ABOUT YOUR VISION" style={{ width: '100%', background: 'none', border: 'none', borderBottom: '1px solid #ddd', padding: '1rem 0', fontFamily: 'var(--font-manrope)', fontSize: '1rem', fontWeight: 600, outline: 'none', color: '#000', resize: 'none' }} rows={4} />
                       </div>
-                      
+
+                      {formState === 'error' && (
+                        <p style={{ fontSize: '0.75rem', fontWeight: 700, color: '#c00', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+                          ✗ Submission failed. Please try again or email us directly.
+                        </p>
+                      )}
+
                       <div style={{ marginTop: '1rem', width: '100%' }}>
-                        <MagneticButton type="submit" style={{ width: '100%', padding: '1.8rem 1rem', background: '#000', color: '#fff', border: 'none', fontFamily: 'var(--font-inter)', fontWeight: 900, fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.3em', cursor: 'pointer' }}>
-                          Initialize Project
+                        <MagneticButton
+                          type="submit"
+                          disabled={formState === 'sending'}
+                          style={{ width: '100%', padding: '1.8rem 1rem', background: '#000', color: '#fff', border: 'none', fontFamily: 'var(--font-inter)', fontWeight: 900, fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.3em', cursor: formState === 'sending' ? 'not-allowed' : 'pointer', opacity: formState === 'sending' ? 0.6 : 1, transition: 'opacity 0.3s ease' }}
+                        >
+                          {formState === 'sending' ? 'Sending…' : 'Initialize Project'}
                         </MagneticButton>
                       </div>
                     </motion.form>
