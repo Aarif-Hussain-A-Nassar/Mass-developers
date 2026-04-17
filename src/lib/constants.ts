@@ -419,3 +419,4 @@ export const JOURNAL = [
 ];
 
 export const SECTIONS_IDS = ['hero', 'about-us', 'expertise', 'projects', 'testimonials', 'journal', 'contact', 'mass-interio'];
+//Form spree mail id and password : massdevelopers@outlook.com and Mass123@
