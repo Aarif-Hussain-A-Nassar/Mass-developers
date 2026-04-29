@@ -408,9 +408,9 @@ export default function About() {
   ];
 
   const team = [
-    { name: 'Al Ameen', role: 'Mep Engineer', initials: 'AA', image: '/founder-1.jpg' },
-    { name: 'Siyad', role: 'Site Co-ordinator', initials: 'SY', image: '/founder-2.jpg' },
-    { name: 'Mus-ab', role: 'Civil Engineer', initials: 'MA', image: '/founder-3.jpg' },
+    { name: 'Al Ameen', role: 'Founder · B.Tech EEE', initials: 'AA', image: '/founder-1.jpg' },
+    { name: 'Mus-ab', role: 'Co-Founder · B.Tech Civil', initials: 'MA', image: '/founder-3.jpg' },
+    { name: 'Siyad', role: 'Co-Founder · Diploma', initials: 'SY', image: '/founder-2.jpg' },
   ];
 
   return (
