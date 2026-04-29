@@ -19,6 +19,9 @@ export const metadata: Metadata = {
   description: 'Mass Developers — precision architecture, luxury interiors, and structural excellence. Building spaces that define lifestyle.',
   keywords: ['architecture', 'luxury', 'design', 'construction', 'mass developers', 'real estate', 'interior design'],
   metadataBase: new URL('https://massdevelopers.in'),
+  verification: {
+    google: 'eO7V4cNSYRFyG5NPKHUBtuF8I25Ik9cYJTZzhszNRwA',
+  },
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: '32x32', type: 'image/x-icon' },
