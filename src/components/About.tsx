@@ -150,7 +150,7 @@ const About: React.FC = () => {
             <div className="narrative-content">
               <FadeIn delay={0.2} direction="left">
                 <p>
-                  In our neighborhood, four friends saw a gap. Construction firms were everywhere, but honest execution was rare. We pooled our expertise—engineering, design, and management—to launch MASS with a &apos;client-first&apos; DNA.
+                  In our neighborhood, three friends saw a gap. Construction firms were everywhere, but honest execution was rare. We pooled our expertise—engineering, design, and management—to launch MASS with a &apos;client-first&apos; DNA.
                 </p>
               </FadeIn>
               <FadeIn delay={0.35} direction="left">
