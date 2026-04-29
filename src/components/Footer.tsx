@@ -123,15 +123,16 @@ export default function Footer() {
               <h4 style={{ fontFamily: 'var(--font-inter)', fontSize: '0.65rem', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.3em', marginBottom: '2rem', color: '#000', opacity: 0.3 }}>Inquiries</h4>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                  <a href="https://wa.me/918089248246" target="_blank" rel="noopener noreferrer" className="location-link" style={{ textDecoration: 'none' }}>
+                    <p style={{ fontFamily: 'var(--font-manrope)', fontSize: 'clamp(0.85rem, 1vw, 0.9rem)', color: 'rgba(0,0,0,0.8)', fontWeight: 600 }}>
+                      <span style={{ fontSize: '0.6rem', opacity: 0.4, display: 'block', marginBottom: '0.4rem' }}>WHATSAPP (PRIMARY)</span>
+                      +91 80892 48246
+                    </p>
+                  </a>
                   <a href="tel:+917025576777" className="location-link" style={{ textDecoration: 'none' }}>
                     <p style={{ fontFamily: 'var(--font-manrope)', fontSize: 'clamp(0.85rem, 1vw, 0.9rem)', color: 'rgba(0,0,0,0.8)', fontWeight: 600 }}>
                       <span style={{ fontSize: '0.6rem', opacity: 0.4, display: 'block', marginBottom: '0.4rem' }}>CALL BASE</span>
                       +91 70255 76777
-                    </p>
-                  </a>
-                  <a href="tel:+918089248246" className="location-link" style={{ textDecoration: 'none' }}>
-                    <p style={{ fontFamily: 'var(--font-manrope)', fontSize: 'clamp(0.85rem, 1vw, 0.9rem)', color: 'rgba(0,0,0,0.8)', fontWeight: 600 }}>
-                      +91 80892 48246
                     </p>
                   </a>
                 </div>

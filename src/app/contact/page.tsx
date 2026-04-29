@@ -208,8 +208,15 @@ export default function Contact() {
                 <div style={{ display: 'grid', gap: '3rem' }}>
                   <div style={{ borderLeft: '1px solid #ddd', paddingLeft: '1.5rem' }}>
                     <h3 style={{ fontSize: '0.65rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.2em', color: '#888', marginBottom: '1rem' }}>Call Us</h3>
-                    <p style={{ fontSize: 'clamp(1.1rem, 2vw, 1.4rem)', fontWeight: 700, fontFamily: 'var(--font-inter)' }}>+91 70255 76777</p>
-                    <p style={{ fontSize: 'clamp(1.1rem, 2vw, 1.4rem)', fontWeight: 700, fontFamily: 'var(--font-inter)', opacity: 0.4 }}>+91 80892 48246</p>
+                    <a href="https://wa.me/918089248246" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
+                      <p style={{ fontSize: 'clamp(1.1rem, 2vw, 1.4rem)', fontWeight: 700, fontFamily: 'var(--font-inter)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                        +91 80892 48246
+                        <span style={{ fontSize: '0.55rem', fontWeight: 900, letterSpacing: '0.1em', background: '#25D366', color: '#fff', padding: '0.2rem 0.5rem', borderRadius: '2px' }}>WHATSAPP</span>
+                      </p>
+                    </a>
+                    <a href="tel:+917025576777" style={{ textDecoration: 'none', color: 'inherit' }}>
+                      <p style={{ fontSize: 'clamp(1.1rem, 2vw, 1.4rem)', fontWeight: 700, fontFamily: 'var(--font-inter)', opacity: 0.4 }}>+91 70255 76777</p>
+                    </a>
                   </div>
                   <div style={{ borderLeft: '1px solid #ddd', paddingLeft: '1.5rem' }}>
                     <h3 style={{ fontSize: '0.65rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.2em', color: '#888', marginBottom: '1rem' }}>Mail Us</h3>
