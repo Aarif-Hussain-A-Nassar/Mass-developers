@@ -4,9 +4,9 @@ import React, { useRef } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 
 const milestones = [
-  { year: '2019', event: 'Founded by four neighborhood friends with a vision for honest construction and uncompromising quality.' },
+  { year: '2019', event: 'Founded by three friends with a vision for honest construction and uncompromising quality.' },
   { year: '2021', event: 'Gained recognition for structural integrity, expanding into large-scale residential and commercial projects.' },
-  { year: '2023', event: 'Certified as one of the most trusted regional developers with 1000+ happy families served.' },
+  { year: '2023', event: 'Certified as one of the most trusted regional developers — serving clients across Kerala with precision and integrity.' },
   { year: '2024', event: 'Continuing our mission: building architectural legacies, one project at a time.' },
 ];
 
@@ -48,8 +48,6 @@ function WordReveal({
 const About: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
 
-  const yearsOfExp = new Date().getFullYear() - 2019;
-
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ['start end', 'end start'],
@@ -59,11 +57,8 @@ const About: React.FC = () => {
   const imageY = useSpring(rawImageY, { stiffness: 60, damping: 20 });
 
   const stats = [
-    { value: `${yearsOfExp}+`, label: 'Years' },
-    { value: '150+', label: 'Projects' },
-    { value: '1000+', label: 'Families' },
-    { value: '02', label: 'Offices' },
-    { value: '50+', label: 'Staff' },
+    { value: '8+', label: 'Years' },
+    { value: '150+', label: 'Clients' },
   ];
 
   return (
@@ -132,16 +127,7 @@ const About: React.FC = () => {
                 </div>
               </motion.div>
 
-              <motion.div
-                className="badge badge-light"
-                initial={{ opacity: 0, x: 20, rotate: 5 }}
-                whileInView={{ opacity: 1, x: 0, rotate: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.6 }}
-              >
-                <strong>{yearsOfExp}+</strong>
-                <span>Years of Quality</span>
-              </motion.div>
+
             </motion.div>
           </div>
 
@@ -325,10 +311,10 @@ const About: React.FC = () => {
         }
         
         @media (min-width: 500px) {
-          .achievements-full { grid-template-columns: repeat(3, 1fr); }
+          .achievements-full { grid-template-columns: repeat(2, 1fr); }
         }
         
-        @media (min-width: 850px) { .achievements-full { grid-template-columns: repeat(5, 1fr); gap: 1rem; } }
+        @media (min-width: 850px) { .achievements-full { grid-template-columns: repeat(2, 1fr); gap: 1rem; } }
 
         .stat-item { display: flex; flex-direction: column; align-items: center; text-align: center; }
         .stat-val { font-family: var(--font-inter); font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 950; color: var(--white); line-height: 1; margin-bottom: 0.5rem; letter-spacing: -0.04em; }
