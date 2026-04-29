@@ -128,16 +128,16 @@ export const PROJECTS = [
     ]
   },
   {
-    id: 'jalal-residence',
-    title: "Mr. Jalal's Residence",
+    id: 'joseph-residence',
+    title: "Mr. Joseph's Residence",
     label: 'Project 003 / 2024',
     location: 'Residential / Arookutty',
     bg: 'url("/jalal-1.webp") center/cover no-repeat',
     heroImage: '/jalal-1.webp',
     placeholder: 'linear-gradient(135deg, #1a1a1a 0%, #000 100%)',
-    description: 'A high-end 1950 sqft residence designed for Mr. Jalal in Arookutty. This project emphasizes open spatial flow, premium finishes, and a seamless integration with the coastal landscape, reflecting a modern architectural ethos tailored to the unique environment of Kerala.',
+    description: 'A high-end 1950 sqft residence designed for Mr. Joseph in Arookutty. This project emphasizes open spatial flow, premium finishes, and a seamless integration with the coastal landscape, reflecting a modern architectural ethos tailored to the unique environment of Kerala.',
     specifications: [
-      { label: 'Client', value: 'Mr. Jalal' },
+      { label: 'Client', value: 'Mr. Joseph' },
       { label: 'Area', value: '1950 Sqft' },
       { label: 'Location', value: 'Arookutty, Kerala' },
       { label: 'Status', value: 'Designed' }
@@ -152,16 +152,16 @@ export const PROJECTS = [
     ]
   },
   {
-    id: 'shefeek-residence',
-    title: "Dr. Shefeek's Residence",
+    id: 'jas-residence',
+    title: 'Jas Residence',
     label: 'Project 004 / 2024',
     location: 'Residential / Eramallor',
     bg: 'url("/shafek-5.webp") center/cover no-repeat',
     heroImage: '/shafek-5.webp',
     placeholder: 'linear-gradient(135deg, #1a1a1a 0%, #000 100%)',
-    description: 'A distinguished 4500 sqft residence crafted for Dr. Shefeek in Eramallor. This project embodies refined architectural sensibility — blending generous spatial planning with premium finishes and thoughtful detailing, delivering a home that reflects the client\'s stature and lifestyle with timeless elegance.',
+    description: 'A distinguished 4500 sqft residence crafted for Jas in Eramallor. This project embodies refined architectural sensibility — blending generous spatial planning with premium finishes and thoughtful detailing, delivering a home that reflects the client\'s stature and lifestyle with timeless elegance.',
     specifications: [
-      { label: 'Client', value: 'Dr. Shefeek' },
+      { label: 'Client', value: 'Jas' },
       { label: 'Area', value: '4500 Sqft' },
       { label: 'Location', value: 'Eramallor, Kerala' },
       { label: 'Status', value: 'Completed' }
@@ -324,7 +324,7 @@ export const TESTIMONIALS = [
   },
   {
     quote: "The charming modern residence exudes its lively aesthetic through a dynamic fusion of minimalism and opulence. Every wall is vividly adorned with bold colors that reflect the resident's character and allure. This home stands as a quintessential representation of our designer's vibrant creativity in contemporary design.",
-    name: 'Mr. Jalal',
+    name: 'Mr. Joseph',
     title: 'Client, Arookutty — 1950 Sqft',
     poster: null,
     videoUrl: 'https://kihgreuv2nuypbvt.public.blob.vercel-storage.com/JALAL%20RESIDENCE.mp4'
@@ -389,13 +389,13 @@ export const JOURNAL = [
   {
     tag: 'Journal / 04',
     title: 'Coastal Living: Designing for Arookutty',
-    excerpt: "A deep dive into Mr. Jalal's 1950 sqft residence — how the coastal microclimate of Arookutty shaped every spatial decision, from orientation to material selection.",
+    excerpt: "A deep dive into Mr. Joseph's 1950 sqft residence — how the coastal microclimate of Arookutty shaped every spatial decision, from orientation to material selection.",
     date: '2024 / Mar',
   },
   {
     tag: 'Journal / 05',
-    title: "Making a Statement: Dr. Shefeek's 4500 Sqft Home",
-    excerpt: "Exploring how generous floor area unlocks elevated living — the design philosophy behind Dr. Shefeek's landmark residence in Eramallor, where scale and restraint coexist.",
+    title: "Making a Statement: Jas Residence 4500 Sqft Home",
+    excerpt: "Exploring how generous floor area unlocks elevated living — the design philosophy behind the Jas Residence landmark home in Eramallor, where scale and restraint coexist.",
     date: '2024 / Aug',
   },
   {

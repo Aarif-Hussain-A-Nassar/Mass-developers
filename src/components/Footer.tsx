@@ -25,7 +25,7 @@ export default function Footer() {
               maxWidth: '450px',
               fontWeight: 500
             }}>
-              Four childhood friends, one shared vision: to bridge the gap in honesty and quality within the construction industry. Founded in 2018, MASS Developers continues to build dreams, one project at a time, with precision and integrity as our only compass.
+              Three childhood friends, one shared vision: to bridge the gap in honesty and quality within the construction industry. Founded in 2018, MASS Developers continues to build dreams, one project at a time, with precision and integrity as our only compass.
             </p>
 
             <div style={{ display: 'flex', gap: '0.75rem', marginTop: '1rem', flexWrap: 'wrap' }}>
