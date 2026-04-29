@@ -59,6 +59,7 @@ const About: React.FC = () => {
   const stats = [
     { value: '8+', label: 'Years' },
     { value: '150+', label: 'Clients' },
+    { value: '150+', label: 'Projects' },
   ];
 
   return (
@@ -311,10 +312,10 @@ const About: React.FC = () => {
         }
         
         @media (min-width: 500px) {
-          .achievements-full { grid-template-columns: repeat(2, 1fr); }
+          .achievements-full { grid-template-columns: repeat(3, 1fr); }
         }
         
-        @media (min-width: 850px) { .achievements-full { grid-template-columns: repeat(2, 1fr); gap: 1rem; } }
+        @media (min-width: 850px) { .achievements-full { grid-template-columns: repeat(3, 1fr); gap: 1rem; } }
 
         .stat-item { display: flex; flex-direction: column; align-items: center; text-align: center; }
         .stat-val { font-family: var(--font-inter); font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 950; color: var(--white); line-height: 1; margin-bottom: 0.5rem; letter-spacing: -0.04em; }

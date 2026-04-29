@@ -549,6 +549,7 @@ export default function About() {
             >
               <AnimatedStat value={8} suffix="+" label="Years of Excellence" />
               <AnimatedStat value={150} suffix="+" label="Clients" />
+              <AnimatedStat value={150} suffix="+" label="Projects" />
               <AnimatedStat value={2} suffix="" label="Offices Across Kerala" />
               <AnimatedStat value={50} suffix="+" label="Full-Time Employees" />
             </div>
