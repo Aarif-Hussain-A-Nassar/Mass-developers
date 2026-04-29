@@ -15,12 +15,19 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: 'MASS | Precision in Silence',
-  description: 'MASS operates at the intersection of structural gravity and ethereal transparency. Architecture as a manifesto.',
-  keywords: ['architecture', 'luxury', 'design', 'construction', 'brutalist', 'mass developers'],
+  title: 'Mass Developers',
+  description: 'Mass Developers — precision architecture, luxury interiors, and structural excellence. Building spaces that define lifestyle.',
+  keywords: ['architecture', 'luxury', 'design', 'construction', 'mass developers', 'real estate', 'interior design'],
+  icons: {
+    icon: [
+      { url: '/favicon.png', type: 'image/png' },
+    ],
+    apple: '/favicon.png',
+    shortcut: '/favicon.png',
+  },
   openGraph: {
-    title: 'MASS | Precision in Silence',
-    description: 'Architecture as a manifesto.',
+    title: 'Mass Developers',
+    description: 'Precision architecture and luxury design.',
     type: 'website',
   },
 };
