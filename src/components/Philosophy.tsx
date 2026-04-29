@@ -20,17 +20,16 @@ export default function Philosophy() {
           <FadeIn delay={0.25}>
             <div>
               <p className="t-body" style={{ marginBottom: '2rem', fontSize: 'clamp(0.9rem, 1.1vw, 1rem)' }}>
-                Founded in 2018 by four friends with a shared vision, MASS Developers was born to bridge the gap in honesty and quality within the construction industry.
+                Founded in 2018 by three friends with a shared vision, MASS Developers was born to bridge the gap in honesty and quality within the construction industry.
               </p>
               <p className="t-body" style={{ marginBottom: '2rem', fontSize: 'clamp(0.9rem, 1.1vw, 1rem)' }}>
                 From our modest beginnings to becoming a trusted name in residential and commercial spaces, we remain committed to building dreams with unwavering integrity and precision.
               </p>
-              <div className="philosophy-stats" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'clamp(1rem, 2vw, 2rem)', marginTop: '3rem', borderTop: '1px solid var(--white-06)', paddingTop: '2rem' }}>
-                <StatCounter value={150} suffix="+" label="Projects" />
-                <StatCounter value={1000} suffix="+" label="Families" />
+              <div className="philosophy-stats" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 'clamp(1rem, 2vw, 2rem)', marginTop: '3rem', borderTop: '1px solid var(--white-06)', paddingTop: '2rem' }}>
+                <StatCounter value={150} suffix="+" label="Clients" />
+                <StatCounter value={8} suffix="+" label="Years" />
                 <StatCounter value={2} suffix="+" label="Offices Across Kerala" />
                 <StatCounter value={50} suffix="+" label="Employees" />
-                <StatCounter value={new Date().getFullYear() - 2019} suffix="+" label="Years" />
               </div>
               <div style={{ marginTop: '2.5rem' }}>
                 <motion.a

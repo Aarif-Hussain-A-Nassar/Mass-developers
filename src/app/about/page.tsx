@@ -547,9 +547,8 @@ export default function About() {
                 gap: '2rem',
               }}
             >
-              <AnimatedStat value={new Date().getFullYear() - 2019} suffix="+" label="Years of Excellence" />
-              <AnimatedStat value={150} suffix="+" label="Projects Delivered" />
-              <AnimatedStat value={1000} suffix="+" label="Happy Families" />
+              <AnimatedStat value={8} suffix="+" label="Years of Excellence" />
+              <AnimatedStat value={150} suffix="+" label="Clients" />
               <AnimatedStat value={2} suffix="" label="Offices Across Kerala" />
               <AnimatedStat value={50} suffix="+" label="Full-Time Employees" />
             </div>
