@@ -84,7 +84,8 @@ export default function FloatingButton() {
         }
         @media (max-width: 900px) {
           :global(.wa-dock) {
-            right: 1.25rem !important;
+            right: auto !important;
+            left: 1.25rem !important;
             bottom: 1.25rem !important;
           }
         }
