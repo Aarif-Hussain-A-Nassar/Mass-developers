@@ -163,14 +163,35 @@ export default function Footer() {
             <p className="footer-slogan" style={{ fontSize: '0.6rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.2em', color: 'rgba(0,0,0,0.3)' }}>
               Precision in Silence.
             </p>
-            <a 
-              href="https://two-dots-two.vercel.app/" 
-              target="_blank" 
+            <motion.a
+              href="https://two-dots-two.vercel.app/"
+              target="_blank"
               rel="noopener noreferrer"
-              style={{ fontSize: '0.6rem', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.2em', color: 'rgba(0,0,0,0.2)', textDecoration: 'none' }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.97 }}
+              style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center' }}
+              className="twodots-badge"
             >
-              DESIGNED BY TWO DOTS
-            </a>
+              <span style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                background: '#000',
+                color: '#fff',
+                fontSize: '0.52rem',
+                fontWeight: 900,
+                textTransform: 'uppercase',
+                letterSpacing: '0.2em',
+                padding: '0.45rem 1rem',
+                borderRadius: '100px',
+                whiteSpace: 'nowrap',
+                boxShadow: '0 4px 18px rgba(124,58,237,0.35)',
+              }}>
+                <span style={{ width: '5px', height: '5px', borderRadius: '50%', background: '#fff', display: 'inline-block', flexShrink: 0 }} />
+                Website by Two Dots
+                <span style={{ width: '5px', height: '5px', borderRadius: '50%', background: '#fff', display: 'inline-block', flexShrink: 0 }} />
+              </span>
+            </motion.a>
             <motion.a
               href="#hero"
               whileHover={{ color: '#000000' }}
