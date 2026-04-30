@@ -159,10 +159,10 @@ export const PROJECTS = [
     bg: 'url("/shafek-5.webp") center/cover no-repeat',
     heroImage: '/shafek-5.webp',
     placeholder: 'linear-gradient(135deg, #1a1a1a 0%, #000 100%)',
-    description: 'A distinguished 4500 sqft residence crafted for Jas in Eramallor. This project embodies refined architectural sensibility — blending generous spatial planning with premium finishes and thoughtful detailing, delivering a home that reflects the client\'s stature and lifestyle with timeless elegance.',
+    description: 'A distinguished 1944 sqft residence crafted for Jas in Eramallor. This project embodies refined architectural sensibility — blending generous spatial planning with premium finishes and thoughtful detailing, delivering a home that reflects the client\'s stature and lifestyle with timeless elegance.',
     specifications: [
       { label: 'Client', value: 'Jas' },
-      { label: 'Area', value: '4500 Sqft' },
+      { label: 'Area', value: '1944 Sqft' },
       { label: 'Location', value: 'Eramallor, Kerala' },
       { label: 'Status', value: 'Completed' }
     ],
@@ -394,7 +394,7 @@ export const JOURNAL = [
   },
   {
     tag: 'Journal / 05',
-    title: "Making a Statement: Jas Residence 4500 Sqft Home",
+    title: "Making a Statement: Jas Residence 1944 Sqft Home",
     excerpt: "Exploring how generous floor area unlocks elevated living — the design philosophy behind the Jas Residence landmark home in Eramallor, where scale and restraint coexist.",
     date: '2024 / Aug',
   },
