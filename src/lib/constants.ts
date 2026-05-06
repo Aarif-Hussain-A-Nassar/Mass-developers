@@ -365,6 +365,13 @@ export const TESTIMONIALS = [
     poster: null,
     videoUrl: 'https://kihgreuv2nuypbvt.public.blob.vercel-storage.com/BEKTASH%20REST.mp4'
   },
+  {
+    quote: "A beautifully crafted 2100 sqft residence in Arookutty, designed to harmonize warmth, functionality, and contemporary architectural elegance. Every space in Junaid Residence speaks of thoughtful planning and meticulous craftsmanship — a true testament to living well.",
+    name: 'Junaid Residence',
+    title: 'Client, Arookutty — 2100 Sqft',
+    poster: null,
+    videoUrl: 'https://kihgreuv2nuypbvt.public.blob.vercel-storage.com/Junaid%20Residence.mp4'
+  },
 ];
 
 export const JOURNAL = [
